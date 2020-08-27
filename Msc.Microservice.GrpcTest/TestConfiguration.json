@@ -1,0 +1,26 @@
+{
+  "GrpcServer": {
+    "Host": {
+      "hostname": "127.0.0.1",
+      "port": "50051"
+    },
+    "Ssl": {
+      "path": "./certs/",
+      "CaCert": "ca.pem",
+      "CertificateChain": "server.pem",
+      "privateKey": "server.key"
+    }
+  },
+  "GrpcClient": {
+    "Host": {
+      "hostname": "127.0.0.1",
+      "port": "50051"
+    },
+    "Ssl": {
+      "path": "./certs/",
+      "CaCert": "ca.pem",
+      "CertificateChain": "client.pem",
+      "privateKey": "client.key"
+    }
+  }
+}

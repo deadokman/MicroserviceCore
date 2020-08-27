@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Msc.Microservice.Layer.GrpcServer</name>
+    </assembly>
+    <members>
+        <member name="T:Msc.Microservice.Layer.GrpcServer.BaseGrpcServer">
+            <summary>
+            Реализация сервера Grpc, предоставляет управление инициализация/запуск/остановка.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.BaseGrpcServer.#ctor(Microsoft.Extensions.Options.IOptions{Msc.Microservice.GrpcCore.Configuration.GrpcConfig},Microsoft.Extensions.Logging.ILogger{Msc.Microservice.Layer.GrpcServer.IGrpcServer})">
+            <summary>
+            Конструктор с параметрами.
+            </summary>
+            <param name="config">Конфигурация запуска.</param>
+            <param name="logger">Логгер.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.BaseGrpcServer.Start(System.Collections.Generic.IEnumerable{Grpc.Core.ServerServiceDefinition})">
+            <inheritdoc />
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.BaseGrpcServer.Shutdown">
+            <inheritdoc />
+        </member>
+        <member name="T:Msc.Microservice.Layer.GrpcServer.GrpcServerAccessLayer">
+            <summary>
+            Слой доступа к серверу, протокол взаимодействия Grpc.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.GrpcServerAccessLayer.#ctor(System.Func{System.IServiceProvider,Grpc.Core.ServerServiceDefinition}[])">
+            <summary>
+            Конструктор, принимает коллекцию определений сервисов. Регистрирует обработчики для взяимодействия с методами сервисов.
+            </summary>
+            <param name="services">Коллекция определений сервисов.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.GrpcServerAccessLayer.RegisterConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.GrpcServerAccessLayer.RegisterLayer(Microsoft.Extensions.Configuration.IConfigurationRoot,Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+            <param name="serviceCollection">Коллекция служб.</param>
+            <returns>Список ошибок во время конфигурирования.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.GrpcServerAccessLayer.RunAsync(System.IServiceProvider)">
+            <summary>
+            Запустить выполннение операций в слое асинхронно.
+            </summary>
+            <param name="serviceProvider">Провайдер служб.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.GrpcServerAccessLayer.Shutdown(System.IServiceProvider)">
+            <summary>
+            Отключить работу службы.
+            </summary>
+            <param name="serviceProvider">Провайдер служб.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.GrpcServer.IGrpcServer">
+            <summary>
+            Интерфейс сервера Grpc.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.IGrpcServer.Start(System.Collections.Generic.IEnumerable{Grpc.Core.ServerServiceDefinition})">
+            <summary>
+            Запустить сервер.
+            </summary>
+            <param name="services">Коллекция определений сервисов.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcServer.IGrpcServer.Shutdown">
+            <summary>
+            Остановить сервер.
+            </summary>
+        </member>
+    </members>
+</doc>

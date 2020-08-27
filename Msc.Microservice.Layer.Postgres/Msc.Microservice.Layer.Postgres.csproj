@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(SolutionDir)\Shared\RuleSet.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="$(SolutionDir)\Shared\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Db.Oracle\Msc.Db.Oracle.csproj" />
+    <ProjectReference Include="..\Db.Postgres\Msc.Db.Postgres.csproj" />
+    <ProjectReference Include="..\Interface.Db\Msc.Interface.Db.csproj" />
+    <ProjectReference Include="..\Msc.Microservice.Core.Standalone\Msc.Microservice.Core.Standalone.csproj" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Microservice.Layer.Postgres.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Microservice.Layer.Postgres.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Product>Microservice.Layer.Postgres</Product>
+    <Description>Библиотека предоставляет интерфейс IDbContext при построении микросервисной архитектуры на Microservice.Core.Standalone, для подключения к СУБД Postgres.
+      Обновлена версия Db.Postgres</Description>
+    <PackageId>Microservice.Layer.Postgres</PackageId>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Первая версия библиотеки</PackageReleaseNotes>
+    <Version>1.0.0.3</Version>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>Gazprom-neft</Company>
+    <Authors>Stepanov.no;Konyshev.av</Authors>
+  </PropertyGroup>
+
+</Project>

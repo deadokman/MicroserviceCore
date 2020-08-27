@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Msc.Db.Postgres</name>
+    </assembly>
+    <members>
+        <member name="T:Msc.Db.Postgres.PgBinaryWriter">
+            <summary>
+            Класс выполняющий запись в бинарный файл, представляет обертку над NpgSQl
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.#ctor(Npgsql.NpgsqlBinaryImporter)">
+            <summary>
+            Конструктор обертки
+            </summary>
+            <param name="binaryImporter">Импортер</param>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.StartRow">
+            <summary>
+            Starts writing a single row, must be invoked before writing any columns.
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.Write``1(``0)">
+            <summary>
+            Writes a single column in the current row.
+            </summary>
+            <param name="value">The value to be written</param>
+            <typeparam name="T">
+            The type of the column to be written. This must correspond to the actual type or data
+            corruption will occur. If in doubt, use <see cref="!:Write&lt;T&gt;(T, NpgsqlDbType)"/> to manually
+            specify the type.
+            </typeparam>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.Write``1(``0,System.Data.DbType)">
+            <summary>
+            Writes a single column in the current row as type <paramref name="npgsqlDbType"/>.
+            </summary>
+            <param name="value">The value to be written</param>
+            <param name="dbType">
+            In some cases <typeparamref name="T"/> isn't enough to infer the data type to be written to
+            the database. This parameter and be used to unambiguously specify the type. An example is
+            the JSONB type, for which <typeparamref name="T"/> will be a simple string but for which
+            <paramref name="dbType"/> must be specified as <see cref="T:System.Data.DbType"/>.
+            </param>
+            <typeparam name="T">The .NET type of the column to be written.</typeparam>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.Write``1(``0,System.String)">
+            <summary>
+            Writes a single column in the current row as type <paramref name="dataTypeName"/>.
+            </summary>
+            <param name="value">The value to be written</param>
+            <param name="dataTypeName">
+            In some cases <typeparamref name="T"/> isn't enough to infer the data type to be written to
+            the database. This parameter and be used to unambiguously specify the type.
+            </param>
+            <typeparam name="T">The .NET type of the column to be written.</typeparam>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.WriteNull">
+            <summary>
+            Writes a single null column value.
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.WriteRow(System.Object[])">
+            <summary>
+            Writes an entire row of columns.
+            Equivalent to calling <see cref="M:Msc.Db.Postgres.PgBinaryWriter.StartRow"/>, followed by multiple <see cref="M:Msc.Db.Postgres.PgBinaryWriter.Write``1(``0)"/>
+            on each value.
+            </summary>
+            <param name="values">An array of column values to be written as a single row</param>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.Complete">
+            <summary>
+            Completes the import operation. The writer is unusable after this operation.
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.Dispose">
+            <summary>
+            Completes that binary import and sets the connection back to idle state
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgBinaryWriter.Close">
+            <summary>
+            Completes the import process and signals to the database to write everything.
+            </summary>
+        </member>
+        <member name="T:Msc.Db.Postgres.PgDbBulkReader">
+            <summary>
+            Чтение из Postgres
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbBulkReader.#ctor(Npgsql.NpgsqlBinaryExporter)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="reader">Читатель</param>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbBulkReader.StartRow">
+            <summary>
+            Чтение строки
+            </summary>
+            <returns>Результат</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbBulkReader.Read``1">
+            <summary>
+            Чтение текущего столбца
+            </summary>
+            <typeparam name="T">Тип</typeparam>
+            <returns>Результат</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbBulkReader.Read``1(System.Data.DbType)">
+            <summary>
+            Чтение текущего столбца с приведением типа
+            </summary>
+            <typeparam name="T">Тип результата</typeparam>
+            <param name="dbType">Тип БД</param>
+            <returns>Значение</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbBulkReader.Cancel">
+            <summary>
+            Отмена чтения
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbBulkReader.Dispose">
+            <summary>
+            Освобождение ресурса
+            </summary>
+        </member>
+        <member name="T:Msc.Db.Postgres.PgDbCommand">
+            <summary>
+            Обёртка над Postgres Command с логированием запросов и ошибок выполнения.
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbCommand.#ctor(Npgsql.NpgsqlCommand,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="command">команда выполнения</param>
+            <param name="logger">интерфейс логгера</param>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbCommand.CommandText">
+            <summary>
+            Возвращает или задает текстовую команду для выполнения
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbCommand.CommandTimeout">
+            <summary>
+            Возвращает или задает время ожидания перед завершением попытки выполнить команду
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbCommand.CommandType">
+            <summary>
+            Тип команды
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbCommand.DesignTimeVisible">
+            <summary>Gets or sets a value indicating whether the command object should be visible in a customized interface control.</summary>
+            <returns>true, if the command object should be visible in a control; otherwise false. The default is true.</returns>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbCommand.UpdatedRowSource">
+            <summary>
+            Возвращает или задает способ применения результатов команды
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbCommand.Cancel">
+            <summary>
+            Отмена команды
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbCommand.ExecuteNonQuery">
+            <summary>
+            Выполнить команду и вернуть число задействованных строк
+            </summary>
+            <returns>число строк</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbCommand.ExecuteScalar">
+            <summary>
+            Выполняет запрос и возвращает первый столбец первой строки результирующего набора
+            </summary>
+            <returns>Первая строка</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbCommand.Prepare">
+            <summary>
+            Компилирование команды выполнения
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbCommand.CreateDbParameter">
+            <summary>Создает новый экземпляр класса <see cref="T:System.Data.Common.DbParameter"></see> </summary>
+            <returns>Экземпляр класса <see cref="T:System.Data.Common.DbParameter"></see></returns>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbCommand.DbConnection">
+            <summary>Получает или устанавливает ссылка на <see cref="T:System.Data.Common.DbConnection"></see> используемую в <see cref="T:System.Data.Common.DbCommand"></see>.</summary>
+            <returns>Подключение к источнику данных.</returns>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbCommand.DbParameterCollection">
+            <summary>Получает коллекцию <see cref="T:System.Data.Common.DbParameter"></see> </summary>
+            <returns>Параметры для запроса SQL или хранимой прцедуры</returns>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbCommand.DbTransaction">
+            <summary>Получает или устанавливает ссылка на <see cref="P:System.Data.Common.DbCommand.DbTransaction"></see> используемую вместе с классом <see cref="T:System.Data.Common.DbCommand"></see> </summary>
+            <returns>Транзакция в рамках которой будет выполнена комманда. Значение по умолчанию NULL</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbCommand.ExecuteDbDataReader(System.Data.CommandBehavior)">
+            <summary>Выполняет команду используя соединение</summary>
+            <param name="behavior">Экземпляр класса <see cref="T:System.Data.CommandBehavior"></see>.</param>
+            <returns>Объект представляющей собой набор данных.</returns>
+            <exception cref="T:System.Data.Common.DbException">Ошибка возникающая во время выполнения команды.</exception>
+            <exception cref="T:System.ArgumentException">An invalid <see cref="T:System.Data.CommandBehavior"></see> value.</exception>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbCommand.Execute``1(System.Func{``0})">
+            <summary>
+            Обработчик выполнения команды
+            </summary>
+            <typeparam name="T">Тип результата выполнения</typeparam>
+            <param name="func">Функция, которую необходимо выполненить</param>
+            <returns>Результат выполнения</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbCommand.Logging(System.String)">
+            <summary>
+            Обработка ошибки выполнения запроса
+            </summary>
+            <param name="message">Текст ошибки</param>
+        </member>
+        <member name="T:Msc.Db.Postgres.PgDbConnection">
+            <summary>
+            Обертка над подключением к источнику данных. Postgres
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.#ctor(System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="connectionString">строка подключения к БД</param>
+            <param name="logger">интерфейс логгера</param>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.ChangeDatabase(System.String)">
+            <summary>
+            Изменяет текущую базу данных для открытого объекта Connection
+            </summary>
+            <param name="databaseName">название БД</param>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.Open">
+            <summary>
+            Устанавливает подключение к базе данных
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.Close">
+            <summary>
+            Закрывает соединение с базой данных
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.Dispose">
+            <summary>
+            Уничтожить объект
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbConnection.ConnectionString">
+            <summary>
+            Строка подключения
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbConnection.ConnectionTimeout">
+            <summary>
+            Получает время ожидания при попытке установки подключения
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbConnection.Database">
+            <summary>
+            Получает имя текущей базы данных
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbConnection.DataSource">
+            <summary>Gets the name of the database server to which to connect.</summary>
+            <returns>The name of the database server to which to connect. The default value is an empty string.</returns>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbConnection.ServerVersion">
+            <summary>Gets a string that represents the version of the server to which the object is connected.</summary>
+            <returns>The version of the database. The format of the string returned depends on the specific type of connection you are using.</returns>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:System.Data.Common.DbConnection.ServerVersion"></see> was called while the returned Task was not completed and the connection was not opened after a call to <see cref="!:Overload:System.Data.Common.DbConnection.OpenAsync"></see>.</exception>
+        </member>
+        <member name="P:Msc.Db.Postgres.PgDbConnection.State">
+            <summary>
+            Возвращает текущее состояние подключения
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.BulkCopy``1(System.String,System.Collections.Generic.IEnumerator{``0},System.Func{``0,System.Object[]})">
+            <summary>
+            Сохранение множества записей
+            </summary>
+            <param name="sql">Выполняемый запрос</param>
+            <param name="enumerator">Енумератор-перечислятор ☺</param>
+            <param name="mapFunction">Преобразование сущности в массив свойств</param>
+            <typeparam name="T">Тип сохраняемой сущности</typeparam>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.BulkCopy``1(System.String,System.Collections.Generic.IEnumerator{``0},System.Action{``0,Msc.Interface.Db.IBinaryWriter})">
+            <summary>
+            Сохранение множества записей
+            </summary>
+            <param name="sql">Выполняемый запрос</param>
+            <param name="enumerator">Енумератор-перечислятор ☺</param>
+            <param name="writerDelegate">Делегат для записи в бинарный поток</param>
+            <typeparam name="T">Тип сохраняемой сущности</typeparam>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.BeginBinaryImport(System.String)">
+            <summary>
+            Выполнить вставку данных из DataRaader
+            </summary>
+            <param name="sql">Sql запрос для импортируемых данных</param>
+            <returns>Интерфейс бинарной записи данных</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.GetDateByDbType(System.DateTime)">
+            <summary>
+            Вернуть DbType даты для конкретной реализации БД
+            </summary>
+            <param name="dt">Дата</param>
+            <returns>DbType даты</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.BulkLoad(System.String)">
+            <summary>
+            Чтение
+            </summary>
+            <param name="sql">Запрос для выборки</param>
+            <returns>Бинарный загрузчик</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.BeginDbTransaction(System.Data.IsolationLevel)">
+            <summary>
+            Начинает транзакцию базы данных
+            </summary>
+            <param name="isolationLevel">Уровень изоляции</param>
+            <returns>Транзакция</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbConnection.CreateDbCommand">
+            <summary>
+            Создать команду
+            </summary>
+            <returns> Новая команда </returns>
+        </member>
+        <member name="T:Msc.Db.Postgres.PgDbContext">
+            <summary>
+            Контекст подключения к БД
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbContext.#ctor(System.String,Microsoft.Extensions.Logging.ILogger{Msc.Interface.Db.IDbContext})">
+            <summary>
+            Конструктор только со строкой подключения к БД
+            </summary>
+            <param name="connectionString">Строка подключения</param>
+            <param name="logger">Интерфейс логгера</param>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbContext.#ctor(System.String,Microsoft.Extensions.Logging.ILogger{Msc.Interface.Db.IDbContext},Msc.Interface.Db.ILocaleProvider,System.Boolean)">
+            <summary>
+            Конструктор со строкой подключения, логгером и провайдером локали
+            </summary>
+            <param name="connectionString">Строка подключения</param>
+            <param name="logger">Интерфейс логгера</param>
+            <param name="localeProvider">Интерфейс провайдера языка</param>
+            <param name="setLocale">Выставлять локаль</param>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbContext.GetConnection">
+            <inheritdoc />
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbContext.GetConnectionAsync">
+            <summary>
+            Get connection async
+            </summary>
+            <returns>Async connection</returns>
+        </member>
+        <member name="M:Msc.Db.Postgres.PgDbContext.GetConnection(System.String)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

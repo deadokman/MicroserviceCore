@@ -1,0 +1,976 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Msc.Microservice.Layer.RabbitMq</name>
+    </assembly>
+    <members>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Behaviour.BehaviourBase">
+            <summary>
+            Базовый класс поведенческой модели.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.Behaviour.BehaviourBase.QueueClient">
+            <summary>
+            Клиент очереди.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Behaviour.BehaviourBase.InvokeBehaviour(System.Byte[])">
+            <summary>
+            Вызвать обработку сообщения согласно модели поведения.
+            </summary>
+            <param name="messageBytes">Набор байт сообщения.</param>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Behaviour.BehaviourBase.ProcessPhase">
+            <summary>
+            Фаза обработки сообщения.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Behaviour.BehaviourBase.SetClient(Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient)">
+            <summary>
+            Установить ссылку на клиент.
+            </summary>
+            <param name="messageQueueClient">Клиент очереди.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Behaviour.RepublishMessageBehaviour">
+            <summary>
+            Поведенческая модель для определения действия клиента при возникновении ошибок обработки сообшения.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Behaviour.RepublishMessageBehaviour.TargetEndpoint">
+            <summary>
+            Целевая очередь для переотправки сообщения.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Behaviour.RepublishMessageBehaviour.InvokeBehaviour(System.Byte[])">
+            <summary>
+            Вызвать отработку поведенческой модели.
+            </summary>
+            <param name="messageBytes">Набор байт сообщения.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Configuration.BehaviourConfig">
+            <summary>
+            Класс предназначен для передачи конфигурации бехейверов в клиент.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.BehaviourConfig.Configuration">
+            <summary>
+            Содержит JSON описание бихейвера.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Configuration.EndpointConfig">
+            <summary>
+            Конфигурация конечных точек.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.EndpointConfig.EndpointName">
+            <summary>
+            Наименование конечной точки получателя.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.EndpointConfig.AutoAck">
+            <summary>
+            Автоподтверждение получения.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Configuration.MessageNamespaceMapItem">
+            <summary>
+            Экземпляр настроек маппинга неймспейса.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.MessageNamespaceMapItem.SourceNamespace">
+            <summary>
+            Неймспейс источника данных.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.MessageNamespaceMapItem.TargetNamespace">
+            <summary>
+            Целевой неймспейс.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig">
+            <summary>
+            Класс описывающий конфигурацию текущего RabbitMQ клиента.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.NamespaceMap">
+            <summary>
+            Мапинг неймспейсов.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.Endpoints">
+            <summary>
+            Конфигурация конечных точек.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.BehaviourConfigurations">
+            <summary>
+            Модель поведений при обработке сообщения.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.ClientName">
+            <summary>
+            Наименование клиента (для отображения в логгировании).
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.HostName">
+            <summary>
+            Имя хоста-подключения.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.Port">
+            <summary>
+            Порт подключения.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.UserName">
+            <summary>
+            Имя пользователя.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.Password">
+            <summary>
+            Пароль подключения.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.ConnectionAttempts">
+            <summary>
+            Число попыток подключения.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.PauseBetweenAttemts">
+            <summary>
+            Пауза между попытками (сек.)
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.RedeliveryRetries">
+            <summary>
+            Количество попыток поворной доставки после провала.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.UseRpc">
+            <summary>
+            Использовать RPC. True по умолчанию.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.RpcTimeout">
+            <summary>
+            Таймаут RPC операции, 1 минута по умолчанию.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.EndpointType">
+            <summary>
+            Тип конечной точки подключения клиента (EndpointName или Exchanger).
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Dispatcher.MessageDispatcher">
+            <summary>
+            Выполняет распределение сообщений по хендлерам.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Dispatcher.MessageDispatcher.#ctor(Microsoft.Extensions.Logging.ILogger{Msc.Microservice.Layer.RabbitMq.Interfaces.IMsgDispatcher},System.Object[])">
+            <summary>
+            Конструктор класса.
+            </summary>
+            <param name="logger">Логгер.</param>
+            <param name="handlers">Массив хендлеров сообщений.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Dispatcher.MessageDispatcher.TryGetByAlias(System.String)">
+            <summary>
+            Попытаться апоулчить тип по алиасу.
+            </summary>
+            <param name="alias">Алиас.</param>
+            <returns>Возвращаемый тип.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Dispatcher.MessageDispatcher.DispatchMessage(Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient,Msc.Microservice.Layer.RabbitMq.Interfaces.Acknoledge,System.Object,System.Type)">
+            <summary>
+            Выполинть обработку сообщения очереди через диспетчер.
+            </summary>
+            <param name="client">Клиент очереди.</param>
+            <param name="acknowledge">Делегат, отвечающий за ручное подтверждение или откат сообщения.</param>
+            <param name="message">Сообщение.</param>
+            <param name="payloadType">Тип сообщения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Dispatcher.MessageDispatcher.HandleRpcMessage(Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient,System.Object,Msc.Microservice.Layer.RabbitMq.Interfaces.Acknoledge,System.Type,System.Type)">
+            <summary>
+            Обработать RPC запрос.
+            </summary>
+            <param name="client">Клиент rmq.</param>
+            <param name="message">Сообщение.</param>
+            <param name="acknowledge">Делегат ручного подтверждения или отката обработки сообщения.</param>
+            <param name="argumentType">Тип входного аргумента.</param>
+            <param name="responseType">Тип ответа.</param>
+            <returns>Возвращает результат RPC запроса.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Dispatcher.MessageDispatcher.BuildWrapperInitiators">
+            <summary>
+            Подготовить динамические инвокаторы для оберток сообщений.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Dispatcher.MessageDispatcher.BuildHandlers(System.Object[],System.Collections.Generic.Dictionary{System.Numerics.BigInteger,System.Tuple{System.Type,System.Func{System.Object,System.Object}}}@)">
+            <summary>
+            Построить обычные хендлеры сообщений.
+            </summary>
+            <param name="handlers">Коллекция обработчиков.</param>
+            <param name="rpcHandlers">Хендлеры RPC.</param>
+            <returns>Справочник хендлеров для TransferMessage.</returns>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageHandler`1">
+            <summary>
+            Хэндлер сообщения очереди с нагрузкой T.
+            </summary>
+            <typeparam name="T">Тип обрабатываемого сообщения.</typeparam>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageHandler`1.HandleMessage(Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap{`0})">
+            <summary>
+            Выполнить обработку сообщения в соответствии с его типом.
+            </summary>
+            <param name="msg">Сообщение.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageProcessBehaviuor">
+            <summary>
+            Интерфейс модели поведения клиента.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageProcessBehaviuor.InvokeBehaviour(System.Byte[])">
+            <summary>
+            Вызвать обработку поведенческой модели.
+            </summary>
+            <param name="messageBytes">Байты сообщения.</param>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageProcessBehaviuor.ProcessPhase">
+            <summary>
+            Фаза обработки сообщения.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageProcessBehaviuor.SetClient(Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient)">
+            <summary>
+            Установить ссылку на клиент.
+            </summary>
+            <param name="messageQueueClient">Клиент очереди.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient">
+            <summary>
+            Клиент брокера очереди.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.PublishMessage(System.String,System.Object,RabbitMQ.Client.IBasicProperties,System.Type)">
+            <summary>
+            Опубликовать сообщение в брокере в конкретной очереди.
+            </summary>
+            <param name="queue">Наименование очереди.</param>
+            <param name="msg">Сообщение.</param>
+            <param name="props">Свосйства запроса.</param>
+            <param name="messageType">Тип отправляемого сообщения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.SendBytes(System.String,System.Byte[],RabbitMQ.Client.IBasicProperties)">
+            <summary>
+            Отправить байты сообщеия.
+            </summary>
+            <param name="queue">Конечная точка.</param>
+            <param name="bytes">Набор байт.</param>
+            <param name="props">Свойства.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.PublishMessage(System.String,System.String,System.Object,RabbitMQ.Client.IBasicProperties,System.Type)">
+            <summary>
+            Опубликовать сообщение в брокере в конкретной очереди.
+            </summary>
+            <param name="exchanger">Эксчейнджер.</param>
+            <param name="queue">Наименование очереди.</param>
+            <param name="msg">Сообщение.</param>
+            <param name="props">Свосйства запроса.</param>
+            <param name="messageType">Тип отправляемого сообщения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.BeginConsume">
+            <summary>
+            Начать получение сообщений.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.MakeRpcCallAsync``2(``0,System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            Выполнить RPC запрос.
+            </summary>
+            <typeparam name="TArgs">Аргумент.</typeparam>
+            <typeparam name="TResp">Результат запроса.</typeparam>
+            <param name="reqArgs">Экземпляр аргумента.</param>
+            <param name="queue">Очередь.</param>
+            <param name="timeout">Задержка ожидания запроса.</param>
+            <returns>Асинхронный результат запроса.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.SetUpClient">
+            <summary>
+            Настроить клиент.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer">
+            <summary>
+            Интерфейс сериализотора сообщений очереди.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer.SerializeTransferMessage(System.Object,System.Type)">
+            <summary>
+            Преобразовать сообщение которое подразумевает только передачу данных в набор байт для отправки.
+            </summary>
+            <param name="message"> Сообщение. </param>
+            <param name="messageType"> Тип сообщения. </param>
+            <returns>Сериализованный байт-массв.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer.SerializePayload(System.Object)">
+            <summary>
+            Преобразовать payload в json для передачи.
+            </summary>
+            <param name="payload">Данные сообщения.</param>
+            <returns>JSON - объект сообщения.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer.DeserializeRpcMessage(System.Byte[],System.Type)">
+            <summary>
+            Преобразовать в объект сообщение, которое подразумевает только передачу данных.
+            </summary>
+            <param name="body"> Тело сообщения. </param>
+            <param name="requestArgType"> Тип сообщения. </param>
+            <returns>Возвращает диссериализованную инстанцию объекта.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer.DeserializeTransferMessage(System.Byte[],System.Type@,System.Func{System.String,System.Type})">
+            <summary>
+            Диссриализовать сообщения из байт-массива.
+            </summary>
+            <param name="body">Тело сообщения.</param>
+            <param name="contentType">Тип объектной модели сообщения.</param>
+            <param name="contractTypes">Делегат на получение типа контракта по алиасу.</param>
+            <returns>Возвращает диссериализованный объект содержимого сообщения.</returns>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IMsgDispatcher">
+            <summary>
+            Интерфейс диспетчера сообщеий очереди.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMsgDispatcher.TryGetByAlias(System.String)">
+            <summary>
+            Попытаться апоулчить тип по алиасу.
+            </summary>
+            <param name="alias">Алиас.</param>
+            <returns>Возвращаемый тип.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMsgDispatcher.DispatchMessage(Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient,Msc.Microservice.Layer.RabbitMq.Interfaces.Acknoledge,System.Object,System.Type)">
+            <summary>
+            Выполинть обработку сообщения очереди через диспетчер.
+            </summary>
+            <param name="client">Клиент очереди.</param>
+            <param name="acknowledge">Делегат, отвечающий за ручное подтверждение или откат сообщения.</param>
+            <param name="message">Сообщение.</param>
+            <param name="payloadType">Тип сообщения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMsgDispatcher.HandleRpcMessage(Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient,System.Object,Msc.Microservice.Layer.RabbitMq.Interfaces.Acknoledge,System.Type,System.Type)">
+            <summary>
+            Обработать RPC запрос.
+            </summary>
+            <param name="client">Клиент очереди.</param>
+            <param name="message">Сообщение.</param>
+            <param name="acknowledge">Делегат ручного подтверждения или отката обработки сообщения.</param>
+            <param name="argumentType">Тип входного аргумента.</param>
+            <param name="responseType">Тип ответа.</param>
+            <returns>Возвращает результат RPC запроса.</returns>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.Acknoledge">
+            <summary>
+            Делегат подтверждения (или отката) обработки сообшения при ручной обработке.
+            </summary>
+            <param name="ack">true - подтверждение обработки false - unack.</param>
+            <param name="requeue">Если true и ack = false сообщение ставится в начало очереди.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap`1">
+            <summary>
+            Интерфейс обертки над сообщением Rmq.
+            </summary>
+            <typeparam name="T">Тип полезной нагрузки.</typeparam>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap`1.Client">
+            <summary>
+            Клиент MQ.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap`1.Payload">
+            <summary>
+            Полезная нагрузка.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap`1.Ack">
+            <summary>
+            Подтвердить обработку сообщения.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap`1.Nack(System.Boolean)">
+            <summary>
+            Отметить сообщение как "не обработанное".
+            </summary>
+            <param name="requeue">true - сообщение помещается обратно в очередь с тем же самым DeliveryTag.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IRpcMessageHandler`2">
+            <summary>
+            Обработчик сообщений типа RPC.
+            </summary>
+            <typeparam name="TArg">Тип входного аргумента.</typeparam>
+            <typeparam name="TResp">Тип ответа.</typeparam>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IRpcMessageHandler`2.HandleRpc(Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap{`0})">
+            <summary>
+            Выполнить обработку RPC запроса.
+            </summary>
+            <param name="arg"> Параметр запроса. </param>
+            <returns> Тип ответа. </returns>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IRpcResponse`1">
+            <summary>
+            Интерфейс ответа.
+            </summary>
+            <typeparam name="TResponse">Тип ответа.</typeparam>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Interfaces.IRpcResponse`1.ResponseType">
+            <summary>
+            Тип ответа (ошибка или успех).
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Interfaces.IRpcResponse`1.Response">
+            <summary>
+            Ответ на запрос.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Interfaces.IRpcResponse`1.Message">
+            <summary>
+            Сообщение.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Layer.RabbitMqLayer">
+            <summary>
+            Слой доступа и получения данных из RabbitMQ.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Layer.RabbitMqLayer.#ctor(System.Boolean,System.Type[])">
+            <summary>
+            Конструктор слоя.
+            </summary>
+            <param name="runConsumeAuto">Запустить получение сообщений в Runnable слое.</param>
+            <param name="handlerTypes">Хэндлеры для регистрации.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Layer.RabbitMqLayer.RegisterConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Layer.RabbitMqLayer.RegisterLayer(Microsoft.Extensions.Configuration.IConfigurationRoot,Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+            <param name="serviceCollection">Коллекция служб.</param>
+            <returns>Список ошибок во время конфигурирования.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Layer.RabbitMqLayer.RunAsync(System.IServiceProvider)">
+            <summary>
+            Запустить выполннение операций в слое асинхронно.
+            </summary>
+            <param name="serviceProvider">Провайдер служб.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Layer.RabbitMqLayer.Shutdown(System.IServiceProvider)">
+            <summary>
+            Отключить работу службы.
+            </summary>
+            <param name="serviceProvider">Провайдер служб.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.MessageProcessPhase">
+            <summary>
+            Фаза обработки сообщения.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.MessageProcessPhase.BeforeProcess">
+            <summary>
+            Перед обработкой
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.MessageProcessPhase.AfterProcess">
+            <summary>
+            После обработки сообщения
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.MessageProcessPhase.OnError">
+            <summary>
+            После возникновения ошибки
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer">
+            <summary>
+            Сериализатор JSON.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer.#ctor(Microsoft.Extensions.Options.IOptions{Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig},Microsoft.Extensions.Logging.ILogger{Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer})">
+            <summary>
+            Сериализатор JSON по умолчанию.
+            </summary>
+            <param name="config">Конфигурация.</param>
+            <param name="logger">Логгер.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer.SerializeTransferMessage(System.Object,System.Type)">
+            <summary>
+            Сериализовать сообщений в байт-массив.
+            </summary>
+            <param name="message">Сообщение.</param>
+            <param name="messageType">Тип сообщения.</param>
+            <returns>Байт-массив сообщения.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer.DeserializeTransferMessage(System.Byte[],System.Type@,System.Func{System.String,System.Type})">
+            <summary>
+            Диссриализовать сообщения из байт-массива.
+            </summary>
+            <param name="body">Тело сообщения.</param>
+            <param name="contentType">Тип объектной модели сообщения.</param>
+            <param name="contractTypes">Делегат на получение типа контракта по алиасу.</param>
+            <returns>Возвращает диссериализованный объект содержимого сообщения.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer.DeserializeRpcMessage(System.Byte[],System.Type)">
+            <summary>
+            Преобразовать в объект сообщение, которое подразумевает только передачу данных.
+            </summary>
+            <param name="body"> Тело сообщения. </param>
+            <param name="messageType"> Тип сообщения. </param>
+            <returns>Возвращает диссериализованную инстанцию объекта.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer.SerializePayload(System.Object)">
+            <summary>
+            Преобразовать payload в json для передачи.
+            </summary>
+            <param name="payload">Данные сообщения.</param>
+            <returns>JSON - объект сообщения.</returns>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.OwMessageCommon">
+            <summary>
+            Общий класс сообщения OW.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwMessageCommon.#ctor(System.String)">
+            <summary>
+            Конструктор класса.
+            </summary>
+            <param name="customMessageType">Кастомный тип сообщения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwMessageCommon.SetMessageType(System.Type)">
+            <summary>
+            Установить тип сообщения.
+            </summary>
+            <param name="type">Тип сообщения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwMessageCommon.SetCustomMessageType(System.String)">
+            <summary>
+            Установить кастомное имя контаркта.
+            </summary>
+            <param name="customMessageType">Кастомное имя контракта.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwMessageCommon.SetPayload(System.String)">
+            <summary>
+            Добавить полезную нагрузку сообщения.
+            </summary>
+            <param name="payload">Полезная нагрузка.</param>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.OwMessageCommon.MessageType">
+            <summary>
+            Заголовок типа сообщения.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.OwMessageCommon.Payload">
+            <summary>
+            Полезная нагрузка сообщения.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.RabbitClientBase">
+            <summary>
+            Базовый класс клиента RMQ.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Dispatcher">
+            <summary>
+            Диспетчер сообщений текущего клиента.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Logger">
+            <summary>
+            Логгер.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Serializer">
+            <summary>
+            Текущая реализация сериализатора сообщений.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Configuration">
+            <summary>
+            Конфигурация текущего клиента.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Connection">
+            <summary>
+            Подключение RabbitMq.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Model">
+            <summary>
+            Модель данных.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.RegistratedConsumers">
+            <summary>
+            Список зарегестрированных источников потребления данных.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.ConnectionFactory">
+            <summary>
+            Фабрика подключений рэббита.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.DeliveryCount">
+            <summary>
+            Счетчик доставок сообщений.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.BehavioursDict">
+            <summary>
+            Справочник поведений.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.#ctor(Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig,Msc.Microservice.Layer.RabbitMq.Interfaces.IMsgDispatcher,Microsoft.Extensions.Logging.ILogger{Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient},Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer)">
+            <summary>
+            Клиент RabbitMq.
+            </summary>
+            <param name="configuration"> Конфигурация клиента. </param>
+            <param name="dispatcher"> Диспетчер сообщений. </param>
+            <param name="logger"> Логгер. </param>
+            <param name="serializer"> Сериализатор сообщений. </param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Dispose">
+            <summary>
+            Очистить занимаеме очередью ресурсы.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.UndeliveredRetries(System.UInt64)">
+            <summary>
+            Изменить состояние счетчиков доставки если сообщение не доставлено.
+            </summary>
+            <param name="deliveryTag">Тег сообщения.</param>
+            <returns>Возвращает true если сообщение следует попробовать доставить еще раз и false если оно считаетя окончательно сломанным.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.CreateConnection(RabbitMQ.Client.ConnectionFactory)">
+            <summary>
+            Создать подключение к RabbitMq.
+            </summary>
+            <param name="connectionFactory">Фабрика подключений.</param>
+            <returns>Подключение.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Initialize">
+            <summary>
+            Инициализировать клиент.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.RabbitContractAttribute">
+            <summary>
+            Аттрибут используется для декларации контракта для RabbitMq
+            Не является обязательным аттнрибутом. Используется при необходимости кроссплатформенной передачи контрактов внутри шины данных.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitContractAttribute.#ctor(System.String)">
+            <summary>
+            Основной конструктор тиап.
+            </summary>
+            <param name="alias">Алиас контракта.</param>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RabbitContractAttribute.Alias">
+            <summary>
+            Возвращает алиас контракта.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.RabbitMessageQueueEndpointType">
+            <summary>
+            Тип конечной точки подключения клиента RabbitMQ.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitMessageQueueEndpointType.Queue">
+            <summary>
+            Конечной точкой является очередь
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitMessageQueueEndpointType.Exchange">
+            <summary>
+            Конечной точкой является Эксчейнджер
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.RabbitMqClient">
+            <summary>
+            Клиент RabbitMQ.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.RpcRequestHeaderName">
+            <summary>
+            Метка RPC запроса в шапке сообщения.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.RpcResponseHeaderName">
+            <summary>
+            Метка RPC ответа в шапке сообщения.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.RpcArgType">
+            <summary>
+            Метка RPC запроса в шапке сообщения.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.RpcRespType">
+            <summary>
+            Метка типа RPC запроса в шапке сообщения.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitMqClient._rpcWaits">
+            <summary>
+            Список запросов, ожидающие ответа.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitMqClient._rpcCallbackQueue">
+            <summary>
+            Наименование очереди для ответов по RPC.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.#ctor(Microsoft.Extensions.Options.IOptions{Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig},Msc.Microservice.Layer.RabbitMq.Interfaces.IMsgDispatcher,Microsoft.Extensions.Logging.ILogger{Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient},Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer)">
+            <summary>
+            Клиент RabbitMq.
+            </summary>
+            <param name="config"> Конфигурация клиента. </param>
+            <param name="dispatcher"> Диспетчер сообщений. </param>
+            <param name="logger"> Логгер. </param>
+            <param name="serializer"> Сериализатор сообщений. </param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.MakeRpcCallAsync``2(``0,System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            Выполнить RPC запрос.
+            </summary>
+            <typeparam name="TArgs">Аргумент запроса.</typeparam>
+            <typeparam name="TResp">Ответ.</typeparam>
+            <param name="reqArgs">Экземпляр аргумента запроса.</param>
+            <param name="queue">Очередь, в которую следует опубликровать сообщение.</param>
+            <param name="timeout">Таймаут ожидания операции.</param>
+            <returns>Возвращает ответ.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.SetUpClient">
+            <summary>
+            Настроить клиент.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.PublishMessage(System.String,System.Object,RabbitMQ.Client.IBasicProperties,System.Type)">
+            <summary>
+            Опубликовать сообщение в брокере в конкретной очереди.
+            </summary>
+            <param name="queue">Наименование очереди.</param>
+            <param name="msg">Сообщение.</param>
+            <param name="props">Свосйства запроса.</param>
+            <param name="messageType">Тип отправляемого сообщения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.PublishMessage(System.String,System.String,System.Object,RabbitMQ.Client.IBasicProperties,System.Type)">
+            <summary>
+            Опубликовать сообщение в брокере в конкретной очереди.
+            </summary>
+            <param name="exchanger">Эксчейнджер.</param>
+            <param name="queue">Наименование очереди.</param>
+            <param name="msg">Сообщение.</param>
+            <param name="props">Свосйства запроса.</param>
+            <param name="messageType">Тип отправляемого сообщения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.SendBytes(System.String,System.Byte[],RabbitMQ.Client.IBasicProperties)">
+            <summary>
+            Отправить байты сообщеия.
+            </summary>
+            <param name="queue">Очередь.</param>
+            <param name="bytes">Набор байт.</param>
+            <param name="props">Свойства.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.BeginConsume">
+            <summary>
+            Начать получать сообщения.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.Dispose">
+            <summary>
+            Очистить ресурсы объекта.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.PrepareBehaviours(Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig)">
+            <summary>
+            Подготовить модели поведения.
+            </summary>
+            <param name="configuration">Конфигурация очереди.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.RabbitMqExtensions">
+            <summary>
+            Класс расширений для RabbitMQ.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqExtensions.Configure(RabbitMQ.Client.ConnectionFactory,Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig)">
+            <summary>
+            Конфигурация фабрики подключений.
+            </summary>
+            <param name="connectionFactory"> Фабрика подключений. </param>
+            <param name="config"> Конфигурация. </param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqExtensions.Configure(RabbitMQ.Client.IModel,Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig)">
+            <summary>
+            Сконфигурировать модель.
+            </summary>
+            <param name="model"> Модель данных. </param>
+            <param name="config"> Конфигурация. </param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.RmqMessageBase`1">
+            <summary>
+            Базовая обертка сообщения.
+            </summary>
+            <typeparam name="T">Payload сообщения.</typeparam>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RmqMessageBase`1.Acknoledge">
+            <summary>
+            Подтверждение сообщения.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RmqMessageBase`1.Payload">
+            <summary>
+            Payload.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RmqMessageBase`1.Client">
+            <summary>
+            Клиент очереди.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RmqMessageBase`1.Ack">
+            <summary>
+            Подтвердить обработку сообщения.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RmqMessageBase`1.Nack(System.Boolean)">
+            <summary>
+            Отметить сообщение как "не обработанное".
+            </summary>
+            <param name="requeue">true - сообщение помещается обратно в очередь с тем же самым DeliveryTag.</param>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.RpcResposeWaitHandle">
+            <summary>
+            Класс синхронизации с передачей объекта.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RpcResposeWaitHandle.Payload">
+            <summary>
+            Передаваемый в ожидающий поток объект.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RpcResposeWaitHandle.#ctor">
+            <summary>
+            Конструктор по умолчанию.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RpcResposeWaitHandle.WaitOne(System.TimeSpan)">
+            <summary>
+            Ожидать результата обработки по RPC.
+            </summary>
+            <param name="span">ТАймаут.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RpcResposeWaitHandle.Set">
+            <summary>
+            Установить защелку в сигнальное положение.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RpcResposeWaitHandle.Reset">
+            <summary>
+            Сброс.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RpcResposeWaitHandle.IsSet">
+            <summary>
+            Установлено сигнальное состояние.
+            </summary>
+            <returns>true если установлено сигнальное состояние.</returns>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Rpc.ResponseType">
+            <summary>
+            Тип ответа (успешно или ошибка).
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.Rpc.ResponseType.Ok">
+            <summary>
+            Выполнено успешно
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.RabbitMq.Rpc.ResponseType.Error">
+            <summary>
+            Выполнено с ошибками
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.Rpc.RpcResponse">
+            <summary>
+            RPC ответ.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Rpc.RpcResponse.#ctor(Msc.Microservice.Layer.RabbitMq.Rpc.ResponseType,System.Object,System.String)">
+            <summary>
+            RPC ответ.
+            </summary>
+            <param name="responseType">Тип ответа (ошибка или данные).</param>
+            <param name="response">Объект ответа.</param>
+            <param name="message">Сообщение.</param>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Rpc.RpcResponse.ResponseType">
+            <summary>
+            Тип RPC ответа.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Rpc.RpcResponse.Response">
+            <summary>
+            RPC ответ.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Rpc.RpcResponse.Message">
+            <summary>
+            Сообщение.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.RabbitMq.TypeNameFromFullQualified">
+            <summary>
+            Класс парсинга названия типов.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.TypeNameFromFullQualified.GetTypeName(System.String)">
+            <summary>
+            Получить экземпляр Typename.
+            </summary>
+            <param name="typeFullQualified">Имя типа.</param>
+            <returns>Вернуть представление типа по имени.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.TypeNameFromFullQualified.#ctor(System.String)">
+            <summary>
+            Класс парсинга названия типов.
+            </summary>
+            <param name="name">Имя таблицы.</param>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.TypeNameFromFullQualified.TypeName">
+            <summary>
+            Имя типа.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.TypeNameFromFullQualified.AssemblyName">
+            <summary>
+            Сборка.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.TypeNameFromFullQualified.PublicToken">
+            <summary>
+            Сборка.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.TypeNameFromFullQualified.TypeNameUnqualified">
+            <summary>
+            Не полное название типа.
+            </summary>
+        </member>
+    </members>
+</doc>

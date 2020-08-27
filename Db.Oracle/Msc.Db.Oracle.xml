@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Msc.Db.Oracle</name>
+    </assembly>
+    <members>
+        <member name="T:Msc.Db.Oracle.OracleDbCommand">
+            <summary>
+            Обёртка над Oracle Command с логированием запросов и ошибок выполнения.
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.#ctor(Oracle.ManagedDataAccess.Client.OracleCommand,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="command">команда выполнения</param>
+            <param name="logger">интерфейс логгера</param>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbCommand.CommandText">
+            <summary>
+            Возвращает или задает текстовую команду для выполнения
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbCommand.CommandTimeout">
+            <summary>
+            Возвращает или задает время ожидания перед завершением попытки выполнить команду
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbCommand.CommandType">
+            <summary>
+            Тип команды
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbCommand.Connection">
+            <summary>
+            Возвращает или задает объект IDbConnection
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbCommand.Parameters">
+            <summary>
+            Возвращает набор параметров запроса
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbCommand.Transaction">
+            <summary>
+            Возвращает или задает транзакцию
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbCommand.UpdatedRowSource">
+            <summary>
+            Возвращает или задает способ применения результатов команды
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.Cancel">
+            <summary>
+            Отмена команды
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.CreateParameter">
+            <summary>
+            Создать параметр запроса
+            </summary>
+            <returns>Параметр запроса</returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.Dispose">
+            <summary>
+            Уничтожить команду
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.ExecuteNonQuery">
+            <summary>
+            Выполнить команду и вернуть число задействованных строк
+            </summary>
+            <returns>число строк</returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.ExecuteReader">
+            <summary>
+            Выполнить запрос и создать IDataReader
+            </summary>
+            <returns>Поток результатов выполнения</returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.ExecuteReader(System.Data.CommandBehavior)">
+            <summary>
+            Выполнить запрос и создать IDataReader
+            </summary>
+            <param name="behavior">CommandBehavior</param>
+            <returns>Поток результатов выполнения</returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.ExecuteScalar">
+            <summary>
+            Выполняет запрос и возвращает первый столбец первой строки результирующего набора
+            </summary>
+            <returns>Первая строка</returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.Prepare">
+            <summary>
+            Компилирование команды выполнения
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.Execute``1(System.Func{``0})">
+            <summary>
+            Обработчик выполнения команды
+            </summary>
+            <typeparam name="T">Тип результата выполнения</typeparam>
+            <param name="func">Функция, которую необходимо выполненить</param>
+            <returns>Результат выполнения</returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbCommand.Logging(System.String)">
+            <summary>
+            Обработка ошибки выполнения запроса
+            </summary>
+            <param name="message">Текст ошибки</param>
+        </member>
+        <member name="T:Msc.Db.Oracle.OracleDbConnection">
+            <summary>
+            Обертка над подключением к источнику данных. Oracle
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.#ctor(System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="connectionString">строка подключения к БД</param>
+            <param name="logger">интерфейс логгера</param>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.BeginTransaction">
+            <summary>
+            Начинает транзакцию базы данных
+            </summary>
+            <returns>Транзакция</returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>
+            Начинает транзакцию базы данных с указанным значением <see cref="T:System.Data.IsolationLevel"/>
+            </summary>
+            <param name="il">уровень изоляции</param>
+            <returns>Транзакция</returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.ChangeDatabase(System.String)">
+            <summary>
+            Изменяет текущую базу данных для открытого объекта Connection
+            </summary>
+            <param name="databaseName">название БД</param>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.CreateCommand">
+            <summary>
+            Создает и возвращает объект Command, связанный с подключением
+            </summary>
+            <returns>объект Command</returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.Open">
+            <summary>
+            Устанавливает подключение к базе данных
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.Close">
+            <summary>
+            Закрывает соединение с базой данных
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.Dispose">
+            <summary>
+            Уничтожить объект
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbConnection.ConnectionString">
+            <summary>
+            Строка подключения
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbConnection.ConnectionTimeout">
+            <summary>
+            Получает время ожидания при попытке установки подключения
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbConnection.Database">
+            <summary>
+            Получает имя текущей базы данных
+            </summary>
+        </member>
+        <member name="P:Msc.Db.Oracle.OracleDbConnection.State">
+            <summary>
+            Возвращает текущее состояние подключения
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.BulkCopy``1(System.String,System.Collections.Generic.IEnumerator{``0},System.Func{``0,System.Object[]})">
+            <inheritdoc />
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.GetDateByDbType(System.DateTime)">
+            <summary>
+            Вернуть DbType даты для конкретной реализации БД
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbConnection.BulkLoad(System.String)">
+            <summary>
+            Массовое чтение
+            </summary>
+            <param name="sql"></param>
+            <returns>Читатель</returns>
+        </member>
+        <member name="T:Msc.Db.Oracle.OracleDbContext">
+            <summary>
+            Контекст подключения к БД
+            </summary>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbContext.#ctor(System.String,Microsoft.Extensions.Logging.ILogger{Msc.Interface.Db.IDbContext})">
+            <summary>
+            Конструктор только со строкой подключения к БД
+            </summary>
+            <param name="connectionString">Строка подключения</param>
+            <param name="logger">Интерфейс логгера</param>
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbContext.GetConnection">
+            <inheritdoc />
+        </member>
+        <member name="M:Msc.Db.Oracle.OracleDbContext.GetConnection(System.String)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

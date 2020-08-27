@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<CodeAnalysisRuleSet>$(SolutionDir)\Shared\RuleSet.ruleset</CodeAnalysisRuleSet>
+		<Product>Msc.Microservice.Layer.GrpcCore</Product>
+		<Description>Библиотека общей конфигурации Grpc клиента и сервера.
+    </Description>
+		<PackageId>Msc.Microservice.Layer.GrpcCore</PackageId>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<PackageReleaseNotes>Выделена конфигурация</PackageReleaseNotes>
+		<Version>1.0.0.1</Version>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<Company>Gazprom-neft</Company>
+		<Authors>Konyshev.av;Stepanov.no</Authors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AdditionalFiles Include="$(SolutionDir)\Shared\stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>Msc.Microservice.GrpcCore.xml</DocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>Msc.Microservice.GrpcCore.xml</DocumentationFile>
+	</PropertyGroup>
+
+</Project>

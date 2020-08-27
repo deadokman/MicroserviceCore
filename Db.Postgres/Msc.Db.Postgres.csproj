@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>	
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Msc.Db.Postgres.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup> 
+     <CodeAnalysisRuleSet>$(SolutionDir)\Shared\RuleSet.ruleset</CodeAnalysisRuleSet> 
+     <GeneratePackageOnBuild>True</GeneratePackageOnBuild> 
+     <Product>Msc.Db.Postgres</Product> 
+     <Description>Реализация обертки над Npgsql;
+Добавлен бинарный импортер данных
++ расширены сопоставления типов DbType
++ fix баги в BinaryWriter</Description> 
+     <PackageId>Msc.Db.Postgres</PackageId> 
+     <PackageReleaseNotes>Добавлен бинарный импортер данных</PackageReleaseNotes> 
+     <Version>1.0.1.15</Version> 
+     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance> 
+     <Company>Msc.Db.Postgres</Company> 
+     <Authors>Msc.Db.Postgres</Authors> 
+     <UserSecretsId>015e3478-3cfa-47b8-a42d-55bc502232a6</UserSecretsId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Msc.Db.Postgres.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>     
+     <AdditionalFiles Include="$(SolutionDir)\Shared\stylecop.json" Link="stylecop.json" />  
+  </ItemGroup> 
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.7" />
+    <PackageReference Include="Npgsql" Version="4.0.4" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup> 
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Interface.Db\Msc.Interface.Db.csproj" />
+  </ItemGroup>
+</Project>

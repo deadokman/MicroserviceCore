@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>$(SolutionDir)\Shared\RuleSet.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\Shared\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Msc.Microservice.Core.Standalone\Msc.Microservice.Core.Standalone.csproj" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Msc.Microservice.Layer.RabbitMq.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Msc.Microservice.Layer.RabbitMq.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Product>Msc.Microservice.Layer.RabbitMq</Product>
+    <Description>Библиотека для доступа к RabbitMQ </Description>
+    <PackageId>Msc.Microservice.Layer.RabbitMq</PackageId>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Добавлен Аттрибут RabbitContractAttribute, добавлена поддержка кроссплатформенного взаимодействия между отправляющими и принимающими сторонами в сообщениях рэббита</PackageReleaseNotes>
+    <Version>1.0.0.3</Version>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>Gazprom-neft</Company>
+    <Authors>Konyshev.av;Stepanov.no</Authors>
+  </PropertyGroup>
+
+</Project>

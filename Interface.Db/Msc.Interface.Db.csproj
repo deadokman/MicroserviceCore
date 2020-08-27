@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Product>Msc.Interface.Db</Product>
+    <Description>Библиотека с интерфесами для работы с базами данных</Description>
+    <PackageId>Msc.Interface.Db</PackageId>
+    <PackageReleaseNotes>Добавил метод возвращающий бинарный импортер данных</PackageReleaseNotes>
+    <Version>1.0.1.11</Version>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>Msc.Interface.Db</Company>
+    <Authors>Konyshev A.V.;Stepanov N.O.</Authors>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.7" />
+  </ItemGroup>
+</Project>

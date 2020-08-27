@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Msc.Microservice.Layer.GrpcClient</name>
+    </assembly>
+    <members>
+        <member name="T:Msc.Microservice.Layer.GrpcClient.ClientCache">
+            <summary>
+            Регистрация клиентов Grpc для регистрации в ClientLayer.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Layer.GrpcClient.ClientCache._instance">
+            <summary>
+            Экземпляр класса.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.GrpcClient.ClientCache.Instance">
+            <summary>
+            Статический экземпляр класса.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.GrpcClient.ClientCache.Types">
+            <summary>
+            Коллекция типов, которые необходимо зарегистрировать.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.GrpcClient.ClientCache.ServiceProvider">
+            <summary>
+            DI.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcClient.ClientCache.Add``1">
+            <summary>
+            Зарегистрировать тип клиента.
+            </summary>
+            <typeparam name="T">Тип сгенерированного клиента Grpc.</typeparam>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcClient.ClientCache.Compile(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Скомпилировать и зарегистрировать клиенты в DI.
+            </summary>
+            <param name="serviceCollection">Коллекция служб.</param>
+            <returns>Список ошибок конфигурации.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcClient.ClientCache.GetInstance``1">
+            <summary>
+            Получить экземпляр по типу.
+            </summary>
+            <typeparam name="T">Тип клиента.</typeparam>
+            <returns>Экземпляр клиента.</returns>
+        </member>
+        <member name="T:Msc.Microservice.Layer.GrpcClient.GrpcClientAccessLayer">
+            <summary>
+            Слой регистрирует канал подключения к серверу Grpc.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcClient.GrpcClientAccessLayer.#ctor(Msc.Microservice.Layer.GrpcClient.ClientCache)">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:Msc.Microservice.Layer.GrpcClient.GrpcClientAccessLayer"/>.
+            </summary>
+            <param name="cache">Кеш клиентов.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcClient.GrpcClientAccessLayer.RegisterConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Зарегистрировать конфигурационный файл.
+            </summary>
+            <param name="configurationBuilder">Построитель конфигурации.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcClient.GrpcClientAccessLayer.RegisterLayer(Microsoft.Extensions.Configuration.IConfigurationRoot,Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+            <param name="serviceCollection">Коллекция служб.</param>
+            <returns>Список ошибок конфигурации.</returns>
+        </member>
+        <member name="T:Msc.Microservice.Layer.GrpcClient.IClientService">
+            <summary>
+            Хранилище экземпляров клиентов.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.GrpcClient.IClientService.ServiceProvider">
+            <summary>
+            DI.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.GrpcClient.IClientService.GetInstance``1">
+            <summary>
+            Получить экземпляр по типу.
+            </summary>
+            <typeparam name="T">Тип клиента.</typeparam>
+            <returns>Экземпляр клиента.</returns>
+        </member>
+    </members>
+</doc>

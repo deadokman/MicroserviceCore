@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Msc.Microservice.Core.Standalone</name>
+    </assembly>
+    <members>
+        <member name="T:Msc.Microservice.Core.Standalone.Exceptions.MicroserviceStartupException">
+            <summary>
+            Ошибка выбрасываемая в момент старта и конфигурации миеросервиса.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Exceptions.MicroserviceStartupException.#ctor(System.String)">
+            <summary>
+            Конструктор ошибки инициализации службы.
+            </summary>
+            <param name="message">Сообщение об ошибке.</param>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Implementations.DoWorkArguments">
+            <summary>
+            Обобщенный контракт для запуска бэкграуд треда в микросрвисе.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Core.Standalone.Implementations.DoWorkArguments.ServiceProvider">
+            <summary>
+            Провайдер микросервисов.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Core.Standalone.Implementations.DoWorkArguments.CancellationToken">
+            <summary>
+            Токен синхронизации останова службы.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Implementations.DoWorkDelegate">
+            <summary>
+            Делегат выполнения асинхронной работы службы.
+            </summary>
+            <param name="serviceProvider">Провайдер микросервисов.</param>
+            <param name="stopServiceToken">Токен останова службы.</param>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore">
+            <summary>
+            Ядро микросервиса.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.ServiceBackgroundThread">
+            <summary>
+            Внутренний поток сервиса в котором выполняется основная работа.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.ServiceIdentifier">
+            <summary>
+            Получить индентификатор слубы.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore._logger">
+            <summary>
+            Логгер.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore._loggerFactory">
+            <summary>
+            Подключение и настройка логгера.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore._event">
+            <summary>
+            Защелка, удерживающая основной поток службы.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore._cts">
+            <summary>
+            Фабрика токенов.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore._layers">
+            <summary>
+            Слои.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore._runnableLayers">
+            <summary>
+            Слои, в которых могут быть запущены асинхронные задачи.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore._configurationRoot">
+            <summary>
+            Microservice configuration root.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore._configurationBuilder">
+            <summary>
+            Построитель конфигурации.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.ServiceId">
+            <summary>
+            Идентификатор служы.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.ServiceName">
+            <summary>
+            Имя службы.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore._serviceCollection">
+            <summary>
+            Di Container
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.#ctor">
+            <summary>
+            Конструктор класса по умолчанию.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.#ctor(System.String,System.String)">
+            <summary>
+            Конструктор класса с использованием конфигурации по умолчанию.
+            </summary>
+            <param name="configFileName">Имя конфигурационного файла.</param>
+            <param name="runtimeEnvVariableName">Имя переменной окружения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Создание службы с заданным именем.
+            </summary>
+            <param name="serviceName">Имя службы.</param>
+            <param name="configFileName">Имя конфигурационного файла.</param>
+            <param name="runtimeEnvVariableName">Имя переменной окружения для определения типа рантайма приложения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.Stop">
+            <summary>
+            Остановить работу службы.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.RunAsync">
+            <summary>
+            ЗАпустить службу асинхронно.
+            </summary>
+            <returns>Асинхронный запуск службы.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.Run">
+            <summary>
+            Запустить службу на выполнение.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.AddLayer(Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceLayer)">
+            <summary>
+            Добавить слой.
+            </summary>
+            <param name="layer">Слой.</param>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.DoWork">
+            <summary>
+            Начать выполнение асинхронной работы
+            </summary>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.PrepareExecution">
+            <summary>
+            Шаг конфигурирования
+            </summary>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.GotUnhandledException">
+            <summary>
+            Нотификация о необработанной исключительной ситуации
+            </summary>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.PrepareShutdown">
+            <summary>
+            Произвести действия перед остановкой службы
+            </summary>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.RegisterConfigurations">
+            <summary>
+            Выполнить регистрацию конфигураций
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Implementations.MicroserviceCore.BasicInitialize(System.String)">
+            <summary>
+            Метод выполняет базовую инициализаци службы
+            в т.ч. добавление логгеров и подписку на необработанные исключения.
+            </summary>
+            <param name="serviceName">Имя службы.</param>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Implementations.PrepareExecutionDelegate">
+            <summary>
+            Делегат для конфигурирования микросервиса.
+            </summary>
+            <param name="serviceCollection">Коллекция служб.</param>
+            <param name="configuration">Конфиг.</param>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Implementations.PrepareShutdownDelegate">
+            <summary>
+            Делегат для метода выключения слудбы.
+            </summary>
+            <param name="sp">Service provider.</param>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore">
+            <summary>
+            Интерфейс ядра микросервиса.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore.Stop">
+            <summary>
+            Остановить работу службы.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore.RunAsync">
+            <summary>
+            ЗАпустить службу асинхронно.
+            </summary>
+            <returns>Асинхронный запуск службы.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore.Run">
+            <summary>
+            Запустить службу на выполнение.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore.AddLayer(Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceLayer)">
+            <summary>
+            Добавить слой.
+            </summary>
+            <param name="layer">Слой.</param>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore.DoWork">
+            <summary>
+            Начать выполнение задачи службой
+            </summary>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore.PrepareExecution">
+            <summary>
+            Выполняется перед началом выполнения тела микросервиса
+            </summary>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore.GotUnhandledException">
+            <summary>
+            Нотификация о необработанной исключительной ситуации
+            </summary>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore.PrepareShutdown">
+            <summary>
+            Произвести действия перед остановкой службы
+            </summary>
+        </member>
+        <member name="E:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceCore.RegisterConfigurations">
+            <summary>
+            Выполнить регистрацию конфигураций
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceLayer">
+            <summary>
+            Представляет собой интерфейс слоя микросервиса, наделяющий его той или иной функциональностью.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceLayer.RegisterConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Interfaces.IMicroserviceLayer.RegisterLayer(Microsoft.Extensions.Configuration.IConfigurationRoot,Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+            <param name="serviceCollection">Коллекция служб.</param>
+            <returns>Список ошибок во время конфигурирования.</returns>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Interfaces.IRunnableLayer">
+            <summary>
+            Слой, который может выполнять некоторые действия.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Interfaces.IRunnableLayer.RunAsync(System.IServiceProvider)">
+            <summary>
+            Запустить выполннение операций в слое асинхронно.
+            </summary>
+            <param name="serviceProvider">Провайдер служб.</param>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Interfaces.IRunnableLayer.Shutdown(System.IServiceProvider)">
+            <summary>
+            Отключить работу службы.
+            </summary>
+            <param name="serviceProvider">Провайдер служб.</param>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Layering.DiScopeLifetime">
+            <summary>
+            Переисление. Уровень жизни типа в DI контейнере.
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Layering.DiScopeLifetime.Tranisent">
+            <summary>
+            Новый экземпляр на каждый инстанс
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Layering.DiScopeLifetime.Scoped">
+            <summary>
+            Один экземлпяр в рамках области видимости вызова
+            </summary>
+        </member>
+        <member name="F:Msc.Microservice.Core.Standalone.Layering.DiScopeLifetime.SingleInstance">
+            <summary>
+            Один экземпляр
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Layering.MicroserviceLayerBase">
+            <summary>
+            Базовый класс для слоя микросервиса.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Layering.MicroserviceLayerBase.RegisterConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Зарегистрировать конфигурационный файл.
+            </summary>
+            <param name="configurationBuilder">Построитель конфигурации.</param>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Layering.MicroserviceLayerBase.RegisterLayer(Microsoft.Extensions.Configuration.IConfigurationRoot,Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+            <param name="serviceCollection">Коллекция служб.</param>
+            <returns>Список ошибок конфигурации.</returns>
+        </member>
+        <member name="T:Msc.Microservice.Core.Standalone.Layering.ValidationExtensions">
+            <summary>
+            Расширение для валидации конфигурации.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Core.Standalone.Layering.ValidationExtensions.ValidateErrors(System.Object)">
+            <summary>
+            Валидация ошибок конфигурации.
+            </summary>
+            <param name="this">Объект для проверки конфигурации.</param>
+            <returns>Список ошибок валидации.</returns>
+        </member>
+    </members>
+</doc>

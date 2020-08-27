@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Msc.Microservice.Layer.Postgres</name>
+    </assembly>
+    <members>
+        <member name="T:Msc.Microservice.Layer.Postgres.Configuration.Postgres">
+            <summary>
+            Конфигурация для посгреса.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Postgres.Configuration.Postgres.ConnectionString">
+            <summary>
+            Строка поключения
+            Обязательное свойство
+            В конфигурационном файле или переменной окружения указывается как connectionString;
+            Значение по умолчанию null;.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Postgres.Configuration.Postgres.ReconnectInterval">
+            <summary>
+            Интервал переподключения
+            В конфигурационном файле указывается как reconnectInterval;
+            Значение по умолчанию 1;.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.Postgres.PostgresAccessLayer">
+            <summary>
+            Слой доступа к СУБД Postgres.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Postgres.PostgresAccessLayer.#ctor(System.String)">
+            <summary>
+            Инициализировать слой через строку подключения.
+            </summary>
+            <param name="connString">Строка подключения.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Postgres.PostgresAccessLayer.#ctor">
+            <summary>
+            Инициализировать, используя конфигурацию.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Postgres.PostgresAccessLayer.RegisterConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Зарегистрировать конфигурационный файл.
+            </summary>
+            <param name="configurationBuilder">Построитель конфигурации.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Postgres.PostgresAccessLayer.RegisterLayer(Microsoft.Extensions.Configuration.IConfigurationRoot,Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+            <param name="serviceCollection">Коллекция служб.</param>
+            <returns>Список ошибок конфигурации.</returns>
+        </member>
+    </members>
+</doc>

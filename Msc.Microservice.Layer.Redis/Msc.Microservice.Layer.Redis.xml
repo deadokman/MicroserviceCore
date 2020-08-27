@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Msc.Microservice.Layer.Redis</name>
+    </assembly>
+    <members>
+        <member name="T:Msc.Microservice.Layer.Redis.Configuration.Redis">
+            <summary>
+            Конфигурация для Redis
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Redis.Configuration.Redis.InstanceName">
+            <summary>
+            Имя экземпляра слушателя
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Redis.Configuration.Redis.Endpoints">
+            <summary>
+            Подключение
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Redis.Configuration.Redis.KeepAlive">
+            <summary>
+            время в сек, через которое требуется производить ping подключения
+            Для того чтобы удостовериться что подключение открыто
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Redis.Configuration.Redis.SyncTimeoutMs">
+            <summary>
+            Тайминг синхронизации
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Redis.Configuration.Redis.ConnectRetry">
+            <summary>
+            Количество попыток переподключения
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Redis.Configuration.Redis.Password">
+            <summary>
+            Пароль
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.Redis.Configuration.RedisEndpoint">
+            <summary>
+            Конечная точка для подключения Redis
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Redis.Configuration.RedisEndpoint.Host">
+            <summary>
+            Хост подключения
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.Redis.Configuration.RedisEndpoint.Port">
+            <summary>
+            Порт подключения
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.Layer.Redis.RedisAccessLayer">
+            <summary>
+            Слой доступа к Redis
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.RedisAccessLayer.RegisterConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="configurationRoot">Валидация конфигураций.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.RedisAccessLayer.RegisterLayer(Microsoft.Extensions.Configuration.IConfigurationRoot,Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Выполнить регистрацию и валидацию конфигураций.
+            </summary>
+            <param name="config">Валидация конфигураций.</param>
+            <param name="services">Коллекция служб.</param>
+            <returns>Список ошибок во время конфигурирования.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.RedisAccessLayer.RunAsync(System.IServiceProvider)">
+            <summary>
+            Запустить выполннение операций в слое асинхронно.
+            </summary>
+            <param name="serviceProvider">Провайдер служб.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.RedisAccessLayer.Shutdown(System.IServiceProvider)">
+            <summary>
+            Отключить работу службы.
+            </summary>
+            <param name="serviceProvider">Провайдер служб.</param>
+        </member>
+    </members>
+</doc>

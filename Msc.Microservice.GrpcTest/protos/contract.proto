@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package proxyInfrastructure;
+
+service ProxiM {
+	rpc Execute (CalcRequest) returns (CalcReply) {}
+}
+
+message CalcRequest {
+	bytes id = 1;
+	bytes wellDataFile = 2;
+	bytes modelFile = 3;
+}
+
+message CalcReply {
+	bytes id = 1;
+	repeated CalcFile files = 2;
+}
+
+message CalcFile {
+	FileType type = 1;
+	bytes content = 2;
+}
+
+enum FileType {
+	Undefined = 0;
+	Vnr = 1;
+	VnrNode = 2;
+	Infra = 3;
+	InfraNode = 4;
+	InfraVnr = 5;
+	InfraVnrNode = 6;
+}

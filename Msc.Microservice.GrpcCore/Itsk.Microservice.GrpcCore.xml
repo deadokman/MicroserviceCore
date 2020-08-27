@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Msc.Microservice.GrpcCore</name>
+    </assembly>
+    <members>
+        <member name="T:Msc.Microservice.GrpcCore.Configuration.GrpcConfig">
+            <summary>
+            Конфигурация для Grpc-сервера.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.GrpcCore.Configuration.GrpcConfig.Host">
+            <summary>
+            Настройки Endpoint.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.GrpcCore.Configuration.GrpcConfig.Ssl">
+            <summary>
+            SSL credentials.
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.GrpcCore.Configuration.GrpcConfig.Validate">
+            <summary>
+            Проверить конфигурацию.
+            </summary>
+            <returns>Список ошибок.</returns>
+        </member>
+        <member name="T:Msc.Microservice.GrpcCore.Configuration.GrpcHostConfig">
+            <summary>
+            Настройки Endpoint.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.GrpcCore.Configuration.GrpcHostConfig.Hostname">
+            <summary>
+            Имя хоста.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.GrpcCore.Configuration.GrpcHostConfig.Port">
+            <summary>
+            Номер порта.
+            </summary>
+        </member>
+        <member name="T:Msc.Microservice.GrpcCore.Configuration.GrpcSslConfig">
+            <summary>
+            Настройка SSL.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.GrpcCore.Configuration.GrpcSslConfig.CaCert">
+            <summary>
+            Родительский сертификат.
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.GrpcCore.Configuration.GrpcSslConfig.CertificateChain">
+            <summary>
+            PEM encoded certificate chain.
+            </summary>
+            <remarks>
+            Иерархия сертификатов — это структура, которая позволяет людям проверять валидность сертификата эмитента.
+            Сертификаты подписываются закрытыми ключами тех сертификатов, которые находятся выше в иерархии сертификатов.
+            Поэтому достоверность данного сертификата определяется достоверностью сертификата, которым он был подписан.
+            Наивысший сертификат в цепочке называется корневым (Root certificate).
+            </remarks>
+        </member>
+        <member name="P:Msc.Microservice.GrpcCore.Configuration.GrpcSslConfig.PrivateKey">
+            <summary>
+            PEM encoded private key.
+            </summary>
+            <remarks>
+            PEM – наиболее популярный формат среди сертификационных центров.
+            PEM сертификаты могут иметь расширение .pem, .crt, .cer, и .key (файл приватного ключа).
+            Она представляют собой ASCII файлы, закодированные по схеме Base64.
+            </remarks>
+        </member>
+        <member name="P:Msc.Microservice.GrpcCore.Configuration.GrpcSslConfig.Path">
+            <summary>
+            Путь к сертификатам.
+            </summary>
+        </member>
+    </members>
+</doc>

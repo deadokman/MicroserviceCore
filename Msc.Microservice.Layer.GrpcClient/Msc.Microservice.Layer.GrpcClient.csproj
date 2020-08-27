@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Product>ItMscsk.Microservice.Layer.GrpcClient</Product>
+    <Description>Библиотека для построения GRPC клиента на основе протоконтрактов.</Description>
+    <PackageId>Msc.Microservice.Layer.GrpcClient</PackageId>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Увеличил размер передаваймого файла до максимально возможного.</PackageReleaseNotes>
+    <Version>1.0.0.4</Version>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>Gazprom-neft</Company>
+    <Authors>Konyshev.av;Stepanov.no</Authors>
+  </PropertyGroup>
+
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Msc.Microservice.Layer.GrpcClient.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Msc.Microservice.Layer.GrpcClient.xml</DocumentationFile>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Grpc" Version="2.27.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Msc.Microservice.Core.Standalone\Msc.Microservice.Core.Standalone.csproj" />
+    <ProjectReference Include="..\Msc.Microservice.GrpcCore\Msc.Microservice.GrpcCore.csproj" />
+    <ProjectReference Include="..\Msc.Microservice.Core.Standalone\Msc.Microservice.Core.Standalone.csproj" />
+  </ItemGroup>
+
+</Project>

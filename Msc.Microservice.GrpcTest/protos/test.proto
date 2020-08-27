@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+
+package com.example.grpc;
+
+option java_multiple_files = true;
+
+enum Sentiment {
+	HAPPY = 0;
+	SLEEPY = 1;
+	ANGRY = 2;
+}
+
+message HelloRequest {
+	string name = 1;
+	int32 age = 2;
+	repeated string hobbies = 3;
+	map<string, string> bagOfTricks = 4;
+	Sentiment sentiment = 5;
+}
+
+message HelloResponse {
+	string greeting = 1;
+}
+
+message GreetingEmpty {}
+
+// 4. service, unary request/response
+service GreetingService {
+	rpc greeting(HelloRequest) returns (HelloResponse);
+	rpc greetingNew(GreetingEmpty) returns (HelloResponse);
+}

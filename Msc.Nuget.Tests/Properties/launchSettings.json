@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Msc.Nuget.Tests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ms.Postgre.ConnectionString": "Server=grp.local;Port=5432;Database=ow;User Id=ow;Password=YARteZ,2{T.6wdde;Search Path=ow"
+      }
+    }
+  }
+}

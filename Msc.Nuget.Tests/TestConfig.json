@@ -1,0 +1,32 @@
+{
+  "Postgres": {
+    "ConnectionString": "Server=host.docker.internal;Port=5432;Database=ow;User Id=ow;Password=YARteZ,2{T.6wdde;Search Path=ow"
+  },
+  "QueuesConfig": {
+	  "Endpoints": [
+		  {
+			  "EndpointName": "Test",
+			  "AutoAck": "false"
+		  }
+	  ],
+	  "ClientName": "WebApiClient",
+	  "HostName": "host.docker.internal",
+	  "Port": "5672",
+	  "UserName": "admin",
+	  "Password": "!qwe123",
+	  "RedeliveryRetries": "3",
+	  "EndpointType": "Queue",
+	  "ConnectionAttempts": "1",
+	  "PauseBetweenAttemts": "1",
+	  "UseRpc": "true"
+  },
+  "Redis":  {
+	  "KeepAlive":  1,
+	  "Password":  "!qwe123",
+	  "InstanceName":  "TestInstance",
+	  "Endpoints": [{
+		  "Host": "host.docker.internal",
+		  "Port": 6379
+	  }]
+	}
+}
