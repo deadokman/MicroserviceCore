@@ -15,6 +15,9 @@ This project is aimed at placing microservices inside docker's containers, but y
 * (WIP) Postgres layer 
 * (WIP) Grpc Server layer 
 * (WIP) Grpc client layer 
+##### Dealing with the Docker
+
+* (WIP) Cooking container with MSC
 
 #### <a name="microservicecore"></a> Microservice Core (MSC)
 
