@@ -20,13 +20,9 @@ jobs:
 
       - name: Setup .NET Core @ Latest
         uses: actions/setup-dotnet@v1
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}        
-
+       
       - name: Build solution and generate NuGet package
-        run: |  
-          cd <project>
-          dotnet build -c release && dotnet pack -c release -o out 
+        run: dotnet build -c release && dotnet pack -c release -o out 
 
       - name: Push generated package to GitHub registry
         run: dotnet nuget push ./<project>/out/*.nupkg --skip-duplicate --no-symbols true
