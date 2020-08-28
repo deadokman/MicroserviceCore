@@ -29,11 +29,11 @@
     <Description>Библиотека предоставляет интерфейс IDbContext при построении микросервисной архитектуры на Microservice.Core.Standalone, для подключения к СУБД Postgres.
       Обновлена версия Db.Postgres</Description>
     <PackageId>Microservice.Layer.Postgres</PackageId>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Первая версия библиотеки</PackageReleaseNotes>
     <Version>1.0.0.3</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Company>Gazprom-neft</Company>
+    <Company>Stepanov.no;Konyshev.av</Company>
     <Authors>Stepanov.no;Konyshev.av</Authors>
   </PropertyGroup>
 

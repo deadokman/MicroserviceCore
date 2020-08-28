@@ -13,7 +13,7 @@
     <PackageReleaseNotes>Доработал создание сервисов GRPC через делегат</PackageReleaseNotes>
     <Version>1.0.0.5</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Company>Gazprom-neft</Company>
+    <Company>Konyshev.av;Stepanov.no</Company>
     <Authors>Konyshev.av;Stepanov.no</Authors>
   </PropertyGroup>
 

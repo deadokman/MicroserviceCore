@@ -9,11 +9,11 @@
     <Product>Msc.Microservice.Layer.Redis</Product>
     <Description>Слой содержит клиент редиса (keydb) и объект с настройками для него.</Description>
     <PackageId>Msc.Microservice.Layer.Redis</PackageId>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Добавлен алгоритм блокировок</PackageReleaseNotes>
     <Version>1.0.0.4</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Company>Msc.Microservice.Layer.Redis</Company>
+    <Company>Konyshev.A.V.;Stepanov.N.O.</Company>
     <Authors>Konyshev.A.V.;Stepanov.N.O.</Authors>
   </PropertyGroup>
   <ItemGroup>

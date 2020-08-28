@@ -27,11 +27,11 @@
     <Product>Msc.Microservice.Layer.RabbitMq</Product>
     <Description>Библиотека для доступа к RabbitMQ </Description>
     <PackageId>Msc.Microservice.Layer.RabbitMq</PackageId>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Добавлен Аттрибут RabbitContractAttribute, добавлена поддержка кроссплатформенного взаимодействия между отправляющими и принимающими сторонами в сообщениях рэббита</PackageReleaseNotes>
     <Version>1.0.0.3</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Company>Gazprom-neft</Company>
+    <Company>Konyshev.av;Stepanov.no</Company>
     <Authors>Konyshev.av;Stepanov.no</Authors>
   </PropertyGroup>
 
