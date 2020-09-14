@@ -1,7 +1,7 @@
 # Microservice Core (MSC) .NET Core library for building microservices
 
-This set of the libraries will help you to organize your microservice architecture in most efficient way. 
-This project is aimed at placing microservices inside docker's containers, but you also can use it inside self-hosted console applications.
+This set of  libraries will help you to organize your microservice architecture in the most efficient way. 
+This project is aimed to place microservices inside docker containers, but you also can use it inside self-hosted console applications.
 
 ##### Base information
 * [Microservice Core](#microservicecore)
@@ -15,23 +15,23 @@ This project is aimed at placing microservices inside docker's containers, but y
 * (WIP) Postgres layer 
 * (WIP) Grpc Server layer 
 * (WIP) Grpc client layer 
-##### Dealing with the Docker
+##### Dealing with Docker
 
 * (WIP) Cooking container with MSC
 
 #### <a name="microservicecore"></a> Microservice Core (MSC)
 
-*Msc.Microservice.Core.Standalone* - is the main library of architecture. It is provide microservice lifecycle events and layer extension mechanisms. 
+*Msc.Microservice.Core.Standalone* - is the main library of architecture. It provides microservice lifecycle events and layer extension mechanisms. 
 
-Too install library as Nuget package use command:
+To install library as Nuget package use command:
 
     dotnet add package Msc.Microservice.Core.Standalone
 
-This library operates with a default .NetCore DI container (may change in a future), Microsoft configurations extensions and custom layering system, all this together provides you arhitecture, that you can use to create and easily extend your microservices.
+This library uses default .NetCore DI container (it may change in future), Microsoft configurations extensions and custom layering system, all together it provides you arhitecture, you can use to create and easily extend your microservices.
 
-Note: *At this point, MSC uses NLog as default logger. But this subject may change in future, to give you possebility to use you favourite logger; Add nlog.config from ./Shared/ folder, to your project file and set "Copy Always" option in file properties => Advanced => Copy to output Directory;*
+Note: *At this point, MSC uses NLog as default logger. But this may change in future, to give you possibility to use you favourite logger; Add nlog.config from ./Shared/ folder, to your project file and set "Copy Always" option in file properties => Advanced => Copy to output Directory;*
 
-To create your first microservice, create new .NET Core console application. And then paste this code inside your *Programm.cs* file, Programm class:
+To create your first microservice, create new .NET Core console application, then paste this code inside your *Programm.cs* file, Programm class:
 
 ```csharp
 
@@ -51,16 +51,16 @@ private static void Microservice_OnDoWork(IServiceProvider serviceprovider, Canc
 
 Thats it, you can start your application... And it won't do anything :). 
 
-Read next article in order to make you microservice more functional.
+Read next article in order to make your microservice more functional.
 
 #### <a name="lifecycle"></a> Lifecycle events
 
-When you microservice starts, shutdowns and/or throws unhandled exception, the MSC fires it's life cycle evets that you can use to perfome some operations or too extend your application. **Required to subscribe is the DoWork event**. Others events subscription are optional.
+When your microservice starts, shutdowns and/or throws unhandled exception, the MSC fires it's life cycle evets that you can use to perform some operations or to extend your application. **Required to subscribe is the DoWork event**. Other events subscription are optional.
 
 
-All events except unhandled exceptions are raised in a specific order:
+All events, except unhandled exceptions are raised in a specific order:
 
-**When you service starts** fires next events:
+**When your service starts** fires next events:
 
 1) *RegisterConfigurations* (optional) - inside this event handler delegate you can register you own configuration files:
 ```csharp
@@ -78,7 +78,7 @@ private static void Microservice_OnRegisterConfigurations(object? sender, IConfi
 }
 ```
 
-2) *PrepareExecution* (optional) - this event provides you an IServiceCollection instance (which is the implementation of the dependency injection container) and instance of class, that implemets IConfigurationRoot. 
+2) *PrepareExecution* (optional) - this event provides an IServiceCollection instance (implementation of the dependency injection container) and instance of class,     implemets IConfigurationRoot. 
    Note: *At this point, MSC uses .Net core default DI contriner, but it will be optional in future*.
    Inside this event handler delagete you can register your own classes inside DI container (IServiceCollection) and get access to you configuration classes from IConfigurationRoot which is the part of the Microsoft.Configuration namespace.
 
