@@ -17,7 +17,6 @@ namespace Msc.Microservice.Layer.RabbitMq
     /// <typeparam name="T">Payload сообщения.</typeparam>
     internal sealed class RmqMessageBase<T> : IRmqMessageWrap<T>
     {
-
         /// <summary>
         /// Подтверждение сообщения.
         /// </summary>
