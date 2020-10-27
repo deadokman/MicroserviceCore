@@ -30,8 +30,7 @@ namespace Msc.Microservice.Layer.RabbitMq
     /// <summary>
     /// Клиент RabbitMQ.
     /// </summary>
-    public class RabbitMqClient
-        : RabbitClientBase, IMessageQueueClient
+    public class RabbitMqClient : RabbitClientBase, IMessageQueueClient
     {
         /// <summary>
         /// Метка RPC запроса в шапке сообщения.

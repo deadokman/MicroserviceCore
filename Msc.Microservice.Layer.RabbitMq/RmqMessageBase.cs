@@ -15,8 +15,9 @@ namespace Msc.Microservice.Layer.RabbitMq
     /// Базовая обертка сообщения.
     /// </summary>
     /// <typeparam name="T">Payload сообщения.</typeparam>
-    public sealed class RmqMessageBase<T> : IRmqMessageWrap<T>
+    internal sealed class RmqMessageBase<T> : IRmqMessageWrap<T>
     {
+
         /// <summary>
         /// Подтверждение сообщения.
         /// </summary>
@@ -32,12 +33,19 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// </summary>
         public IMessageQueueClient Client { get; set; }
 
+        private bool _notCompleted = true;
+
         /// <summary>
         /// Подтвердить обработку сообщения.
         /// </summary>
         public void Ack()
         {
-            Acknoledge.Invoke(true, false);
+            if (_notCompleted)
+            {
+                Acknoledge.Invoke(true, false);
+            }
+
+            _notCompleted = false;
         }
 
         /// <summary>
@@ -46,7 +54,12 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="requeue">true - сообщение помещается обратно в очередь с тем же самым DeliveryTag.</param>
         public void Nack(bool requeue = false)
         {
-            Acknoledge.Invoke(false, requeue);
+            if (_notCompleted)
+            {
+                Acknoledge.Invoke(false, requeue);
+            }
+
+            _notCompleted = false;
         }
     }
 }
