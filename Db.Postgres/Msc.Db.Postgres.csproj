@@ -19,7 +19,8 @@
      <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance> 
      <Company>Msc.Db.Postgres</Company> 
      <Authors>Msc.Db.Postgres</Authors> 
-     <UserSecretsId>015e3478-3cfa-47b8-a42d-55bc502232a6</UserSecretsId>
+     <UserSecretsId>015e3478-3cfa-47b8-a42d-55bc502232a6</UserSecretsId> 
+     <OutputType>Library</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>Msc.Db.Postgres.xml</DocumentationFile>

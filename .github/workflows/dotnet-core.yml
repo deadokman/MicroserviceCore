@@ -24,5 +24,34 @@ jobs:
       - name: Build solution and generate NuGet package
         run: dotnet restore && dotnet build -c release && dotnet pack -c release -o out 
 
-      - name: Push generated package to GitHub registry
-        run: dotnet nuget push "out/*.nupkg"  -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
+      - name: publish Db.Postgres
+        id: publish_Db_Postgres
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Db.Postgres/Msc.Db.Postgres.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+                   
+      - name: publish Msc.Microservice.Core.Standalone
+        id: publish_Microservice_Core_Standalone
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Msc.Microservice.Core.Standalone/Msc.Microservice.Core.Standalone.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+
+      - name: publish Msc.Microservice.Layer.RabbitMq
+        id: publish_Msc_Microservice_Layer_RabbitMq
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Msc.Microservice.Layer.RabbitMq/Msc.Microservice.Layer.RabbitMq.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          
+      - name: publish Msc.Microservice.Layer.Redis
+        id: publish_Msc_Microservice_Layer_Redis
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Msc.Microservice.Layer.Redis/Msc.Microservice.Layer.Redis.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
