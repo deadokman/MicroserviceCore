@@ -55,3 +55,11 @@ jobs:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Msc.Microservice.Layer.Redis/Msc.Microservice.Layer.Redis.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          
+      - name: publish Msc.Microservice.Layer.Postgres
+        id: publish_Msc_Microservice_Layer_Postgres
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Msc.Microservice.Layer.Postgres/Msc.Microservice.Layer.Postgres.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
