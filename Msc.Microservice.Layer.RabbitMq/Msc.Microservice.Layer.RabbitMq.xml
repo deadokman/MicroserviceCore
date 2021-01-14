@@ -162,6 +162,16 @@
             Тип конечной точки подключения клиента (EndpointName или Exchanger).
             </summary>
         </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.PrefetchCount">
+            <summary>
+            Максимальное количество сообщений, которое принимает клиент до подтверждения предыдущих в очереди
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.VirtualHost">
+            <summary>
+            Виртуальный сегмент
+            </summary>
+        </member>
         <member name="T:Msc.Microservice.Layer.RabbitMq.Dispatcher.MessageDispatcher">
             <summary>
             Выполняет распределение сообщений по хендлерам.
@@ -376,6 +386,7 @@
             </summary>
             <param name="ack">true - подтверждение обработки false - unack.</param>
             <param name="requeue">Если true и ack = false сообщение ставится в начало очереди.</param>
+            <param name="ordered">Учитывать отправку подтверждений в порядке поступления сообщений</param>
         </member>
         <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap`1">
             <summary>
@@ -393,10 +404,11 @@
             Полезная нагрузка.
             </summary>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap`1.Ack">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap`1.Ack(System.Boolean)">
             <summary>
             Подтвердить обработку сообщения.
             </summary>
+            <param name="order">Учитывать порядок сообщений</param>
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IRmqMessageWrap`1.Nack(System.Boolean)">
             <summary>
@@ -843,10 +855,11 @@
             Клиент очереди.
             </summary>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.RmqMessageBase`1.Ack">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RmqMessageBase`1.Ack(System.Boolean)">
             <summary>
-            Подтвердить обработку сообщения.
+            Подтвердить обработку сообщения без сопоставления порядка подтверждений с порядком сообщений.
             </summary>
+            <param name="order">Учитывать порядок сообщений</param>
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.RmqMessageBase`1.Nack(System.Boolean)">
             <summary>

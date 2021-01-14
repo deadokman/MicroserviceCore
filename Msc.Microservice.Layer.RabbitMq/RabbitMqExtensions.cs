@@ -26,7 +26,7 @@ namespace Msc.Microservice.Layer.RabbitMq
         {
             connectionFactory.UserName = config.UserName;
             connectionFactory.Password = config.Password;
-            connectionFactory.VirtualHost = "/";
+            connectionFactory.VirtualHost = config.VirtualHost;
             connectionFactory.Protocol = Protocols.DefaultProtocol;
             connectionFactory.HostName = config.HostName;
             connectionFactory.Port = config.Port;
@@ -41,7 +41,14 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="config"> Конфигурация. </param>
         public static void Configure(this IModel model, QueuesConfig config)
         {
-            model.BasicQos(0, 1, false);
+            if (config.PrefetchCount.HasValue)
+            {
+                model.BasicQos(0, config.PrefetchCount.Value, false);
+            }
+            else
+            {
+                model.BasicQos(0, 1, false);
+            }
         }
     }
 }

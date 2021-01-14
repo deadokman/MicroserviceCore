@@ -92,5 +92,15 @@ namespace Msc.Microservice.Layer.RabbitMq.Configuration
         /// Тип конечной точки подключения клиента (EndpointName или Exchanger).
         /// </summary>
         public RabbitMessageQueueEndpointType EndpointType { get; set; }
+
+        /// <summary>
+        /// Максимальное количество сообщений, которое принимает клиент до подтверждения предыдущих в очереди
+        /// </summary>
+        public ushort? PrefetchCount { get; set; }
+
+        /// <summary>
+        /// Виртуальный сегмент
+        /// </summary>
+        public string VirtualHost { get; set; } = "/";
     }
 }
