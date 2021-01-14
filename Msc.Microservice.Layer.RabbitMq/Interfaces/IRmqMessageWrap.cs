@@ -28,7 +28,8 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         /// <summary>
         /// Подтвердить обработку сообщения.
         /// </summary>
-        void Ack();
+        /// <param name="order">Учитывать порядок сообщений</param>
+        void Ack(bool order = true);
 
         /// <summary>
         /// Отметить сообщение как "не обработанное".

@@ -245,7 +245,7 @@ namespace Msc.Microservice.Layer.RabbitMq
                             // Обработать сообщение, если оно подразумевает только получение
                             Dispatcher.DispatchMessage(
                             this,
-                            (ack, requeue) => Acknowledgment(epConf, args, ack, requeue),
+                            (ack, requeue, order) => Acknowledgment(epConf, args, ack, requeue, order),
                             message,
                             type);
                         }
@@ -290,7 +290,7 @@ namespace Msc.Microservice.Layer.RabbitMq
                                     var response = Dispatcher.HandleRpcMessage(
                                         this,
                                         message,
-                                        (ack, requeue) => Acknowledgment(epConf, args, ack, requeue),
+                                        (ack, requeue, order) => Acknowledgment(epConf, args, ack, requeue, order),
                                         argType,
                                         respType);
                                     var responseObject = new RpcResponse(ResponseType.Ok, response, string.Empty);
@@ -326,7 +326,7 @@ namespace Msc.Microservice.Layer.RabbitMq
                     {
                         if (!epConf.AutoAck)
                         {
-                            Acknowledgment(epConf, args, false, false);
+                            Acknowledgment(epConf, args, false, false, true);
                         }
 
                         Logger.LogError(ex, $"Клиенту не удалось обработать сообщение DeliveryTag {args.DeliveryTag} из-за ошибки");
@@ -400,20 +400,34 @@ namespace Msc.Microservice.Layer.RabbitMq
             Model.BasicPublish(string.Empty, endpoint, propsData, bytes);
         }
 
-        private void Acknowledgment(EndpointConfig epConf, BasicDeliverEventArgs args, bool ack, bool requeue)
+        private void Acknowledgment(EndpointConfig epConf, BasicDeliverEventArgs args, bool ack, bool requeue, bool order)
         {
             if (epConf.AutoAck)
             {
                 throw new NotSupportedException("Ручное подтверждение не доступно т.к. выбран режим AutoAck = true");
             }
 
-            if (ack)
+            if (order)
             {
-                Model.BasicAck(args.DeliveryTag, ack);
+                if (ack)
+                {
+                    Model.BasicAck(args.DeliveryTag, ack);
+                }
+                else
+                {
+                    Model.BasicNack(args.DeliveryTag, false, requeue);
+                }
             }
             else
             {
-                Model.BasicNack(args.DeliveryTag, false, requeue);
+                if (!ack)
+                {
+                    Model.BasicAck(args.DeliveryTag, ack);
+                }
+                else
+                {
+                    Model.BasicNack(args.DeliveryTag, false, requeue);
+                }
             }
         }
 

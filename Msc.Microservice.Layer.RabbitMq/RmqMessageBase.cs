@@ -35,13 +35,14 @@ namespace Msc.Microservice.Layer.RabbitMq
         private bool _notCompleted = true;
 
         /// <summary>
-        /// Подтвердить обработку сообщения.
+        /// Подтвердить обработку сообщения без сопоставления порядка подтверждений с порядком сообщений.
         /// </summary>
-        public void Ack()
+        /// <param name="order">Учитывать порядок сообщений</param>
+        public void Ack(bool order = true)
         {
             if (_notCompleted)
             {
-                Acknoledge.Invoke(true, false);
+                Acknoledge.Invoke(true, false, order);
             }
 
             _notCompleted = false;

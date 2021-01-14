@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(SolutionDir)\Shared\RuleSet.ruleset</CodeAnalysisRuleSet>
+    <PackageVersion>1.0.0.7</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\Shared\stylecop.json" Link="stylecop.json" />

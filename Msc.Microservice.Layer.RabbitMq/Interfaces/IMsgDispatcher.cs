@@ -49,5 +49,6 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
     /// </summary>
     /// <param name="ack">true - подтверждение обработки false - unack.</param>
     /// <param name="requeue">Если true и ack = false сообщение ставится в начало очереди.</param>
-    public delegate void Acknoledge(bool ack, bool requeue);
+    /// <param name="ordered">Учитывать отправку подтверждений в порядке поступления сообщений</param>
+    public delegate void Acknoledge(bool ack, bool requeue, bool ordered = true);
 }
