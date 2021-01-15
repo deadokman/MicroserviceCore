@@ -96,7 +96,7 @@ namespace Msc.Microservice.Layer.RabbitMq.Configuration
         /// <summary>
         /// Максимальное количество сообщений, которое принимает клиент до подтверждения предыдущих в очереди
         /// </summary>
-        public ushort? PrefetchCount { get; set; }
+        public ushort? PrefetchCount { get; set; } = 1;
 
         /// <summary>
         /// Виртуальный сегмент
