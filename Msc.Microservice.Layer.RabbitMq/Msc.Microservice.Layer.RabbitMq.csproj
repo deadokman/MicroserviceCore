@@ -29,13 +29,13 @@
     <Description>Библиотека для доступа к RabbitMQ </Description>
     <PackageId>Msc.Microservice.Layer.RabbitMq</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>FIXED: After message re-confirmation (double Ack), layer stops new messages consuming</PackageReleaseNotes>
-    <Version>1.0.0.1</Version>
+    <PackageReleaseNotes>Added order to Ack (for PrefetchCount) and VirtualHost in QueueConfig</PackageReleaseNotes>
+    <Version>1.0.0.7</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Konyshev.av;Stepanov.no</Company>
     <Authors>Konyshev.av;Stepanov.no</Authors>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.7</AssemblyVersion>
+    <FileVersion>1.0.0.7</FileVersion>
   </PropertyGroup>
 
 </Project>
