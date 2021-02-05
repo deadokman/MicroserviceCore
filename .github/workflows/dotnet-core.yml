@@ -63,3 +63,27 @@ jobs:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Msc.Microservice.Layer.Postgres/Msc.Microservice.Layer.Postgres.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          
+      - name: publish Msc.Microservice.GrpcCore
+        id: publish_Msc_Microservice_GrpcCore
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Msc.Microservice.GrpcCore/Msc.Microservice.GrpcCore.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          
+      - name: publish Msc.Microservice.Layer.GrpcServer
+        id: publish_Msc_Microservice_Layer_GrpcServer
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Msc.Microservice.Layer.GrpcServer/Msc.Microservice.Layer.GrpcServer.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          
+      - name: publish Msc.Microservice.Layer.GrpcClient
+        id: publish_Msc_Microservice_Layer_GrpcClient
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Msc.Microservice.Layer.GrpcClient/Msc.Microservice.Layer.GrpcClient.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
