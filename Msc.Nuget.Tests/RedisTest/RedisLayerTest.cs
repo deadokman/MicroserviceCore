@@ -40,7 +40,7 @@ namespace Msc.Nuget.Tests.RedisTest
             _service.Stop();
         }
 
-        private void _service_OnRegisterConfigurations(object? sender, IConfigurationBuilder e)
+        private void _service_OnRegisterConfigurations(object sender, IConfigurationBuilder e)
         {
             e.AddJsonFile("./TestConfig.json");
         }

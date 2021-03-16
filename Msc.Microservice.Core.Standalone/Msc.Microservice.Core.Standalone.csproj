@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>net461;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(SolutionDir)\Shared\RuleSet.ruleset</CodeAnalysisRuleSet>
@@ -12,7 +12,7 @@ This set of the libraries will help you to organize your microservice architectu
     <PackageId>Msc.Microservice.Core.Standalone</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>+ Исправил инициализацию DI контейнера</PackageReleaseNotes>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.1.81</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Stepanov.no;Konyshev.av</Company>
     <Authors>Stepanov.no;Konyshev.av</Authors>

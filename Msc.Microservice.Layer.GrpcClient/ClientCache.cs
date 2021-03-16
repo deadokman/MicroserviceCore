@@ -24,7 +24,7 @@ namespace Msc.Microservice.Layer.GrpcClient
         /// <summary>
         /// Статический экземпляр класса.
         /// </summary>
-        public static ClientCache Instance => _instance ??= new ClientCache();
+        public static ClientCache Instance => _instance == null ? _instance = new ClientCache() : _instance;
 
         /// <summary>
         /// Коллекция типов, которые необходимо зарегистрировать.
