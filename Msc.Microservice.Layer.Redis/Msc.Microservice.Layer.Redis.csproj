@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>net461;netstandard2.1</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -11,12 +11,12 @@
     <PackageId>Msc.Microservice.Layer.Redis</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Добавлен алгоритм блокировок</PackageReleaseNotes>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.1.81</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Konyshev.A.V.;Stepanov.N.O.</Company>
     <Authors>Konyshev.A.V.;Stepanov.N.O.</Authors>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.1.81</AssemblyVersion>
+    <FileVersion>1.0.1.81</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\Shared\stylecop.json" Link="stylecop.json" />

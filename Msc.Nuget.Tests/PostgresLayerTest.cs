@@ -27,7 +27,7 @@ namespace Msc.Nuget.Tests
 
         private void McOnRegisterConfigurations(object sender, IConfigurationBuilder e)
         {
-            e.AddEnvironmentVariables("ms_");
+            //e.AddEnvironmentVariables("ms_");
         }
 
 
