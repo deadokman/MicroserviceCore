@@ -33,7 +33,7 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         /// <param name="queue">Конечная точка.</param>
         /// <param name="bytes">Набор байт.</param>
         /// <param name="props">Свойства.</param>
-        void SendBytes(string queue, byte[] bytes, IBasicProperties props = null);
+        void SendBytes(string queue, ReadOnlyMemory<byte> bytes, IBasicProperties props = null);
 
         /// <summary>
         /// Опубликовать сообщение в брокере в конкретной очереди.

@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Msc.Microservice.Layer.RabbitMq.Behaviour
 {
     /// <summary>
@@ -23,7 +25,7 @@ namespace Msc.Microservice.Layer.RabbitMq.Behaviour
         /// Вызвать отработку поведенческой модели.
         /// </summary>
         /// <param name="messageBytes">Набор байт сообщения.</param>
-        public override void InvokeBehaviour(byte[] messageBytes)
+        public override void InvokeBehaviour(ReadOnlyMemory<byte> messageBytes)
         {
             if (QueueClient != null)
             {

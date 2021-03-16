@@ -79,7 +79,7 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="dispatcher"> Диспетчер сообщений. </param>
         /// <param name="logger"> Логгер. </param>
         /// <param name="serializer"> Сериализатор сообщений. </param>
-        public RabbitClientBase(QueuesConfig configuration, IMsgDispatcher dispatcher, ILogger<IMessageQueueClient> logger, IMessageSerializer serializer)
+        protected RabbitClientBase(QueuesConfig configuration, IMsgDispatcher dispatcher, ILogger<IMessageQueueClient> logger, IMessageSerializer serializer)
         {
             Configuration = configuration ?? throw new ArgumentNullException($"Конфигурация клиента очереди не найдена или содержит ошибки");
             Dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
@@ -90,7 +90,7 @@ namespace Msc.Microservice.Layer.RabbitMq
             RegistratedConsumers = new Dictionary<string, EventingBasicConsumer>();
             ConnectionFactory = new ConnectionFactory
             {
-                RequestedHeartbeat = 5,
+                RequestedHeartbeat = TimeSpan.FromSeconds(5),
             };
         }
 

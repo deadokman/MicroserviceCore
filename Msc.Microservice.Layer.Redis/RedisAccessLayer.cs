@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Redis;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,8 +29,6 @@ namespace Msc.Microservice.Layer.Redis
     /// </summary>
     public class RedisAccessLayer : IRunnableLayer
     {
-        private static Lazy<ConnectionMultiplexer> _lazyConnection;
-
         private RedLockFactory _lockFactory;
 
         /// <summary>
@@ -39,7 +37,6 @@ namespace Msc.Microservice.Layer.Redis
         /// <param name="configurationRoot">Валидация конфигураций.</param>
         public void RegisterConfiguration(IConfigurationBuilder configurationRoot)
         {
-            return;
         }
 
         /// <summary>
@@ -102,7 +99,6 @@ namespace Msc.Microservice.Layer.Redis
         /// <param name="serviceProvider">Провайдер служб.</param>
         public void RunAsync(IServiceProvider serviceProvider)
         {
-            return;
         }
 
         /// <summary>

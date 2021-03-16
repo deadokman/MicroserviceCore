@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Msc.Microservice.Core.Standalone.Implementations;
 using Msc.Microservice.Core.Standalone.Interfaces;
-using Msc.Microservice.Layer.Postgres;
 using Msc.Microservice.Layer.RabbitMq.Interfaces;
 using Msc.Microservice.Layer.RabbitMq.Layer;
 using Msc.Nuget.Tests.Handlers;
 using Msc.Nuget.Tests.Handlers.Contracts;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using NUnit.Framework;
 
 namespace Msc.Nuget.Tests

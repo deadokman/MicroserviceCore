@@ -8,7 +8,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.ComponentModel.DataAnnotations;
-using System.Net;
 
 namespace Msc.Microservice.Layer.Redis.Configuration
 {

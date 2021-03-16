@@ -26,7 +26,7 @@ namespace Msc.Microservice.Layer.RabbitMq
     {
         private ILogger<IMessageSerializer> Logger { get; }
 
-        private IDictionary<string, string> _namespaceMaps;
+        private readonly IDictionary<string, string> _namespaceMaps;
 
         /// <summary>
         /// Сериализатор JSON по умолчанию.
@@ -68,9 +68,15 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="contentType">Тип объектной модели сообщения.</param>
         /// <param name="contractTypes">Делегат на получение типа контракта по алиасу.</param>
         /// <returns>Возвращает диссериализованный объект содержимого сообщения.</returns>
-        public object DeserializeTransferMessage(byte[] body, out Type contentType, Func<string, Type> contractTypes = null)
+        public object DeserializeTransferMessage(ReadOnlyMemory<byte> body, out Type contentType, Func<string, Type> contractTypes = null)
         {
-            var messageBody = JToken.Parse(new string(Encoding.UTF8.GetChars(body)));
+#if NETSTANDARD2_1
+            var messageEncoding = Encoding.UTF8.GetString(body.Span);
+#else
+            var messageEncoding = Encoding.UTF8.GetString(body.ToArray());
+#endif
+
+            var messageBody = JToken.Parse(messageEncoding);
             var mesageType = messageBody.Value<string>("MessageType");
             var payload = messageBody.Value<JToken>("Payload")?.ToString();
 
@@ -127,9 +133,14 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="body"> Тело сообщения. </param>
         /// <param name="messageType"> Тип сообщения. </param>
         /// <returns>Возвращает диссериализованную инстанцию объекта.</returns>
-        public object DeserializeRpcMessage(byte[] body, Type messageType)
+        public object DeserializeRpcMessage(ReadOnlyMemory<byte> body, Type messageType)
         {
-            var mesageStr = new string(Encoding.UTF8.GetChars(body));
+#if NETSTANDARD2_1
+            var mesageStr = Encoding.UTF8.GetString(body.Span);
+#else
+            var mesageStr = Encoding.UTF8.GetString(body.ToArray());
+#endif
+
             Logger.LogTrace($"msgBody: {mesageStr}");
             return JsonConvert.DeserializeObject(mesageStr, messageType);
         }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Castle.Core.Logging;
+﻿using System.Text;
 using Msc.Microservice.Layer.RabbitMq;
 using Msc.Microservice.Layer.RabbitMq.Dispatcher;
 using Msc.Microservice.Layer.RabbitMq.Interfaces;
