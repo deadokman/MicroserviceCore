@@ -7,6 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using Msc.Microservice.Layer.RabbitMq.Interfaces;
 
 namespace Msc.Microservice.Layer.RabbitMq.Behaviour
@@ -25,7 +26,7 @@ namespace Msc.Microservice.Layer.RabbitMq.Behaviour
         /// Вызвать обработку сообщения согласно модели поведения.
         /// </summary>
         /// <param name="messageBytes">Набор байт сообщения.</param>
-        public abstract void InvokeBehaviour(byte[] messageBytes);
+        public abstract void InvokeBehaviour(ReadOnlyMemory<byte> messageBytes);
 
         /// <summary>
         /// Фаза обработки сообщения.

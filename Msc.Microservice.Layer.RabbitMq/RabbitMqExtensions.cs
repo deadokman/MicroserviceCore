@@ -7,6 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using Msc.Microservice.Layer.RabbitMq.Configuration;
 using RabbitMQ.Client;
 
@@ -27,10 +28,9 @@ namespace Msc.Microservice.Layer.RabbitMq
             connectionFactory.UserName = config.UserName;
             connectionFactory.Password = config.Password;
             connectionFactory.VirtualHost = config.VirtualHost;
-            connectionFactory.Protocol = Protocols.DefaultProtocol;
             connectionFactory.HostName = config.HostName;
             connectionFactory.Port = config.Port;
-            connectionFactory.RequestedHeartbeat = 30;
+            connectionFactory.RequestedHeartbeat = TimeSpan.FromSeconds(30);
             connectionFactory.AutomaticRecoveryEnabled = true;
         }
 

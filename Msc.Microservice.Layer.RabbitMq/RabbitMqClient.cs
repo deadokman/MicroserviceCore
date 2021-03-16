@@ -218,7 +218,7 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="queue">Очередь.</param>
         /// <param name="bytes">Набор байт.</param>
         /// <param name="props">Свойства.</param>
-        public void SendBytes(string queue, byte[] bytes, IBasicProperties props = null)
+        public void SendBytes(string queue, ReadOnlyMemory<byte> bytes, IBasicProperties props = null)
         {
             var propsData = props ?? Model.CreateBasicProperties();
             propsData.Persistent = true;

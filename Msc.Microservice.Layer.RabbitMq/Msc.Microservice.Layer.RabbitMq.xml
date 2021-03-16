@@ -14,7 +14,7 @@
             Клиент очереди.
             </summary>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.Behaviour.BehaviourBase.InvokeBehaviour(System.Byte[])">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Behaviour.BehaviourBase.InvokeBehaviour(System.ReadOnlyMemory{System.Byte})">
             <summary>
             Вызвать обработку сообщения согласно модели поведения.
             </summary>
@@ -41,7 +41,7 @@
             Целевая очередь для переотправки сообщения.
             </summary>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.Behaviour.RepublishMessageBehaviour.InvokeBehaviour(System.Byte[])">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Behaviour.RepublishMessageBehaviour.InvokeBehaviour(System.ReadOnlyMemory{System.Byte})">
             <summary>
             Вызвать отработку поведенческой модели.
             </summary>
@@ -241,7 +241,7 @@
             Интерфейс модели поведения клиента.
             </summary>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageProcessBehaviuor.InvokeBehaviour(System.Byte[])">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageProcessBehaviuor.InvokeBehaviour(System.ReadOnlyMemory{System.Byte})">
             <summary>
             Вызвать обработку поведенческой модели.
             </summary>
@@ -272,7 +272,7 @@
             <param name="props">Свосйства запроса.</param>
             <param name="messageType">Тип отправляемого сообщения.</param>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.SendBytes(System.String,System.Byte[],RabbitMQ.Client.IBasicProperties)">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.SendBytes(System.String,System.ReadOnlyMemory{System.Byte},RabbitMQ.Client.IBasicProperties)">
             <summary>
             Отправить байты сообщеия.
             </summary>
@@ -331,7 +331,7 @@
             <param name="payload">Данные сообщения.</param>
             <returns>JSON - объект сообщения.</returns>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer.DeserializeRpcMessage(System.Byte[],System.Type)">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer.DeserializeRpcMessage(System.ReadOnlyMemory{System.Byte},System.Type)">
             <summary>
             Преобразовать в объект сообщение, которое подразумевает только передачу данных.
             </summary>
@@ -339,7 +339,7 @@
             <param name="requestArgType"> Тип сообщения. </param>
             <returns>Возвращает диссериализованную инстанцию объекта.</returns>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer.DeserializeTransferMessage(System.Byte[],System.Type@,System.Func{System.String,System.Type})">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer.DeserializeTransferMessage(System.ReadOnlyMemory{System.Byte},System.Type@,System.Func{System.String,System.Type})">
             <summary>
             Диссриализовать сообщения из байт-массива.
             </summary>
@@ -529,7 +529,7 @@
             <param name="messageType">Тип сообщения.</param>
             <returns>Байт-массив сообщения.</returns>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer.DeserializeTransferMessage(System.Byte[],System.Type@,System.Func{System.String,System.Type})">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer.DeserializeTransferMessage(System.ReadOnlyMemory{System.Byte},System.Type@,System.Func{System.String,System.Type})">
             <summary>
             Диссриализовать сообщения из байт-массива.
             </summary>
@@ -538,7 +538,7 @@
             <param name="contractTypes">Делегат на получение типа контракта по алиасу.</param>
             <returns>Возвращает диссериализованный объект содержимого сообщения.</returns>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer.DeserializeRpcMessage(System.Byte[],System.Type)">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.OwJsonSerializer.DeserializeRpcMessage(System.ReadOnlyMemory{System.Byte},System.Type)">
             <summary>
             Преобразовать в объект сообщение, которое подразумевает только передачу данных.
             </summary>
@@ -791,7 +791,7 @@
             <param name="props">Свосйства запроса.</param>
             <param name="messageType">Тип отправляемого сообщения.</param>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.SendBytes(System.String,System.Byte[],RabbitMQ.Client.IBasicProperties)">
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.SendBytes(System.String,System.ReadOnlyMemory{System.Byte},RabbitMQ.Client.IBasicProperties)">
             <summary>
             Отправить байты сообщеия.
             </summary>

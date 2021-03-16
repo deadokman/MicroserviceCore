@@ -37,7 +37,7 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         /// <param name="body"> Тело сообщения. </param>
         /// <param name="requestArgType"> Тип сообщения. </param>
         /// <returns>Возвращает диссериализованную инстанцию объекта.</returns>
-        object DeserializeRpcMessage(byte[] body, Type requestArgType);
+        object DeserializeRpcMessage(ReadOnlyMemory<byte> body, Type requestArgType);
 
         /// <summary>
         /// Диссриализовать сообщения из байт-массива.
@@ -46,6 +46,6 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         /// <param name="contentType">Тип объектной модели сообщения.</param>
         /// <param name="contractTypes">Делегат на получение типа контракта по алиасу.</param>
         /// <returns>Возвращает диссериализованный объект содержимого сообщения.</returns>
-        object DeserializeTransferMessage(byte[] body, out Type contentType, Func<string, Type> contractTypes = null);
+        object DeserializeTransferMessage(ReadOnlyMemory<byte> body, out Type contentType, Func<string, Type> contractTypes = null);
     }
 }
