@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Msc.Microservice.Layer.RabbitMq;
+﻿using Msc.Microservice.Layer.RabbitMq;
 using Msc.Microservice.Layer.RabbitMq.Configuration;
 using Msc.Microservice.Layer.RabbitMq.Interfaces;
 using Microsoft.Extensions.Logging;

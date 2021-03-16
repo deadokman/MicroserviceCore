@@ -1,5 +1,4 @@
-﻿using Msc.Interface.Db;
-using System.Data;
+﻿using System.Data;
 
 namespace Msc.Interface.Db
 {

@@ -22,7 +22,15 @@ jobs:
         uses: actions/setup-dotnet@v1
        
       - name: Build solution and generate NuGet package
-        run: dotnet restore && dotnet build -c release && dotnet pack -c release -o out 
+        run: dotnet restore && dotnet build -c release && dotnet pack -c release -o out
+        
+      - name: publish Interface.Db
+        id: publish_Interface_Db
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Interface.Db/Msc.Interface.Db.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
 
       - name: publish Db.Postgres
         id: publish_Db_Postgres
@@ -31,7 +39,15 @@ jobs:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Db.Postgres/Msc.Db.Postgres.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-                   
+
+      - name: publish Db.Oracle
+        id: publish_Db_Oracle
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: Db.Oracle/Msc.Db.Oracle.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+
       - name: publish Msc.Microservice.Core.Standalone
         id: publish_Microservice_Core_Standalone
         uses: rohith/publish-nuget@v2

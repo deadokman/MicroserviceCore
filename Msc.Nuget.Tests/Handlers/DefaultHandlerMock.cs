@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Msc.Microservice.Layer.RabbitMq.Interfaces;
+﻿using Msc.Microservice.Layer.RabbitMq.Interfaces;
 using Msc.Nuget.Tests.Handlers.Contracts;
-using Moq;
-using NUnit.Framework;
 
 namespace Msc.Nuget.Tests.Handlers
 {

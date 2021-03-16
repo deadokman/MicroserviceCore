@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using Msc.Interface.Db;
 using Msc.Microservice.Core.Standalone.Implementations;

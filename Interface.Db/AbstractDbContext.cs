@@ -1,5 +1,4 @@
-﻿using Msc.Interface.Db;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Data.Common;
 using System.Threading.Tasks;

@@ -11,7 +11,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Msc.Microservice.Core.Standalone.Implementations;
-using Msc.Microservice.Core.Standalone.Implementations;
 
 namespace Msc.Microservice.Core.Standalone.Interfaces
 {

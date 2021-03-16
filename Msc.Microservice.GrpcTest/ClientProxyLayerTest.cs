@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Com.Example.Grpc;
 using Google.Protobuf;
 using Msc.Microservice.Layer.GrpcClient;
 using Microsoft.Extensions.Configuration;

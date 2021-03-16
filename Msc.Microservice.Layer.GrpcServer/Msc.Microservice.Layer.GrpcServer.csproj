@@ -11,7 +11,7 @@
     <PackageId>Msc.Microservice.Layer.GrpcServer</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageReleaseNotes>Доработал создание сервисов GRPC через делегат</PackageReleaseNotes>
-    <Version>1.0.1.81</Version>
+    <Version>1.0.1.82</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Konyshev.av;Stepanov.no</Company>
     <Authors>Konyshev.av;Stepanov.no</Authors>
