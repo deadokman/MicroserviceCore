@@ -198,14 +198,37 @@ namespace Msc.Microservice.Core.Standalone.Implementations
 
             string configurationJsonFile = "N/A";
 
+            /*
             // Добавить конфигурационный файл по умолчанию
             if (!string.IsNullOrEmpty(_configFileName))
             {
+                _configurationBuilder.AddJsonFile($"{_configFileName}.json");
+                if (string.IsNullOrEmpty(_runtimeEnvVariableName))
+                {
+                    _configurationBuilder.AddJsonFile($"{_configFileName}.{Environment.GetEnvironmentVariable(_runtimeEnvVariableName)}.json");
+                }
+
                 var configFileName = string.IsNullOrEmpty(_runtimeEnvVariableName)
                     ? $"{_configFileName}.json"
                     : $"{_configFileName}.{Environment.GetEnvironmentVariable(_runtimeEnvVariableName)}.json";
                 configurationJsonFile = $"{configFileName}";
                 _configurationBuilder.AddJsonFile(configurationJsonFile);
+            }
+            */
+
+            if (!string.IsNullOrEmpty(_configFileName))
+            {
+                var cfgFile = _configFileName ?? "appsettings";
+                Configuration(cfgFile);
+            }
+
+            void Configuration(string configFile)
+            {
+                _configurationBuilder.AddJsonFile($"{configFile}.json");
+                if (!string.IsNullOrEmpty(_runtimeEnvVariableName))
+                {
+                    _configurationBuilder.AddJsonFile($"{_configFileName}.{Environment.GetEnvironmentVariable(_runtimeEnvVariableName)}.json");
+                }
             }
 
             _logger.LogInformation($"Выполняется запуск              {ServiceIdentifier}");
