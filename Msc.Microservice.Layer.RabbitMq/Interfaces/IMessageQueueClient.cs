@@ -9,6 +9,7 @@
 
 using System;
 using System.Threading.Tasks;
+using Msc.Microservice.Layer.RabbitMq.Configuration;
 using RabbitMQ.Client;
 
 namespace Msc.Microservice.Layer.RabbitMq.Interfaces
@@ -65,6 +66,12 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         /// Настроить клиент.
         /// </summary>
         void SetUpClient();
+
+        /// <summary>
+        /// Добавить конфигурацию для конечной точки
+        /// </summary>
+        /// <param name="ep">Конечная точка</param>
+        void AppendEndpoint(EndpointConfig ep);
 
         /// <summary>
         /// Создать очередь

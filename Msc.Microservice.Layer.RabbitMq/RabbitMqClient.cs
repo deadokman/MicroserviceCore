@@ -166,6 +166,18 @@ namespace Msc.Microservice.Layer.RabbitMq
         }
 
         /// <summary>
+        /// Добавить конфигурацию для конечной точки
+        /// </summary>
+        /// <param name="ep">Конечная точка</param>
+        public void AppendEndpoint(EndpointConfig ep)
+        {
+            var eps = Configuration.Endpoints;
+            var newEps = new List<EndpointConfig>(eps);
+            newEps.Add(ep);
+            Configuration.Endpoints = newEps.ToArray();
+        }
+
+        /// <summary>
         /// Создать очередь
         /// </summary>
         /// <param name="queue">Очередь</param>
