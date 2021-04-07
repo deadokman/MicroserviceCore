@@ -311,6 +311,29 @@
             Настроить клиент.
             </summary>
         </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.QueueDeclare(System.String,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Создать очередь
+            </summary>
+            <param name="queue">Очередь</param>
+            <param name="durable">Durable</param>
+            <param name="autoDelete">AUto deltet</param>
+            <param name="vhost">Vhost</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.DeleteQueue(System.String)">
+            <summary>
+            Удаление очереди
+            </summary>
+            <param name="queueName">Имя очереди</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.CreateQueueBinding(System.String,System.String,System.String)">
+            <summary>
+            Добавить биндинг между эксчейнджером и очередью
+            </summary>
+            <param name="exchanger">Эксчейнджер</param>
+            <param name="queue">Очередь</param>
+            <param name="routingKey">Routing key</param>
+        </member>
         <member name="T:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer">
             <summary>
             Интерфейс сериализотора сообщений очереди.
@@ -771,6 +794,29 @@
             <summary>
             Настроить клиент.
             </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.QueueDeclare(System.String,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Создать очередь
+            </summary>
+            <param name="queue">Очередь</param>
+            <param name="durable">Durable</param>
+            <param name="autoDelete">AUto deltet</param>
+            <param name="vhost">Vhost</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.DeleteQueue(System.String)">
+            <summary>
+            Удаление очереди
+            </summary>
+            <param name="queueName">Имя очереди</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.CreateQueueBinding(System.String,System.String,System.String)">
+            <summary>
+            Добавить биндинг между эксчейнджером и очередью
+            </summary>
+            <param name="exchanger">Эксчейнджер</param>
+            <param name="queue">Очередь</param>
+            <param name="routingKey">Routing key</param>
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.PublishMessage(System.String,System.Object,RabbitMQ.Client.IBasicProperties,System.Type)">
             <summary>

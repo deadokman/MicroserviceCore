@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -162,6 +163,48 @@ namespace Msc.Microservice.Layer.RabbitMq
                 _rpcConsumer.Received += OnRpcCallbackRecived;
                 _rpcModel.BasicConsume(_rpcCallbackQueue, true, _rpcConsumer);
             }
+        }
+
+        /// <summary>
+        /// Создать очередь
+        /// </summary>
+        /// <param name="queue">Очередь</param>
+        /// <param name="durable">Durable</param>
+        /// <param name="autoDelete">AUto deltet</param>
+        /// <param name="vhost">Vhost</param>
+        public void QueueDeclare(string queue, bool durable = false, bool autoDelete = true, string vhost = "")
+        {
+            if (this.Model == null)
+            {
+                throw new Exception("Client not initialized or initialized with errors");
+            }
+
+            Model.QueueDeclare(queue, durable, false, autoDelete);
+        }
+
+        /// <summary>
+        /// Удаление очереди
+        /// </summary>
+        /// <param name="queueName">Имя очереди</param>
+        public void DeleteQueue(string queueName)
+        {
+            Model.QueueDelete(queueName);
+        }
+
+        /// <summary>
+        /// Добавить биндинг между эксчейнджером и очередью
+        /// </summary>
+        /// <param name="exchanger">Эксчейнджер</param>
+        /// <param name="queue">Очередь</param>
+        /// <param name="routingKey">Routing key</param>
+        public void CreateQueueBinding(string exchanger, string queue, string routingKey = "")
+        {
+            if (this.Model == null)
+            {
+                throw new Exception("Client not initialized or initialized with errors");
+            }
+
+            Model.QueueBind(queue, exchanger, routingKey);
         }
 
         /// <summary>

@@ -65,5 +65,28 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         /// Настроить клиент.
         /// </summary>
         void SetUpClient();
+
+        /// <summary>
+        /// Создать очередь
+        /// </summary>
+        /// <param name="queue">Очередь</param>
+        /// <param name="durable">Durable</param>
+        /// <param name="autoDelete">AUto deltet</param>
+        /// <param name="vhost">Vhost</param>
+        void QueueDeclare(string queue, bool durable = false, bool autoDelete = true, string vhost = "");
+
+        /// <summary>
+        /// Удаление очереди
+        /// </summary>
+        /// <param name="queueName">Имя очереди</param>
+        void DeleteQueue(string queueName);
+
+        /// <summary>
+        /// Добавить биндинг между эксчейнджером и очередью
+        /// </summary>
+        /// <param name="exchanger">Эксчейнджер</param>
+        /// <param name="queue">Очередь</param>
+        /// <param name="routingKey">Routing key</param>
+        void CreateQueueBinding(string exchanger, string queue, string routingKey = "");
     }
 }
