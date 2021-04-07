@@ -172,7 +172,7 @@ namespace Msc.Microservice.Layer.RabbitMq
         public void AppendEndpoint(EndpointConfig ep)
         {
             var eps = Configuration.Endpoints;
-            var newEps = new List<EndpointConfig>(eps);
+            var newEps = new List<EndpointConfig>(eps ?? new EndpointConfig[0]);
             newEps.Add(ep);
             Configuration.Endpoints = newEps.ToArray();
         }
@@ -286,6 +286,11 @@ namespace Msc.Microservice.Layer.RabbitMq
         public void BeginConsume()
         {
             List<IMessageProcessBehaviuor> behaviours;
+            if (Configuration.Endpoints == null)
+            {
+                return;
+            }
+
             foreach (var epConf in Configuration.Endpoints)
             {
                 var consumer = new EventingBasicConsumer(Model);
