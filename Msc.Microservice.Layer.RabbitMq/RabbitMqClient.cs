@@ -72,6 +72,11 @@ namespace Msc.Microservice.Layer.RabbitMq
         private EventingBasicConsumer _rpcConsumer;
 
         /// <summary>
+        /// Подключение установлено
+        /// </summary>
+        public bool IsConnected => this._rpcModel.IsOpen;
+
+        /// <summary>
         /// Клиент RabbitMq.
         /// </summary>
         /// <param name="config"> Конфигурация клиента. </param>

@@ -74,6 +74,26 @@ namespace Msc.Microservice.Layer.RabbitMq.Configuration
         public int? PauseBetweenAttemts { get; set; } = 60;
 
         /// <summary>
+        /// Интервал подключения к очереди
+        /// </summary>
+        public int ConnectHeartbeatSec { get; set; } = 60;
+
+        /// <summary>
+        /// Интервал подключения к очереди
+        /// </summary>
+        public int ContinuationTimeoutSec { get; set; } = 25;
+
+        /// <summary>
+        /// HandshakeContinuationTimeoutSec
+        /// </summary>
+        public int HandshakeContinuationTimeoutSec { get; set; } = 15;
+
+        /// <summary>
+        /// RequestedConnectionTimeoutSec
+        /// </summary>
+        public int RequestedConnectionTimeoutSec { get; set; } = 30;
+
+        /// <summary>
         /// Количество попыток поворной доставки после провала.
         /// </summary>
         public int? RedeliveryRetries { get; set; } = 10;

@@ -29,6 +29,11 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         void PublishMessage(string queue, object msg, IBasicProperties props = null, Type messageType = null);
 
         /// <summary>
+        /// Подключено
+        /// </summary>
+        bool IsConnected { get; }
+
+        /// <summary>
         /// Отправить байты сообщеия.
         /// </summary>
         /// <param name="queue">Конечная точка.</param>

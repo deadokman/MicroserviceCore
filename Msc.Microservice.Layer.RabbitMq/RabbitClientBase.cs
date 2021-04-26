@@ -23,6 +23,11 @@ namespace Msc.Microservice.Layer.RabbitMq
     public abstract class RabbitClientBase : IDisposable
     {
         /// <summary>
+        /// Подключение RabbitMq.
+        /// </summary>
+        public IConnection Connection { get; set; }
+
+        /// <summary>
         /// Диспетчер сообщений текущего клиента.
         /// </summary>
         protected IMsgDispatcher Dispatcher;
@@ -41,11 +46,6 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// Конфигурация текущего клиента.
         /// </summary>
         protected QueuesConfig Configuration;
-
-        /// <summary>
-        /// Подключение RabbitMq.
-        /// </summary>
-        protected IConnection Connection;
 
         /// <summary>
         /// Модель данных.
@@ -90,7 +90,10 @@ namespace Msc.Microservice.Layer.RabbitMq
             RegistratedConsumers = new Dictionary<string, EventingBasicConsumer>();
             ConnectionFactory = new ConnectionFactory
             {
-                RequestedHeartbeat = TimeSpan.FromSeconds(5),
+                RequestedHeartbeat = TimeSpan.FromSeconds(configuration.ConnectHeartbeatSec),
+                ContinuationTimeout = TimeSpan.FromSeconds(configuration.ContinuationTimeoutSec),
+                HandshakeContinuationTimeout = TimeSpan.FromSeconds(configuration.HandshakeContinuationTimeoutSec),
+                RequestedConnectionTimeout = TimeSpan.FromSeconds(configuration.RequestedConnectionTimeoutSec),
             };
         }
 
@@ -142,6 +145,7 @@ namespace Msc.Microservice.Layer.RabbitMq
                 catch (RabbitMQ.Client.Exceptions.BrokerUnreachableException ex)
                 {
                     Logger.LogWarning($"Не удалось подключиться клиенту {Configuration.ClientName} к RabbitMq попытка № - {attempt} клиент засыпает на {waitTime} сек.");
+                    Logger.LogWarning(ex, "Ошибка подключения");
                     if (attempt >= maxAttempts)
                     {
                         var msg = $"Клиенту {Configuration.ClientName} не удалось подключиться к шине в результате {maxAttempts} попыток";

@@ -142,6 +142,26 @@
             Пауза между попытками (сек.)
             </summary>
         </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.ConnectHeartbeatSec">
+            <summary>
+            Интервал подключения к очереди
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.ContinuationTimeoutSec">
+            <summary>
+            Интервал подключения к очереди
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.HandshakeContinuationTimeoutSec">
+            <summary>
+            HandshakeContinuationTimeoutSec
+            </summary>
+        </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.RequestedConnectionTimeoutSec">
+            <summary>
+            RequestedConnectionTimeoutSec
+            </summary>
+        </member>
         <member name="P:Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig.RedeliveryRetries">
             <summary>
             Количество попыток поворной доставки после провала.
@@ -272,6 +292,11 @@
             <param name="props">Свосйства запроса.</param>
             <param name="messageType">Тип отправляемого сообщения.</param>
         </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.IsConnected">
+            <summary>
+            Подключено
+            </summary>
+        </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.SendBytes(System.String,System.ReadOnlyMemory{System.Byte},RabbitMQ.Client.IBasicProperties)">
             <summary>
             Отправить байты сообщеия.
@@ -310,6 +335,12 @@
             <summary>
             Настроить клиент.
             </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.AppendEndpoint(Msc.Microservice.Layer.RabbitMq.Configuration.EndpointConfig)">
+            <summary>
+            Добавить конфигурацию для конечной точки
+            </summary>
+            <param name="ep">Конечная точка</param>
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.QueueDeclare(System.String,System.Boolean,System.Boolean,System.String)">
             <summary>
@@ -620,6 +651,11 @@
             Базовый класс клиента RMQ.
             </summary>
         </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Connection">
+            <summary>
+            Подключение RabbitMq.
+            </summary>
+        </member>
         <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Dispatcher">
             <summary>
             Диспетчер сообщений текущего клиента.
@@ -638,11 +674,6 @@
         <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Configuration">
             <summary>
             Конфигурация текущего клиента.
-            </summary>
-        </member>
-        <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Connection">
-            <summary>
-            Подключение RabbitMq.
             </summary>
         </member>
         <member name="F:Msc.Microservice.Layer.RabbitMq.RabbitClientBase.Model">
@@ -770,6 +801,11 @@
             Наименование очереди для ответов по RPC.
             </summary>
         </member>
+        <member name="P:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.IsConnected">
+            <summary>
+            Подключение установлено
+            </summary>
+        </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.#ctor(Microsoft.Extensions.Options.IOptions{Msc.Microservice.Layer.RabbitMq.Configuration.QueuesConfig},Msc.Microservice.Layer.RabbitMq.Interfaces.IMsgDispatcher,Microsoft.Extensions.Logging.ILogger{Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient},Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageSerializer)">
             <summary>
             Клиент RabbitMq.
@@ -794,6 +830,12 @@
             <summary>
             Настроить клиент.
             </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.AppendEndpoint(Msc.Microservice.Layer.RabbitMq.Configuration.EndpointConfig)">
+            <summary>
+            Добавить конфигурацию для конечной точки
+            </summary>
+            <param name="ep">Конечная точка</param>
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.QueueDeclare(System.String,System.Boolean,System.Boolean,System.String)">
             <summary>
