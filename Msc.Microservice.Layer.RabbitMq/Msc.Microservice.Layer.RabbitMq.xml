@@ -320,6 +320,19 @@
             Начать получение сообщений.
             </summary>
         </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.BeginConsume(Msc.Microservice.Layer.RabbitMq.Configuration.EndpointConfig)">
+            <summary>
+            Начать получать сообщения со одной конечной точки.
+            </summary>
+            <param name="endpoint">Конечная точка.</param>
+            <returns>Тег потребителя сообщений.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.BeginCancel(System.String)">
+            <summary>
+            Отписать потребителя от очереди.
+            </summary>
+            <param name="tag">Тег потребителя сообщений.</param>
+        </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.MakeRpcCallAsync``2(``0,System.String,System.Nullable{System.TimeSpan})">
             <summary>
             Выполнить RPC запрос.
@@ -338,13 +351,13 @@
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.AppendEndpoint(Msc.Microservice.Layer.RabbitMq.Configuration.EndpointConfig)">
             <summary>
-            Добавить конфигурацию для конечной точки
+            Добавить конфигурацию для конечной точки.
             </summary>
-            <param name="ep">Конечная точка</param>
+            <param name="ep">Конечная точка.</param>
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.QueueDeclare(System.String,System.Boolean,System.Boolean,System.String)">
             <summary>
-            Создать очередь
+            Создать очередь.
             </summary>
             <param name="queue">Очередь</param>
             <param name="durable">Durable</param>
@@ -889,8 +902,21 @@
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.BeginConsume">
             <summary>
-            Начать получать сообщения.
+            Начать получать сообщения со всех конечных точек.
             </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.BeginConsume(Msc.Microservice.Layer.RabbitMq.Configuration.EndpointConfig)">
+            <summary>
+            Начать получать сообщения со одной конечной точки.
+            </summary>
+            <param name="endpoint">Конечная точка.</param>
+            <returns>Тег потребителя сообщений.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.BeginCancel(System.String)">
+            <summary>
+            Отписать потребителя от очереди.
+            </summary>
+            <param name="tag">Тег потребителя сообщений.</param>
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.Dispose">
             <summary>
