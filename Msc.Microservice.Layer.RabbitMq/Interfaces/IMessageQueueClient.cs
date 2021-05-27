@@ -57,6 +57,19 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         void BeginConsume();
 
         /// <summary>
+        /// Начать получать сообщения со одной конечной точки.
+        /// </summary>
+        /// <param name="endpoint">Конечная точка.</param>
+        /// <returns>Тег потребителя сообщений.</returns>
+        string BeginConsume(EndpointConfig endpoint);
+
+        /// <summary>
+        /// Отписать потребителя от очереди.
+        /// </summary>
+        /// <param name="tag">Тег потребителя сообщений.</param>
+        void BeginCancel(string tag);
+
+        /// <summary>
         /// Выполнить RPC запрос.
         /// </summary>
         /// <typeparam name="TArgs">Аргумент.</typeparam>
@@ -73,13 +86,13 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         void SetUpClient();
 
         /// <summary>
-        /// Добавить конфигурацию для конечной точки
+        /// Добавить конфигурацию для конечной точки.
         /// </summary>
-        /// <param name="ep">Конечная точка</param>
+        /// <param name="ep">Конечная точка.</param>
         void AppendEndpoint(EndpointConfig ep);
 
         /// <summary>
-        /// Создать очередь
+        /// Создать очередь.
         /// </summary>
         /// <param name="queue">Очередь</param>
         /// <param name="durable">Durable</param>

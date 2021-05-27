@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,7 +73,7 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <summary>
         /// Подключение установлено
         /// </summary>
-        public bool IsConnected => this._rpcModel.IsOpen;
+        public bool IsConnected => _rpcModel.IsOpen;
 
         /// <summary>
         /// Клиент RabbitMq.
@@ -177,8 +176,11 @@ namespace Msc.Microservice.Layer.RabbitMq
         public void AppendEndpoint(EndpointConfig ep)
         {
             var eps = Configuration.Endpoints;
-            var newEps = new List<EndpointConfig>(eps ?? new EndpointConfig[0]);
-            newEps.Add(ep);
+            var newEps = new List<EndpointConfig>(eps ?? new EndpointConfig[0])
+            {
+                ep,
+            };
+
             Configuration.Endpoints = newEps.ToArray();
         }
 
@@ -191,7 +193,7 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="vhost">Vhost</param>
         public void QueueDeclare(string queue, bool durable = false, bool autoDelete = true, string vhost = "")
         {
-            if (this.Model == null)
+            if (Model == null)
             {
                 throw new Exception("Client not initialized or initialized with errors");
             }
@@ -205,6 +207,11 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="queueName">Имя очереди</param>
         public void DeleteQueue(string queueName)
         {
+            if (Model == null)
+            {
+                throw new Exception("Client not initialized or initialized with errors");
+            }
+
             Model.QueueDelete(queueName);
         }
 
@@ -216,7 +223,7 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="routingKey">Routing key</param>
         public void CreateQueueBinding(string exchanger, string queue, string routingKey = "")
         {
-            if (this.Model == null)
+            if (Model == null)
             {
                 throw new Exception("Client not initialized or initialized with errors");
             }
@@ -247,10 +254,9 @@ namespace Msc.Microservice.Layer.RabbitMq
         public void PublishMessage(string exchanger, string queue, object msg, IBasicProperties props = null, Type messageType = null)
         {
             var bestType = messageType ?? msg.GetType();
-            string messageTypeName;
 
             // Попробовать вытащить данные из кэша аттрибутов
-            if (!_typeAliasCache.TryGetValue(bestType, out messageTypeName))
+            if (!_typeAliasCache.TryGetValue(bestType, out var messageTypeName))
             {
                 // Попытаться извлечь данные из арртрибута контракта
                 var attr = bestType.GetCustomAttributes<RabbitContractAttribute>().FirstOrDefault();
@@ -286,11 +292,10 @@ namespace Msc.Microservice.Layer.RabbitMq
         }
 
         /// <summary>
-        /// Начать получать сообщения.
+        /// Начать получать сообщения со всех конечных точек.
         /// </summary>
         public void BeginConsume()
         {
-            List<IMessageProcessBehaviuor> behaviours;
             if (Configuration.Endpoints == null)
             {
                 return;
@@ -298,131 +303,158 @@ namespace Msc.Microservice.Layer.RabbitMq
 
             foreach (var epConf in Configuration.Endpoints)
             {
-                var consumer = new EventingBasicConsumer(Model);
-                consumer.Received += (sender, args) =>
-                {
-                    try
-                    {
-                        if (string.IsNullOrEmpty(args.BasicProperties.Type))
-                        {
-                            var message = Serializer.DeserializeTransferMessage(args.Body, out var type, Dispatcher.TryGetByAlias);
+                BeginConsume(epConf);
+            }
+        }
 
-                            // Обработать сообщение, если оно подразумевает только получение
-                            Dispatcher.DispatchMessage(
-                            this,
-                            (ack, requeue, order) => Acknowledgment(epConf, args, ack, requeue, order),
-                            message,
-                            type);
-                        }
-                        else if (args.BasicProperties.Type == RpcRequestHeaderName)
+        /// <summary>
+        /// Начать получать сообщения со одной конечной точки.
+        /// </summary>
+        /// <param name="endpoint">Конечная точка.</param>
+        /// <returns>Тег потребителя сообщений.</returns>
+        public string BeginConsume(EndpointConfig endpoint)
+        {
+            var consumer = new EventingBasicConsumer(Model);
+            consumer.Received += (sender, args) =>
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(args.BasicProperties.Type))
+                    {
+                        var message = Serializer.DeserializeTransferMessage(args.Body, out var type, Dispatcher.TryGetByAlias);
+
+                        // Обработать сообщение, если оно подразумевает только получение
+                        Dispatcher.DispatchMessage(
+                        this,
+                        (ack, requeue, order) => Acknowledgment(endpoint, args, ack, requeue, order),
+                        message,
+                        type);
+                    }
+                    else if (args.BasicProperties.Type == RpcRequestHeaderName)
+                    {
+                        try
                         {
+                            // Найти соответствующий делегат в списке ожидающих
                             try
                             {
-                                // Найти соответствующий делегат в списке ожидающих
-                                try
+                                ValidateRpcMessageArgs(args);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.LogError(ex, $"Ошибка обработки сообщения DeliveryTag: {args.DeliveryTag}");
+                            }
+
+                            var props = Model.CreateBasicProperties();
+                            props.CorrelationId = args.BasicProperties.CorrelationId;
+                            props.Type = RpcResponseHeaderName;
+                            try
+                            {
+                                var argTypeName = Encoding.UTF8.GetString((byte[])args.BasicProperties.Headers[RpcArgType]);
+                                var respTypeName = Encoding.UTF8.GetString((byte[])args.BasicProperties.Headers[RpcRespType]);
+
+                                Logger.LogTrace($"Reviced msg argType: {argTypeName} respType: {respTypeName}");
+
+                                // Обработать сообщение
+                                var argType = Type.GetType(argTypeName);
+                                var respType = Type.GetType(respTypeName);
+                                if (argType == null)
                                 {
-                                    ValidateRpcMessageArgs(args);
+                                    throw new ArgumentException($"Не удалось найти тип аргумента запроса: {argTypeName}");
                                 }
-                                catch (Exception ex)
+
+                                if (respType == null)
                                 {
-                                    Logger.LogError(ex, $"Ошибка обработки сообщения DeliveryTag: {args.DeliveryTag}");
+                                    throw new ArgumentException($"Не удалось найти тип аргумента ответа: {respTypeName}");
                                 }
 
-                                var props = Model.CreateBasicProperties();
-                                props.CorrelationId = args.BasicProperties.CorrelationId;
-                                props.Type = RpcResponseHeaderName;
-                                try
-                                {
-                                    var argTypeName = Encoding.UTF8.GetString((byte[])args.BasicProperties.Headers[RpcArgType]);
-                                    var respTypeName = Encoding.UTF8.GetString((byte[])args.BasicProperties.Headers[RpcRespType]);
-
-                                    Logger.LogTrace($"Reviced msg argType: {argTypeName} respType: {respTypeName}");
-
-                                    // Обработать сообщение
-                                    var argType = Type.GetType(argTypeName);
-                                    var respType = Type.GetType(respTypeName);
-                                    if (argType == null)
-                                    {
-                                        throw new ArgumentException($"Не удалось найти тип аргумента запроса: {argTypeName}");
-                                    }
-
-                                    if (respType == null)
-                                    {
-                                        throw new ArgumentException($"Не удалось найти тип аргумента ответа: {respTypeName}");
-                                    }
-
-                                    var message = Serializer.DeserializeRpcMessage(args.Body, argType);
-                                    var response = Dispatcher.HandleRpcMessage(
-                                        this,
-                                        message,
-                                        (ack, requeue, order) => Acknowledgment(epConf, args, ack, requeue, order),
-                                        argType,
-                                        respType);
-                                    var responseObject = new RpcResponse(ResponseType.Ok, response, string.Empty);
-                                    props.Headers = new Dictionary<string, object>
+                                var message = Serializer.DeserializeRpcMessage(args.Body, argType);
+                                var response = Dispatcher.HandleRpcMessage(
+                                    this,
+                                    message,
+                                    (ack, requeue, order) => Acknowledgment(endpoint, args, ack, requeue, order),
+                                    argType,
+                                    respType);
+                                var responseObject = new RpcResponse(ResponseType.Ok, response, string.Empty);
+                                props.Headers = new Dictionary<string, object>
                                     {
                                         { RpcRespType, args.BasicProperties.Headers[RpcRespType] },
                                     };
 
-                                    // Отправить сообщение в очередь ответа
-                                    PublishRpc(args.BasicProperties.ReplyTo, responseObject, props, responseObject.GetType());
-                                    Model.BasicAck(args.DeliveryTag, true);
-                                }
-                                catch (Exception ex)
-                                {
-                                    // Отправить сообщение об ошибке
-                                    var responseObject = new RpcResponse(ResponseType.Error, new object(), ex.ToString());
-                                    Logger.Log(LogLevel.Error, ex, "Ошибка во время обработки RPC сообщения");
-                                    PublishRpc(args.BasicProperties.ReplyTo, responseObject, props, responseObject.GetType());
-                                    Model.BasicNack(args.DeliveryTag, false, false);
-                                }
+                                // Отправить сообщение в очередь ответа
+                                PublishRpc(args.BasicProperties.ReplyTo, responseObject, props, responseObject.GetType());
+                                Model.BasicAck(args.DeliveryTag, true);
                             }
                             catch (Exception ex)
                             {
-                                throw new InvalidDataContractException($"Невозможно ответить на RPC сообщение TAG: [{args.DeliveryTag}] CT: [{args.ConsumerTag}] т.к. заголовки сформированы с ошибкой", ex);
+                                // Отправить сообщение об ошибке
+                                var responseObject = new RpcResponse(ResponseType.Error, new object(), ex.ToString());
+                                Logger.Log(LogLevel.Error, ex, "Ошибка во время обработки RPC сообщения");
+                                PublishRpc(args.BasicProperties.ReplyTo, responseObject, props, responseObject.GetType());
+                                Model.BasicNack(args.DeliveryTag, false, false);
                             }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            throw new NotSupportedException($"Неподдерживаемый тип сообщения: [{args.BasicProperties.Type}]");
+                            throw new InvalidDataContractException($"Невозможно ответить на RPC сообщение TAG: [{args.DeliveryTag}] CT: [{args.ConsumerTag}] т.к. заголовки сформированы с ошибкой", ex);
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        if (!epConf.AutoAck)
-                        {
-                            Acknowledgment(epConf, args, false, false, true);
-                        }
+                        throw new NotSupportedException($"Неподдерживаемый тип сообщения: [{args.BasicProperties.Type}]");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (!endpoint.AutoAck)
+                    {
+                        Acknowledgment(endpoint, args, false, false, true);
+                    }
 
-                        Logger.LogError(ex, $"Клиенту не удалось обработать сообщение DeliveryTag {args.DeliveryTag} из-за ошибки");
-                        if (BehavioursDict.TryGetValue(MessageProcessPhase.OnError, out behaviours))
+                    Logger.LogError(ex, $"Клиенту не удалось обработать сообщение DeliveryTag {args.DeliveryTag} из-за ошибки");
+                    if (BehavioursDict.TryGetValue(MessageProcessPhase.OnError, out var behaviours))
+                    {
+                        foreach (var messageProcessBehaviuor in behaviours)
                         {
-                            foreach (var messageProcessBehaviuor in behaviours)
+                            Logger.Log(LogLevel.Debug, $"Отработка вызова поведения фаза [{MessageProcessPhase.OnError}]: {messageProcessBehaviuor}");
+                            try
                             {
-                                Logger.Log(LogLevel.Debug, $"Отработка вызова поведения фаза [{MessageProcessPhase.OnError}]: {messageProcessBehaviuor}");
-                                try
-                                {
-                                    messageProcessBehaviuor.InvokeBehaviour(args.Body);
-                                }
-                                catch (Exception bex)
-                                {
-                                    Logger.Log(LogLevel.Error, bex, $"Ошибка во время отработки поведения: [{messageProcessBehaviuor}]");
-                                }
+                                messageProcessBehaviuor.InvokeBehaviour(args.Body);
+                            }
+                            catch (Exception bex)
+                            {
+                                Logger.Log(LogLevel.Error, bex, $"Ошибка во время отработки поведения: [{messageProcessBehaviuor}]");
                             }
                         }
                     }
-                };
+                }
+            };
 
-                var tag = Model.BasicConsume(epConf.EndpointName, epConf.AutoAck, consumer);
-                if (!RegistratedConsumers.ContainsKey(tag))
-                {
-                    RegistratedConsumers.Add(tag, consumer);
-                }
-                else
-                {
-                    throw new Exception($"Получатель сообщений уже зарегистрирован: {tag} - {epConf.EndpointName}");
-                }
+            var tag = Model.BasicConsume(endpoint.EndpointName, endpoint.AutoAck, consumer);
+
+            if (!RegistratedConsumers.ContainsKey(tag))
+            {
+                RegistratedConsumers.Add(tag, consumer);
             }
+            else
+            {
+                throw new Exception($"Получатель сообщений уже зарегистрирован: {tag} - {endpoint.EndpointName}");
+            }
+
+            return tag;
+        }
+
+        /// <summary>
+        /// Отписать потребителя от очереди.
+        /// </summary>
+        /// <param name="tag">Тег потребителя сообщений.</param>
+        public void BeginCancel(string tag)
+        {
+            if (!RegistratedConsumers.ContainsKey(tag))
+            {
+                return;
+            }
+
+            Model.BasicCancel(tag);
         }
 
         /// <summary>
