@@ -15,7 +15,7 @@
 + fix баги в BinaryWriter</Description> 
      <PackageId>Msc.Db.Postgres</PackageId> 
      <PackageReleaseNotes>Обновлена версия Dapper и NpgSQL</PackageReleaseNotes> 
-     <Version>1.0.1.82</Version> 
+     <Version>1.0.1.90</Version> 
      <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance> 
      <Company>Msc.Db.Postgres</Company> 
      <Authors>Msc.Db.Postgres</Authors> 
