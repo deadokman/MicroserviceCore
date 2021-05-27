@@ -7,12 +7,12 @@
     <Description>Обновил зависимости</Description>
     <PackageId>Msc.Db.Oracle</PackageId>
     <PackageReleaseNotes>None</PackageReleaseNotes>
-    <Version>1.0.1.82</Version>
+    <Version>1.0.1.90</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Msc.Db.Oracle</Company>
     <Authors>Msc.Db.Oracle</Authors>
-    <AssemblyVersion>1.0.1.82</AssemblyVersion>
-    <Version>1.0.1.82</Version>
+    <AssemblyVersion>1.0.1.90</AssemblyVersion>
+    <Version>1.0.1.90</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
