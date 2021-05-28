@@ -458,6 +458,24 @@ namespace Msc.Microservice.Layer.RabbitMq
         }
 
         /// <summary>
+        /// Проверить наличие очереди
+        /// </summary>
+        /// <param name="queue">Название очереди</param>
+        /// <returns>Существует или нет</returns>
+        public bool CheckExistQueue(string queue)
+        {
+            try
+            {
+                Model.QueueDeclarePassive(queue);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Очистить ресурсы объекта.
         /// </summary>
         public override void Dispose()

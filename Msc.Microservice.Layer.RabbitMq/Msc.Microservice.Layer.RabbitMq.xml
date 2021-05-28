@@ -333,6 +333,13 @@
             </summary>
             <param name="tag">Тег потребителя сообщений.</param>
         </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.CheckExistQueue(System.String)">
+            <summary>
+            Проверить наличие очереди
+            </summary>
+            <param name="queue">Название очереди</param>
+            <returns>Существует или нет</returns>
+        </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.MakeRpcCallAsync``2(``0,System.String,System.Nullable{System.TimeSpan})">
             <summary>
             Выполнить RPC запрос.
@@ -917,6 +924,13 @@
             Отписать потребителя от очереди.
             </summary>
             <param name="tag">Тег потребителя сообщений.</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.CheckExistQueue(System.String)">
+            <summary>
+            Проверить наличие очереди
+            </summary>
+            <param name="queue">Название очереди</param>
+            <returns>Существует или нет</returns>
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.Dispose">
             <summary>
