@@ -70,6 +70,13 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         void BeginCancel(string tag);
 
         /// <summary>
+        /// Проверить наличие очереди
+        /// </summary>
+        /// <param name="queue">Название очереди</param>
+        /// <returns>Существует или нет</returns>
+        bool CheckExistQueue(string queue);
+
+        /// <summary>
         /// Выполнить RPC запрос.
         /// </summary>
         /// <typeparam name="TArgs">Аргумент.</typeparam>
