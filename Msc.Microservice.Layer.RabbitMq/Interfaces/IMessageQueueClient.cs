@@ -70,13 +70,6 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         void BeginCancel(string tag);
 
         /// <summary>
-        /// Проверить наличие очереди
-        /// </summary>
-        /// <param name="queue">Название очереди</param>
-        /// <returns>Существует или нет</returns>
-        bool CheckExistQueue(string queue);
-
-        /// <summary>
         /// Выполнить RPC запрос.
         /// </summary>
         /// <typeparam name="TArgs">Аргумент.</typeparam>
@@ -120,5 +113,13 @@ namespace Msc.Microservice.Layer.RabbitMq.Interfaces
         /// <param name="queue">Очередь</param>
         /// <param name="routingKey">Routing key</param>
         void CreateQueueBinding(string exchanger, string queue, string routingKey = "");
+
+        /// <summary>
+        /// Удалить биндинг между эксчейнджером и очередью
+        /// </summary>
+        /// <param name="exchanger">Эксчейнджер</param>
+        /// <param name="queue">Очередь</param>
+        /// <param name="routingKey">Routing key</param>
+        void RemoveQueueBinding(string exchanger, string queue, string routingKey = "");
     }
 }

@@ -333,13 +333,6 @@
             </summary>
             <param name="tag">Тег потребителя сообщений.</param>
         </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.CheckExistQueue(System.String)">
-            <summary>
-            Проверить наличие очереди
-            </summary>
-            <param name="queue">Название очереди</param>
-            <returns>Существует или нет</returns>
-        </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.MakeRpcCallAsync``2(``0,System.String,System.Nullable{System.TimeSpan})">
             <summary>
             Выполнить RPC запрос.
@@ -380,6 +373,14 @@
         <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.CreateQueueBinding(System.String,System.String,System.String)">
             <summary>
             Добавить биндинг между эксчейнджером и очередью
+            </summary>
+            <param name="exchanger">Эксчейнджер</param>
+            <param name="queue">Очередь</param>
+            <param name="routingKey">Routing key</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.Interfaces.IMessageQueueClient.RemoveQueueBinding(System.String,System.String,System.String)">
+            <summary>
+            Удалить биндинг между эксчейнджером и очередью
             </summary>
             <param name="exchanger">Эксчейнджер</param>
             <param name="queue">Очередь</param>
@@ -880,6 +881,14 @@
             <param name="queue">Очередь</param>
             <param name="routingKey">Routing key</param>
         </member>
+        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.RemoveQueueBinding(System.String,System.String,System.String)">
+            <summary>
+            Удалить биндинг между эксчейнджером и очередью
+            </summary>
+            <param name="exchanger">Эксчейнджер</param>
+            <param name="queue">Очередь</param>
+            <param name="routingKey">Routing key</param>
+        </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.PublishMessage(System.String,System.Object,RabbitMQ.Client.IBasicProperties,System.Type)">
             <summary>
             Опубликовать сообщение в брокере в конкретной очереди.
@@ -924,13 +933,6 @@
             Отписать потребителя от очереди.
             </summary>
             <param name="tag">Тег потребителя сообщений.</param>
-        </member>
-        <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.CheckExistQueue(System.String)">
-            <summary>
-            Проверить наличие очереди
-            </summary>
-            <param name="queue">Название очереди</param>
-            <returns>Существует или нет</returns>
         </member>
         <member name="M:Msc.Microservice.Layer.RabbitMq.RabbitMqClient.Dispose">
             <summary>
