@@ -55,7 +55,7 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <summary>
         /// Список зарегестрированных источников потребления данных.
         /// </summary>
-        protected Dictionary<string, EventingBasicConsumer> RegistratedConsumers { get; set; }
+        protected Dictionary<string, (EventingBasicConsumer Consumer, EventHandler<BasicDeliverEventArgs> Handler)> RegistratedConsumers { get; set; }
 
         /// <summary>
         /// Фабрика подключений рэббита.
@@ -87,7 +87,7 @@ namespace Msc.Microservice.Layer.RabbitMq
             Serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
 
             DeliveryCount = new Dictionary<ulong, int>();
-            RegistratedConsumers = new Dictionary<string, EventingBasicConsumer>();
+            RegistratedConsumers = new Dictionary<string, (EventingBasicConsumer, EventHandler<BasicDeliverEventArgs>)>();
             ConnectionFactory = new ConnectionFactory
             {
                 RequestedHeartbeat = TimeSpan.FromSeconds(configuration.ConnectHeartbeatSec),

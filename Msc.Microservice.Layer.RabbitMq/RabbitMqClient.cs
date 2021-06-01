@@ -154,19 +154,21 @@ namespace Msc.Microservice.Layer.RabbitMq
         public void SetUpClient()
         {
             Initialize();
-            if (Configuration.UseRpc)
+            if (!Configuration.UseRpc)
             {
-                var guid = Guid.NewGuid().ToString();
-                _rpcModel = Connection.CreateModel();
-                _rpcModel.Configure(Configuration);
-
-                // Сгенерировать уникальное имя очереди для ответа
-                _rpcCallbackQueue = $"{Configuration.ClientName}_{guid}";
-                _rpcModel.QueueDeclare(_rpcCallbackQueue, true, true, true);
-                _rpcConsumer = new EventingBasicConsumer(_rpcModel);
-                _rpcConsumer.Received += OnRpcCallbackRecived;
-                _rpcModel.BasicConsume(_rpcCallbackQueue, true, _rpcConsumer);
+                return;
             }
+
+            var guid = Guid.NewGuid().ToString();
+            _rpcModel = Connection.CreateModel();
+            _rpcModel.Configure(Configuration);
+
+            // Сгенерировать уникальное имя очереди для ответа
+            _rpcCallbackQueue = $"{Configuration.ClientName}_{guid}";
+            _rpcModel.QueueDeclare(_rpcCallbackQueue, true);
+            _rpcConsumer = new EventingBasicConsumer(_rpcModel);
+            _rpcConsumer.Received += OnRpcCallbackRecived;
+            _rpcModel.BasicConsume(_rpcCallbackQueue, true, _rpcConsumer);
         }
 
         /// <summary>
@@ -229,6 +231,22 @@ namespace Msc.Microservice.Layer.RabbitMq
             }
 
             Model.QueueBind(queue, exchanger, routingKey);
+        }
+
+        /// <summary>
+        /// Удалить биндинг между эксчейнджером и очередью
+        /// </summary>
+        /// <param name="exchanger">Эксчейнджер</param>
+        /// <param name="queue">Очередь</param>
+        /// <param name="routingKey">Routing key</param>
+        public void RemoveQueueBinding(string exchanger, string queue, string routingKey = "")
+        {
+            if (Model == null)
+            {
+                throw new Exception("Client not initialized or initialized with errors");
+            }
+
+            Model.QueueUnbind(queue, exchanger, routingKey);
         }
 
         /// <summary>
@@ -315,42 +333,38 @@ namespace Msc.Microservice.Layer.RabbitMq
         public string BeginConsume(EndpointConfig endpoint)
         {
             var consumer = new EventingBasicConsumer(Model);
-            consumer.Received += (sender, args) =>
+            void OnConsumerOnReceived(object sender, BasicDeliverEventArgs e)
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(args.BasicProperties.Type))
+                    if (string.IsNullOrEmpty(e.BasicProperties.Type))
                     {
-                        var message = Serializer.DeserializeTransferMessage(args.Body, out var type, Dispatcher.TryGetByAlias);
+                        var message = Serializer.DeserializeTransferMessage(e.Body, out var type, Dispatcher.TryGetByAlias);
 
                         // Обработать сообщение, если оно подразумевает только получение
-                        Dispatcher.DispatchMessage(
-                        this,
-                        (ack, requeue, order) => Acknowledgment(endpoint, args, ack, requeue, order),
-                        message,
-                        type);
+                        Dispatcher.DispatchMessage(this, (ack, requeue, order) => Acknowledgment(endpoint, e, ack, requeue, order), message, type);
                     }
-                    else if (args.BasicProperties.Type == RpcRequestHeaderName)
+                    else if (e.BasicProperties.Type == RpcRequestHeaderName)
                     {
                         try
                         {
                             // Найти соответствующий делегат в списке ожидающих
                             try
                             {
-                                ValidateRpcMessageArgs(args);
+                                ValidateRpcMessageArgs(e);
                             }
                             catch (Exception ex)
                             {
-                                Logger.LogError(ex, $"Ошибка обработки сообщения DeliveryTag: {args.DeliveryTag}");
+                                Logger.LogError(ex, $"Ошибка обработки сообщения DeliveryTag: {e.DeliveryTag}");
                             }
 
                             var props = Model.CreateBasicProperties();
-                            props.CorrelationId = args.BasicProperties.CorrelationId;
+                            props.CorrelationId = e.BasicProperties.CorrelationId;
                             props.Type = RpcResponseHeaderName;
                             try
                             {
-                                var argTypeName = Encoding.UTF8.GetString((byte[])args.BasicProperties.Headers[RpcArgType]);
-                                var respTypeName = Encoding.UTF8.GetString((byte[])args.BasicProperties.Headers[RpcRespType]);
+                                var argTypeName = Encoding.UTF8.GetString((byte[])e.BasicProperties.Headers[RpcArgType]);
+                                var respTypeName = Encoding.UTF8.GetString((byte[])e.BasicProperties.Headers[RpcRespType]);
 
                                 Logger.LogTrace($"Reviced msg argType: {argTypeName} respType: {respTypeName}");
 
@@ -367,50 +381,42 @@ namespace Msc.Microservice.Layer.RabbitMq
                                     throw new ArgumentException($"Не удалось найти тип аргумента ответа: {respTypeName}");
                                 }
 
-                                var message = Serializer.DeserializeRpcMessage(args.Body, argType);
-                                var response = Dispatcher.HandleRpcMessage(
-                                    this,
-                                    message,
-                                    (ack, requeue, order) => Acknowledgment(endpoint, args, ack, requeue, order),
-                                    argType,
-                                    respType);
+                                var message = Serializer.DeserializeRpcMessage(e.Body, argType);
+                                var response = Dispatcher.HandleRpcMessage(this, message, (ack, requeue, order) => Acknowledgment(endpoint, e, ack, requeue, order), argType, respType);
                                 var responseObject = new RpcResponse(ResponseType.Ok, response, string.Empty);
-                                props.Headers = new Dictionary<string, object>
-                                    {
-                                        { RpcRespType, args.BasicProperties.Headers[RpcRespType] },
-                                    };
+                                props.Headers = new Dictionary<string, object> { { RpcRespType, e.BasicProperties.Headers[RpcRespType] }, };
 
                                 // Отправить сообщение в очередь ответа
-                                PublishRpc(args.BasicProperties.ReplyTo, responseObject, props, responseObject.GetType());
-                                Model.BasicAck(args.DeliveryTag, true);
+                                PublishRpc(e.BasicProperties.ReplyTo, responseObject, props, responseObject.GetType());
+                                Model.BasicAck(e.DeliveryTag, true);
                             }
                             catch (Exception ex)
                             {
                                 // Отправить сообщение об ошибке
                                 var responseObject = new RpcResponse(ResponseType.Error, new object(), ex.ToString());
                                 Logger.Log(LogLevel.Error, ex, "Ошибка во время обработки RPC сообщения");
-                                PublishRpc(args.BasicProperties.ReplyTo, responseObject, props, responseObject.GetType());
-                                Model.BasicNack(args.DeliveryTag, false, false);
+                                PublishRpc(e.BasicProperties.ReplyTo, responseObject, props, responseObject.GetType());
+                                Model.BasicNack(e.DeliveryTag, false, false);
                             }
                         }
                         catch (Exception ex)
                         {
-                            throw new InvalidDataContractException($"Невозможно ответить на RPC сообщение TAG: [{args.DeliveryTag}] CT: [{args.ConsumerTag}] т.к. заголовки сформированы с ошибкой", ex);
+                            throw new InvalidDataContractException($"Невозможно ответить на RPC сообщение TAG: [{e.DeliveryTag}] CT: [{e.ConsumerTag}] т.к. заголовки сформированы с ошибкой", ex);
                         }
                     }
                     else
                     {
-                        throw new NotSupportedException($"Неподдерживаемый тип сообщения: [{args.BasicProperties.Type}]");
+                        throw new NotSupportedException($"Неподдерживаемый тип сообщения: [{e.BasicProperties.Type}]");
                     }
                 }
                 catch (Exception ex)
                 {
                     if (!endpoint.AutoAck)
                     {
-                        Acknowledgment(endpoint, args, false, false, true);
+                        Acknowledgment(endpoint, e, false, false, true);
                     }
 
-                    Logger.LogError(ex, $"Клиенту не удалось обработать сообщение DeliveryTag {args.DeliveryTag} из-за ошибки");
+                    Logger.LogError(ex, $"Клиенту не удалось обработать сообщение DeliveryTag {e.DeliveryTag} из-за ошибки");
                     if (BehavioursDict.TryGetValue(MessageProcessPhase.OnError, out var behaviours))
                     {
                         foreach (var messageProcessBehaviuor in behaviours)
@@ -418,7 +424,7 @@ namespace Msc.Microservice.Layer.RabbitMq
                             Logger.Log(LogLevel.Debug, $"Отработка вызова поведения фаза [{MessageProcessPhase.OnError}]: {messageProcessBehaviuor}");
                             try
                             {
-                                messageProcessBehaviuor.InvokeBehaviour(args.Body);
+                                messageProcessBehaviuor.InvokeBehaviour(e.Body);
                             }
                             catch (Exception bex)
                             {
@@ -427,13 +433,14 @@ namespace Msc.Microservice.Layer.RabbitMq
                         }
                     }
                 }
-            };
+            }
+
+            consumer.Received += OnConsumerOnReceived;
 
             var tag = Model.BasicConsume(endpoint.EndpointName, endpoint.AutoAck, consumer);
-
             if (!RegistratedConsumers.ContainsKey(tag))
             {
-                RegistratedConsumers.Add(tag, consumer);
+                RegistratedConsumers.Add(tag, (consumer, OnConsumerOnReceived));
             }
             else
             {
@@ -449,30 +456,14 @@ namespace Msc.Microservice.Layer.RabbitMq
         /// <param name="tag">Тег потребителя сообщений.</param>
         public void BeginCancel(string tag)
         {
-            if (!RegistratedConsumers.ContainsKey(tag))
+            if (!RegistratedConsumers.TryGetValue(tag, out var consumer))
             {
                 return;
             }
 
+            consumer.Consumer.Received -= consumer.Handler;
+            RegistratedConsumers.Remove(tag);
             Model.BasicCancel(tag);
-        }
-
-        /// <summary>
-        /// Проверить наличие очереди
-        /// </summary>
-        /// <param name="queue">Название очереди</param>
-        /// <returns>Существует или нет</returns>
-        public bool CheckExistQueue(string queue)
-        {
-            try
-            {
-                Model.QueueDeclarePassive(queue);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         /// <summary>
@@ -526,7 +517,7 @@ namespace Msc.Microservice.Layer.RabbitMq
             {
                 if (ack)
                 {
-                    Model.BasicAck(args.DeliveryTag, ack);
+                    Model.BasicAck(args.DeliveryTag, true);
                 }
                 else
                 {
@@ -537,7 +528,7 @@ namespace Msc.Microservice.Layer.RabbitMq
             {
                 if (!ack)
                 {
-                    Model.BasicAck(args.DeliveryTag, ack);
+                    Model.BasicAck(args.DeliveryTag, false);
                 }
                 else
                 {
