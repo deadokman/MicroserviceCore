@@ -89,7 +89,7 @@ namespace Msc.Microservice.Layer.Redis
                         return _lockFactory;
                     });
 
-            services.AddSingleton<IDistributedCache, RedisCache>();
+            services.AddSingleton<IExtendDistributedCache, ExtendRedisCache>();
             return configurationErrors;
         }
 
@@ -107,7 +107,7 @@ namespace Msc.Microservice.Layer.Redis
         /// <param name="serviceProvider">Провайдер служб.</param>
         public void Shutdown(IServiceProvider serviceProvider)
         {
-            _lockFactory.Dispose();
+            _lockFactory?.Dispose();
         }
     }
 }

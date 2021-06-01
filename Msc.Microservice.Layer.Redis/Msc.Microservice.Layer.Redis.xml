@@ -55,6 +55,66 @@
             Порт подключения
             </summary>
         </member>
+        <member name="T:Msc.Microservice.Layer.Redis.ExtendRedisCache">
+            <summary>
+            Класс расширение для кеша Redis
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.StackExchangeRedis.RedisCacheOptions})">
+            <summary>
+            Конструктор с параметрами
+            </summary>
+            <param name="optionsAccessor">Опции подключения</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.ResetIncr(System.String,System.Int64)">
+            <summary>
+            Установить начальное значение инкремента
+            </summary>
+            <param name="key">Название ключа</param>
+            <param name="val">Начальное значение ключа</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.GetIncr(System.String)">
+            <summary>
+            Получить текущее значение инкремента
+            </summary>
+            <param name="key">Название ключа</param>
+            <returns>Значение</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.SetIncr(System.String,System.Int64)">
+            <summary>
+            Увеличить инкремент на заданное значение
+            </summary>
+            <param name="key">Название ключа</param>
+            <param name="val">Начальное значение ключа</param>
+            <returns>Результат изменения</returns>
+        </member>
+        <member name="T:Msc.Microservice.Layer.Redis.IExtendDistributedCache">
+            <summary>
+            Интерфейс расширение для кеша Redis
+            </summary>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.ResetIncr(System.String,System.Int64)">
+            <summary>
+            Установить начальное значение инкремента
+            </summary>
+            <param name="key">Название ключа</param>
+            <param name="val">Начальное значение ключа</param>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.GetIncr(System.String)">
+            <summary>
+            Получить текущее значение инкремента
+            </summary>
+            <param name="key">Название ключа</param>
+            <returns>Значение</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.SetIncr(System.String,System.Int64)">
+            <summary>
+            Увеличить инкремент на заданное значение
+            </summary>
+            <param name="key">Название ключа</param>
+            <param name="val">Начальное значение ключа</param>
+            <returns>Результат изменения</returns>
+        </member>
         <member name="T:Msc.Microservice.Layer.Redis.RedisAccessLayer">
             <summary>
             Слой доступа к Redis

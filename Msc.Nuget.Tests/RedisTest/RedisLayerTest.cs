@@ -29,15 +29,6 @@ namespace Msc.Nuget.Tests.RedisTest
             _service = new MicroserviceCore();
             _service.RegisterConfigurations += _service_OnRegisterConfigurations;
             _service.AddLayer(new RedisAccessLayer());
-            _service.DoWork += _service_OnDoWork;
-        }
-
-        private void _service_OnDoWork(IServiceProvider sp, CancellationToken token)
-        {
-            _serviceProvider = sp;
-            var cache = sp.GetService<IDistributedCache>();
-            cache.SetString(_redisKey, _redistestVal);
-            _service.Stop();
         }
 
         private void _service_OnRegisterConfigurations(object sender, IConfigurationBuilder e)
@@ -49,7 +40,7 @@ namespace Msc.Nuget.Tests.RedisTest
         public void TestRedisConnect()
         {
             _service.Run();
-            var cache = _serviceProvider.GetService<IDistributedCache>();
+            var cache = _serviceProvider.GetRequiredService<IExtendDistributedCache>();
             var cachedData = cache.GetString(_redisKey);
             Assert.AreEqual(_redistestVal, cachedData);
         }
@@ -58,8 +49,26 @@ namespace Msc.Nuget.Tests.RedisTest
         public void TestNoData()
         {
             _service.Run();
-            var cache = _serviceProvider.GetService<IDistributedCache>();
+            var cache = _serviceProvider.GetRequiredService<IExtendDistributedCache>();
             var cachedData = cache.GetString("wrongkey");
+        }
+
+        [Test]
+        public void TestRedisIncrConnect()
+        {
+            _service.DoWork += (sp, token) =>
+            {
+                var cache = sp.GetRequiredService<IExtendDistributedCache>();
+
+                cache.ResetIncr(_redisKey, 33);
+                cache.SetIncr(_redisKey);
+
+                var incr = cache.GetIncr(_redisKey);
+                Assert.AreEqual(incr, 34);
+                _service.Stop();
+            };
+
+            _service.Run();
         }
     }
 }
