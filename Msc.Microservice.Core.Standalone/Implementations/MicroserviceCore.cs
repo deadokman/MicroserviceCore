@@ -337,7 +337,7 @@ namespace Msc.Microservice.Core.Standalone.Implementations
             _logger.LogInformation($"Запуск службы выполнен");
 
             // Выполнить инициализацию слоев
-            _event.Wait();
+            _event.Wait(ct);
 
             _logger.LogWarning($"Запрошен останов {ServiceIdentifier}");
             StopRunnableLayers();
