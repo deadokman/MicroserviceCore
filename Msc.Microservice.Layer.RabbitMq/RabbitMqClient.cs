@@ -463,7 +463,7 @@ namespace Msc.Microservice.Layer.RabbitMq
 
             consumer.Consumer.Received -= consumer.Handler;
             RegistratedConsumers.Remove(tag);
-            Model.BasicCancel(tag);
+            Model.BasicCancelNoWait(tag);
         }
 
         /// <summary>
