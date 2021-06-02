@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(SolutionDir)\Shared\RuleSet.ruleset</CodeAnalysisRuleSet>
-    <PackageVersion>1.0.1.92</PackageVersion>
+    <PackageVersion>1.0.1.93</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\Shared\stylecop.json" Link="stylecop.json" />
@@ -31,12 +31,12 @@
     <PackageId>Msc.Microservice.Layer.RabbitMq</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Added order to Ack (for PrefetchCount) and VirtualHost in QueueConfig</PackageReleaseNotes>
-    <Version>1.0.1.92</Version>
+    <Version>1.0.1.93</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Konyshev.av;Stepanov.no</Company>
     <Authors>Konyshev.av;Stepanov.no</Authors>
-    <AssemblyVersion>1.0.1.92</AssemblyVersion>
-    <FileVersion>1.0.1.92</FileVersion>
+    <AssemblyVersion>1.0.1.93</AssemblyVersion>
+    <FileVersion>1.0.1.93</FileVersion>
   </PropertyGroup>
 
 </Project>
