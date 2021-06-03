@@ -76,7 +76,7 @@ namespace Msc.Microservice.Layer.Postgres
                 connectionString = postgesConfig.ConnectionString;
             }
 
-            serviceCollection.AddTransient<IDbContext>((provider) => new PgDbContext(connectionString, provider.GetService<ILogger<IDbContext>>()));
+            serviceCollection.AddSingleton<IDbContext>((provider) => new PgDbContext(connectionString, provider.GetService<ILogger<IDbContext>>()));
             return errors;
         }
     }
