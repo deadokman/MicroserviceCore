@@ -20,13 +20,15 @@
 	  "PauseBetweenAttemts": "1",
 	  "UseRpc": "true"
   },
-  "Redis":  {
-	  "KeepAlive":  1,
-	  "Password":  "!qwe123",
-	  "InstanceName":  "TestInstance",
-	  "Endpoints": [{
-		  "Host": "host.docker.internal",
-		  "Port": 6379
-	  }]
+	"Redis": {
+		"KeepAlive": 1,
+		"Password": "rBtNMUa1hw",
+		"InstanceName": "TestInstance",
+		"Endpoints": [
+			{
+				"Host": "localhost",
+				"Port": 6379
+			}
+		]
 	}
 }

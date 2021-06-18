@@ -29,6 +29,12 @@ namespace Msc.Nuget.Tests.RedisTest
             _service = new MicroserviceCore();
             _service.RegisterConfigurations += _service_OnRegisterConfigurations;
             _service.AddLayer(new RedisAccessLayer());
+            _service.DoWork += ServiceOnDoWork;
+        }
+
+        private void ServiceOnDoWork(IServiceProvider serviceprovider, CancellationToken stopservicetoken)
+        {
+            return;
         }
 
         private void _service_OnRegisterConfigurations(object sender, IConfigurationBuilder e)
