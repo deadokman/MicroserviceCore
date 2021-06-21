@@ -7,6 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
@@ -55,6 +56,16 @@ namespace Msc.Microservice.Layer.Redis
         /// <param name="hashKey">Ключ хэша=бакета</param>
         /// <returns>пары ключ-значение</returns>
         Task<(string key, string value)[]> GetAllHValuesAsync(string hashKey);
+
+        /// <summary>
+        /// Установить значение хэш-сета
+        /// </summary>
+        /// <param name="hashKey">Ключ хэш сета</param>
+        /// <param name="key">Ключ данных</param>
+        /// <param name="value">Ключ значения</param>
+        /// <param name="hashSetKeyLifetime">Время жизни ключа хэш-сета</param>
+        /// <returns>Асинхронная операция</returns>
+        Task SetHValueAsync(string hashKey, string key, string value, TimeSpan? hashSetKeyLifetime = null);
 
         /// <summary>
         /// Получить значение для ключа из хэша

@@ -81,6 +81,16 @@
             <param name="values">Values</param>
             <returns> representing the asynchronous operation.</returns>
         </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.SetHValueAsync(System.String,System.String,System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            Hash set
+            </summary>
+            <param name="hashKey">Hash key</param>
+            <param name="key">Key</param>
+            <param name="value">Value</param>
+            <param name="hashSetKeyLifetime">Время жизни для всего хэш сета</param>
+            <returns> representing the asynchronous operation.</returns>
+        </member>
         <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.GetAllHValuesAsync(System.String)">
             <summary>
             Получить все значения из хэша
@@ -159,6 +169,16 @@
             </summary>
             <param name="hashKey">Ключ хэша=бакета</param>
             <returns>пары ключ-значение</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.SetHValueAsync(System.String,System.String,System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            Установить значение хэш-сета
+            </summary>
+            <param name="hashKey">Ключ хэш сета</param>
+            <param name="key">Ключ данных</param>
+            <param name="value">Ключ значения</param>
+            <param name="hashSetKeyLifetime">Время жизни ключа хэш-сета</param>
+            <returns>Асинхронная операция</returns>
         </member>
         <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.GetHValueAsync(System.String,System.String)">
             <summary>

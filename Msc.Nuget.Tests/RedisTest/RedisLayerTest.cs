@@ -76,6 +76,18 @@ namespace Msc.Nuget.Tests.RedisTest
         }
 
         [Test]
+        public async Task TestHashAddAndExpire()
+        {
+            _service.Run();
+            var key = String.Format("test_key_" + Guid.NewGuid());
+            var cache = _serviceProvider.GetRequiredService<IExtendDistributedCache>();
+            await cache.SetHValueAsync(key, "a1", "a2", TimeSpan.FromSeconds(3));
+            Thread.Sleep(TimeSpan.FromSeconds(10));
+            var res = await cache.GetHValueAsync(key, "a1");
+            Assert.IsTrue(String.IsNullOrEmpty(res));
+        }
+
+        [Test]
         public void TestNoData()
         {
             _service.Run();

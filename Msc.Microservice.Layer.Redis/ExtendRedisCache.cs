@@ -59,6 +59,22 @@ namespace Msc.Microservice.Layer.Redis
         }
 
         /// <summary>
+        /// Hash set
+        /// </summary>
+        /// <param name="hashKey">Hash key</param>
+        /// <param name="key">Key</param>
+        /// <param name="value">Value</param>
+        /// <param name="hashSetKeyLifetime">Время жизни для всего хэш сета</param>
+        /// <returns> representing the asynchronous operation.</returns>
+        public async Task SetHValueAsync(string hashKey, string key, string value, TimeSpan? hashSetKeyLifetime = null)
+        {
+            var cache = GetCache();
+            hashSetKeyLifetime = hashSetKeyLifetime ?? TimeSpan.FromMinutes(15);
+            await cache.HashSetAsync(hashKey, key, value, When.Always);
+            cache.KeyExpire(hashKey, hashSetKeyLifetime);
+        }
+
+        /// <summary>
         /// Получить все значения из хэша
         /// </summary>
         /// <param name="hashKey">Ключ хэша=бакета</param>
