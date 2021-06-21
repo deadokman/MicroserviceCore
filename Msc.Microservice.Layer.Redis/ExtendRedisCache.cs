@@ -69,9 +69,12 @@ namespace Msc.Microservice.Layer.Redis
         public async Task SetHValueAsync(string hashKey, string key, string value, TimeSpan? hashSetKeyLifetime = null)
         {
             var cache = GetCache();
-            hashSetKeyLifetime = hashSetKeyLifetime ?? TimeSpan.FromMinutes(15);
             await cache.HashSetAsync(hashKey, key, value, When.Always);
-            cache.KeyExpire(hashKey, hashSetKeyLifetime);
+
+            if (hashSetKeyLifetime.HasValue)
+            {
+                cache.KeyExpire(hashKey, hashSetKeyLifetime);
+            }
         }
 
         /// <summary>
