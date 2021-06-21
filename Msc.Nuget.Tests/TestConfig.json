@@ -22,7 +22,7 @@
   },
 	"Redis": {
 		"KeepAlive": 1,
-		"Password": "rBtNMUa1hw",
+		"Password": "!qwe123",
 		"InstanceName": "TestInstance",
 		"Endpoints": [
 			{

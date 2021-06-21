@@ -11,7 +11,7 @@
     <PackageId>Msc.Microservice.Layer.Redis</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Добавлен алгоритм блокировок</PackageReleaseNotes>
-    <Version>1.0.1.91</Version>
+    <Version>1.0.1.93</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Konyshev.A.V.;Stepanov.N.O.</Company>
     <Authors>Konyshev.A.V.;Stepanov.N.O.</Authors>

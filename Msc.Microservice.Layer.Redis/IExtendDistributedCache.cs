@@ -7,7 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Distributed;
+using StackExchange.Redis;
 
 namespace Msc.Microservice.Layer.Redis
 {
@@ -37,5 +40,35 @@ namespace Msc.Microservice.Layer.Redis
         /// <param name="val">Начальное значение ключа</param>
         /// <returns>Результат изменения</returns>
         long SetIncr(string key, long val = 1);
+
+        /// <summary>
+        /// Hash set
+        /// </summary>
+        /// <param name="hashKey">Hash key</param>
+        /// <param name="values">Values</param>
+        /// <returns> representing the asynchronous operation.</returns>
+        Task SetHValuesAsync(string hashKey, params (string key, string value)[] values);
+
+        /// <summary>
+        /// Получить все значения из хэша
+        /// </summary>
+        /// <param name="hashKey">Ключ хэша=бакета</param>
+        /// <returns>пары ключ-значение</returns>
+        Task<(string key, string value)[]> GetAllHValuesAsync(string hashKey);
+
+        /// <summary>
+        /// Получить значение для ключа из хэша
+        /// </summary>
+        /// <param name="hashKey">Ключ хэша</param>
+        /// <param name="hashValueName">Имя значения внутри хэша</param>
+        /// <returns>Получить </returns>
+        Task<string> GetHValueAsync(string hashKey, string hashValueName);
+
+        /// <summary>
+        /// Удалить хэш
+        /// </summary>
+        /// <param name="hashKey">Хэш-ключ</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        Task DelHAsync(string hashKey);
     }
 }

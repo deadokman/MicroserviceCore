@@ -73,6 +73,36 @@
             <param name="key">Название ключа</param>
             <param name="val">Начальное значение ключа</param>
         </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.SetHValuesAsync(System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Hash set
+            </summary>
+            <param name="hashKey">Hash key</param>
+            <param name="values">Values</param>
+            <returns> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.GetAllHValuesAsync(System.String)">
+            <summary>
+            Получить все значения из хэша
+            </summary>
+            <param name="hashKey">Ключ хэша=бакета</param>
+            <returns>пары ключ-значение</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.GetHValueAsync(System.String,System.String)">
+            <summary>
+            Получить значение для ключа из хэша
+            </summary>
+            <param name="hashKey">Ключ хэша</param>
+            <param name="hashValueName">Имя значения внутри хэша</param>
+            <returns>Получить </returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.DelHAsync(System.String)">
+            <summary>
+            Удалить хэш
+            </summary>
+            <param name="hashKey">Хэш-ключ</param>
+            <returns>representing the asynchronous operation.</returns>
+        </member>
         <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.GetIncr(System.String)">
             <summary>
             Получить текущее значение инкремента
@@ -114,6 +144,36 @@
             <param name="key">Название ключа</param>
             <param name="val">Начальное значение ключа</param>
             <returns>Результат изменения</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.SetHValuesAsync(System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Hash set
+            </summary>
+            <param name="hashKey">Hash key</param>
+            <param name="values">Values</param>
+            <returns> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.GetAllHValuesAsync(System.String)">
+            <summary>
+            Получить все значения из хэша
+            </summary>
+            <param name="hashKey">Ключ хэша=бакета</param>
+            <returns>пары ключ-значение</returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.GetHValueAsync(System.String,System.String)">
+            <summary>
+            Получить значение для ключа из хэша
+            </summary>
+            <param name="hashKey">Ключ хэша</param>
+            <param name="hashValueName">Имя значения внутри хэша</param>
+            <returns>Получить </returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.DelHAsync(System.String)">
+            <summary>
+            Удалить хэш
+            </summary>
+            <param name="hashKey">Хэш-ключ</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
         </member>
         <member name="T:Msc.Microservice.Layer.Redis.RedisAccessLayer">
             <summary>

@@ -8,7 +8,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
@@ -41,6 +44,54 @@ namespace Msc.Microservice.Layer.Redis
         {
             var cache = GetCache();
             cache.StringSet($"{_instance}{key}", val);
+        }
+
+        /// <summary>
+        /// Hash set
+        /// </summary>
+        /// <param name="hashKey">Hash key</param>
+        /// <param name="values">Values</param>
+        /// <returns> representing the asynchronous operation.</returns>
+        public async Task SetHValuesAsync(string hashKey, params (string key, string value)[] values)
+        {
+            var cache = GetCache();
+            await cache.HashSetAsync(hashKey, values.Select(v => new HashEntry(v.key, v.value)).ToArray());
+        }
+
+        /// <summary>
+        /// Получить все значения из хэша
+        /// </summary>
+        /// <param name="hashKey">Ключ хэша=бакета</param>
+        /// <returns>пары ключ-значение</returns>
+        public async Task<(string key, string value)[]> GetAllHValuesAsync(string hashKey)
+        {
+            var cache = GetCache();
+            var vals = await cache.HashGetAllAsync(hashKey);
+            return vals.Select(v => (key: v.Name.ToString(), value: v.Value.ToString())).ToArray();
+        }
+
+        /// <summary>
+        /// Получить значение для ключа из хэша
+        /// </summary>
+        /// <param name="hashKey">Ключ хэша</param>
+        /// <param name="hashValueName">Имя значения внутри хэша</param>
+        /// <returns>Получить </returns>
+        public async Task<string> GetHValueAsync(string hashKey, string hashValueName)
+        {
+            var cache = GetCache();
+            var vals = await cache.HashGetAsync(hashKey, hashValueName);
+            return vals.ToString();
+        }
+
+        /// <summary>
+        /// Удалить хэш
+        /// </summary>
+        /// <param name="hashKey">Хэш-ключ</param>
+        /// <returns>representing the asynchronous operation.</returns>
+        public async Task DelHAsync(string hashKey)
+       {
+            var cache = GetCache();
+            await cache.KeyDeleteAsync(hashKey);
         }
 
         /// <summary>

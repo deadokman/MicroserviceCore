@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Msc.Microservice.Core.Standalone", "Msc.Microservice.Core.Standalone\Msc.Microservice.Core.Standalone.csproj", "{5BABC48D-2A7C-4FD0-BDA8-B22C9A965BAA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nuget.Tests", "Msc.Nuget.Tests\Nuget.Tests.csproj", "{7FA9125A-7995-4BD8-A71D-D01751643CBE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Msc.Microservice.Layer.Postgres", "Msc.Microservice.Layer.Postgres\Msc.Microservice.Layer.Postgres.csproj", "{2A327E88-784D-49AE-AAD5-5B6A422BEE3D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Msc.Microservice.Layer.RabbitMq", "Msc.Microservice.Layer.RabbitMq\Msc.Microservice.Layer.RabbitMq.csproj", "{1A80DAE2-50A0-4ECD-80B0-9716892E521F}"
@@ -29,20 +25,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Msc.Db.Postgres", "Db.Postg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Msc.Interface.Db", "Interface.Db\Msc.Interface.Db.csproj", "{45B9F177-C0E8-495D-B0BE-10432C3BB70E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nuget.Tests", "Msc.Nuget.Tests\Nuget.Tests.csproj", "{6BEB1368-8F2B-49DC-8F65-1709FCC50100}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Msc.Microservice.Core.Standalone", "Msc.Microservice.Core.Standalone\Msc.Microservice.Core.Standalone.csproj", "{37B5D5B1-F1E2-4B80-A7B2-6FBE87B1B3A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5BABC48D-2A7C-4FD0-BDA8-B22C9A965BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BABC48D-2A7C-4FD0-BDA8-B22C9A965BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BABC48D-2A7C-4FD0-BDA8-B22C9A965BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BABC48D-2A7C-4FD0-BDA8-B22C9A965BAA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7FA9125A-7995-4BD8-A71D-D01751643CBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FA9125A-7995-4BD8-A71D-D01751643CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FA9125A-7995-4BD8-A71D-D01751643CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FA9125A-7995-4BD8-A71D-D01751643CBE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A327E88-784D-49AE-AAD5-5B6A422BEE3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A327E88-784D-49AE-AAD5-5B6A422BEE3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A327E88-784D-49AE-AAD5-5B6A422BEE3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -79,6 +71,14 @@ Global
 		{45B9F177-C0E8-495D-B0BE-10432C3BB70E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45B9F177-C0E8-495D-B0BE-10432C3BB70E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45B9F177-C0E8-495D-B0BE-10432C3BB70E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BEB1368-8F2B-49DC-8F65-1709FCC50100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BEB1368-8F2B-49DC-8F65-1709FCC50100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BEB1368-8F2B-49DC-8F65-1709FCC50100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BEB1368-8F2B-49DC-8F65-1709FCC50100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37B5D5B1-F1E2-4B80-A7B2-6FBE87B1B3A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37B5D5B1-F1E2-4B80-A7B2-6FBE87B1B3A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37B5D5B1-F1E2-4B80-A7B2-6FBE87B1B3A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37B5D5B1-F1E2-4B80-A7B2-6FBE87B1B3A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
