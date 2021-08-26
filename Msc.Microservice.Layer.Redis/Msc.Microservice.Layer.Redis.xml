@@ -106,6 +106,14 @@
             <param name="hashValueName">Имя значения внутри хэша</param>
             <returns>Получить </returns>
         </member>
+        <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.DelHValueAsync(System.String,System.String)">
+            <summary>
+            Получить значение для ключа из хэша
+            </summary>
+            <param name="hashKey">Ключ хэша</param>
+            <param name="hashValueName">Имя значения внутри хэша</param>
+            <returns>true если удалено успешно </returns>
+        </member>
         <member name="M:Msc.Microservice.Layer.Redis.ExtendRedisCache.DelHAsync(System.String)">
             <summary>
             Удалить хэш
@@ -181,6 +189,14 @@
             <returns>Асинхронная операция</returns>
         </member>
         <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.GetHValueAsync(System.String,System.String)">
+            <summary>
+            Получить значение для ключа из хэша
+            </summary>
+            <param name="hashKey">Ключ хэша</param>
+            <param name="hashValueName">Имя значения внутри хэша</param>
+            <returns>Получить </returns>
+        </member>
+        <member name="M:Msc.Microservice.Layer.Redis.IExtendDistributedCache.DelHValueAsync(System.String,System.String)">
             <summary>
             Получить значение для ключа из хэша
             </summary>

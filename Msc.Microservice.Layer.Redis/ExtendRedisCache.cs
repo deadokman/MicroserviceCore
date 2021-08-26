@@ -103,6 +103,18 @@ namespace Msc.Microservice.Layer.Redis
         }
 
         /// <summary>
+        /// Получить значение для ключа из хэша
+        /// </summary>
+        /// <param name="hashKey">Ключ хэша</param>
+        /// <param name="hashValueName">Имя значения внутри хэша</param>
+        /// <returns>true если удалено успешно </returns>
+        public async Task<bool> DelHValueAsync(string hashKey, string hashValueName)
+        {
+            var cache = GetCache();
+            return await cache.HashDeleteAsync(hashKey, hashValueName);
+        }
+
+        /// <summary>
         /// Удалить хэш
         /// </summary>
         /// <param name="hashKey">Хэш-ключ</param>

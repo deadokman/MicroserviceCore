@@ -25,7 +25,7 @@
     <DocumentationFile>Msc.Microservice.Layer.RabbitMq.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetFrameworks>net461;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net461;net5.0</TargetFrameworks>
     <Product>Msc.Microservice.Layer.RabbitMq</Product>
     <Description>Библиотека для доступа к RabbitMQ </Description>
     <PackageId>Msc.Microservice.Layer.RabbitMq</PackageId>

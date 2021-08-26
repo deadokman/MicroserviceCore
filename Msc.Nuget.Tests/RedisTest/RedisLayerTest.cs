@@ -88,6 +88,17 @@ namespace Msc.Nuget.Tests.RedisTest
         }
 
         [Test]
+        public async Task TashHashKeyDelete()
+        {
+            _service.Run();
+            var key = String.Format("test_key_" + Guid.NewGuid());
+            var cache = _serviceProvider.GetRequiredService<IExtendDistributedCache>();
+            await cache.SetHValueAsync(key, "a1", "a2", TimeSpan.FromSeconds(9099));
+            var del = await cache.DelHValueAsync(key, "a1");
+            Assert.IsTrue(del);
+        }
+
+        [Test]
         public void TestNoData()
         {
             _service.Run();
