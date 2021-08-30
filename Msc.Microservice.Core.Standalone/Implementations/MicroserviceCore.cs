@@ -195,27 +195,7 @@ namespace Msc.Microservice.Core.Standalone.Implementations
             }
 
             _serviceCollection.AddOptions();
-
-            string configurationJsonFile = "N/A";
-
-            /*
-            // Добавить конфигурационный файл по умолчанию
-            if (!string.IsNullOrEmpty(_configFileName))
-            {
-                _configurationBuilder.AddJsonFile($"{_configFileName}.json");
-                if (string.IsNullOrEmpty(_runtimeEnvVariableName))
-                {
-                    _configurationBuilder.AddJsonFile($"{_configFileName}.{Environment.GetEnvironmentVariable(_runtimeEnvVariableName)}.json");
-                }
-
-                var configFileName = string.IsNullOrEmpty(_runtimeEnvVariableName)
-                    ? $"{_configFileName}.json"
-                    : $"{_configFileName}.{Environment.GetEnvironmentVariable(_runtimeEnvVariableName)}.json";
-                configurationJsonFile = $"{configFileName}";
-                _configurationBuilder.AddJsonFile(configurationJsonFile);
-            }
-            */
-
+            var configurationJsonFile = "N/A";
             if (!string.IsNullOrEmpty(_configFileName))
             {
                 var cfgFile = _configFileName ?? "appsettings";
@@ -225,9 +205,10 @@ namespace Msc.Microservice.Core.Standalone.Implementations
             void Configuration(string configFile)
             {
                 _configurationBuilder.AddJsonFile($"{configFile}.json");
-                if (!string.IsNullOrEmpty(_runtimeEnvVariableName))
+                var configName = Environment.GetEnvironmentVariable(_runtimeEnvVariableName);
+                if (!string.IsNullOrEmpty(_runtimeEnvVariableName) && !string.IsNullOrWhiteSpace(configName))
                 {
-                    _configurationBuilder.AddJsonFile($"{_configFileName}.{Environment.GetEnvironmentVariable(_runtimeEnvVariableName)}.json");
+                    _configurationBuilder.AddJsonFile($"{_configFileName}.{configName}.json");
                 }
             }
 
