@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net461;netstandard2.1</TargetFrameworks>
+	  <TargetFrameworks>netstandard2.1</TargetFrameworks>
   </PropertyGroup>
 
 	<PropertyGroup>
@@ -12,12 +12,12 @@
 		<PackageId>Msc.Microservice.Layer.GrpcCore</PackageId>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<PackageReleaseNotes>Выделена конфигурация</PackageReleaseNotes>
-		<Version>1.0.1.90</Version>
+		<Version>1.0.1.91</Version>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<Company>Gazprom-neft</Company>
 		<Authors>Konyshev.av;Stepanov.no</Authors>
-		<FileVersion>1.0.1.90</FileVersion>
-		<AssemblyVersion>1.0.1.90</AssemblyVersion>
+		<FileVersion>1.0.1.91</FileVersion>
+		<AssemblyVersion>1.0.1.91</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
