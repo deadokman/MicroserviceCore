@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -11,21 +11,21 @@
     <PackageId>Msc.Microservice.Layer.Redis</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Добавлен алгоритм блокировок</PackageReleaseNotes>
-    <Version>1.0.1.96</Version>
+    <Version>1.0.1.97</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Konyshev.A.V.;Stepanov.N.O.</Company>
     <Authors>Konyshev.A.V.;Stepanov.N.O.</Authors>
-    <AssemblyVersion>1.0.1.96</AssemblyVersion>
-    <FileVersion>1.0.1.96</FileVersion>
+    <AssemblyVersion>1.0.1.97</AssemblyVersion>
+    <FileVersion>1.0.1.97</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\Shared\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
-    <PackageReference Include="RedLock.net" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.3" />
+    <PackageReference Include="RedLock.net" Version="2.3.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

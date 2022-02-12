@@ -66,7 +66,8 @@ namespace Msc.Microservice.Layer.Postgres
             }
             else
             {
-                var postgesConfig = configurationRoot.GetSection(nameof(Configuration.Postgres)).Get<Configuration.Postgres>();
+                var section = configurationRoot.GetSection(nameof(Configuration.Postgres));
+                var postgesConfig = section.Get<Configuration.Postgres>();
                 errors.AddRange(postgesConfig.ValidateErrors());
                 if (errors.Any())
                 {
@@ -74,6 +75,7 @@ namespace Msc.Microservice.Layer.Postgres
                 }
 
                 connectionString = postgesConfig.ConnectionString;
+                serviceCollection.Configure<Configuration.Postgres>(section);
             }
 
             serviceCollection.AddSingleton<IDbContext>((provider) => new PgDbContext(connectionString, provider.GetService<ILogger<IDbContext>>()));

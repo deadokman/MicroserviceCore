@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <CodeAnalysisRuleSet>$(SolutionDir)\Shared\RuleSet.ruleset</CodeAnalysisRuleSet>
-    <PackageVersion>1.0.1.93</PackageVersion>
+    <PackageVersion>1.0.1.94</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\Shared\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.3" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -25,18 +25,18 @@
     <DocumentationFile>Msc.Microservice.Layer.RabbitMq.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetFrameworks>net461;net5.0</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <Product>Msc.Microservice.Layer.RabbitMq</Product>
     <Description>Библиотека для доступа к RabbitMQ </Description>
     <PackageId>Msc.Microservice.Layer.RabbitMq</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Added order to Ack (for PrefetchCount) and VirtualHost in QueueConfig</PackageReleaseNotes>
-    <Version>1.0.1.93</Version>
+    <Version>1.0.1.94</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Konyshev.av;Stepanov.no</Company>
     <Authors>Konyshev.av;Stepanov.no</Authors>
-    <AssemblyVersion>1.0.1.93</AssemblyVersion>
-    <FileVersion>1.0.1.93</FileVersion>
+    <AssemblyVersion>1.0.1.94</AssemblyVersion>
+    <FileVersion>1.0.1.94</FileVersion>
   </PropertyGroup>
 
 </Project>
