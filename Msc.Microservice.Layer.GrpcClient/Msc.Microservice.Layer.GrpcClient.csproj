@@ -10,7 +10,7 @@
     <PackageId>Msc.Microservice.Layer.GrpcClient</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageReleaseNotes>Bug fix: After message re-confirmation (double Ack), layer stops new message consuming</PackageReleaseNotes>
-    <Version>1.0.1.91</Version>
+    <Version>1.0.1.100</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Konyshev.av;Stepanov.no</Company>
     <Authors>Konyshev.av;Stepanov.no</Authors>
@@ -26,7 +26,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Grpc" Version="2.43.0" />
+    <PackageReference Include="Grpc" Version="2.45.0" />
   </ItemGroup>
 
   <ItemGroup>

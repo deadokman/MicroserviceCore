@@ -12,12 +12,12 @@
 		<PackageId>Msc.Microservice.Layer.GrpcCore</PackageId>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<PackageReleaseNotes>Выделена конфигурация</PackageReleaseNotes>
-		<Version>1.0.1.91</Version>
+		<Version>1.0.1.100</Version>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<Company>Gazprom-neft</Company>
 		<Authors>Konyshev.av;Stepanov.no</Authors>
-		<FileVersion>1.0.1.91</FileVersion>
-		<AssemblyVersion>1.0.1.91</AssemblyVersion>
+		<FileVersion>1.0.1.100</FileVersion>
+		<AssemblyVersion>1.0.1.100</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
