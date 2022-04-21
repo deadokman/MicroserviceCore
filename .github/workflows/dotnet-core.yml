@@ -26,7 +26,7 @@ jobs:
         
       - name: publish Interface.Db
         id: publish_Interface_Db
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Interface.Db/Msc.Interface.Db.csproj
@@ -34,7 +34,7 @@ jobs:
 
       - name: publish Db.Postgres
         id: publish_Db_Postgres
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Db.Postgres/Msc.Db.Postgres.csproj
@@ -42,7 +42,7 @@ jobs:
 
       - name: publish Db.Oracle
         id: publish_Db_Oracle
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Db.Oracle/Msc.Db.Oracle.csproj
@@ -50,7 +50,7 @@ jobs:
 
       - name: publish Msc.Microservice.Core.Standalone
         id: publish_Microservice_Core_Standalone
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Msc.Microservice.Core.Standalone/Msc.Microservice.Core.Standalone.csproj
@@ -58,7 +58,7 @@ jobs:
 
       - name: publish Msc.Microservice.Layer.RabbitMq
         id: publish_Msc_Microservice_Layer_RabbitMq
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Msc.Microservice.Layer.RabbitMq/Msc.Microservice.Layer.RabbitMq.csproj
@@ -66,7 +66,7 @@ jobs:
           
       - name: publish Msc.Microservice.Layer.Redis
         id: publish_Msc_Microservice_Layer_Redis
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Msc.Microservice.Layer.Redis/Msc.Microservice.Layer.Redis.csproj
@@ -74,7 +74,7 @@ jobs:
           
       - name: publish Msc.Microservice.Layer.Postgres
         id: publish_Msc_Microservice_Layer_Postgres
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Msc.Microservice.Layer.Postgres/Msc.Microservice.Layer.Postgres.csproj
@@ -82,7 +82,7 @@ jobs:
           
       - name: publish Msc.Microservice.GrpcCore
         id: publish_Msc_Microservice_GrpcCore
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Msc.Microservice.GrpcCore/Msc.Microservice.GrpcCore.csproj
@@ -90,7 +90,7 @@ jobs:
           
       - name: publish Msc.Microservice.Layer.GrpcServer
         id: publish_Msc_Microservice_Layer_GrpcServer
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Msc.Microservice.Layer.GrpcServer/Msc.Microservice.Layer.GrpcServer.csproj
@@ -98,7 +98,7 @@ jobs:
           
       - name: publish Msc.Microservice.Layer.GrpcClient
         id: publish_Msc_Microservice_Layer_GrpcClient
-        uses: rohith/publish-nuget@v2
+        uses: rohith/publish-nuget@v2.5.5
         with:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: Msc.Microservice.Layer.GrpcClient/Msc.Microservice.Layer.GrpcClient.csproj
