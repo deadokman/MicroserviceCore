@@ -6,7 +6,7 @@
     <Description>Библиотека с интерфесами для работы с базами данных</Description>
     <PackageId>Msc.Interface.Db</PackageId>
     <PackageReleaseNotes>Добавил метод возвращающий бинарный импортер данных</PackageReleaseNotes>
-    <Version>1.0.1.100</Version>
+    <Version>1.0.2.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Msc.Interface.Db</Company>
     <Authors>Konyshev A.V.;Stepanov N.O.</Authors>

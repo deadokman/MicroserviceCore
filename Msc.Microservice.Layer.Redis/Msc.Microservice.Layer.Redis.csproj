@@ -11,12 +11,12 @@
     <PackageId>Msc.Microservice.Layer.Redis</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Добавлен алгоритм блокировок</PackageReleaseNotes>
-    <Version>1.0.1.100</Version>
+    <Version>1.0.2.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Konyshev.A.V.;Stepanov.N.O.</Company>
     <Authors>Konyshev.A.V.;Stepanov.N.O.</Authors>
-    <AssemblyVersion>1.0.1.100</AssemblyVersion>
-    <FileVersion>1.0.1.100</FileVersion>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\Shared\stylecop.json" Link="stylecop.json" />
