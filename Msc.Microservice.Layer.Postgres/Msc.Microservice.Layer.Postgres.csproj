@@ -31,7 +31,7 @@
     <PackageId>Microservice.Layer.Postgres</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Обновления версия NpgSql</PackageReleaseNotes>
-    <Version>1.0.1.92</Version>
+    <Version>1.0.1.100</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Stepanov.no;Konyshev.av</Company>
     <Authors>Stepanov.no;Konyshev.av</Authors>
