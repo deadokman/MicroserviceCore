@@ -24,7 +24,7 @@
     <DocumentationFile>Microservice.Layer.Postgres.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1</TargetFrameworks>
+    <TargetFramework>net5.0</TargetFramework>
     <Product>Microservice.Layer.Postgres</Product>
     <Description>Библиотека предоставляет интерфейс IDbContext при построении микросервисной архитектуры на Microservice.Core.Standalone, для подключения к СУБД Postgres.
       Обновлена версия Db.Postgres</Description>
