@@ -11,8 +11,8 @@
 This set of the libraries will help you to organize your microservice architecture in most efficient way. This project is aimed at placing microservices inside docker's containers, but you also can use it inside self-hosted console applications.</Description>
     <PackageId>Msc.Microservice.Core.Standalone</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>+ Исправил инициализацию DI контейнера</PackageReleaseNotes>
-    <Version>1.0.2.0</Version>
+    <PackageReleaseNotes>Перевод проекта на net5</PackageReleaseNotes>
+    <Version>1.0.3.0</Version>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>Stepanov.no;Konyshev.av</Company>
     <Authors>Stepanov.no;Konyshev.av</Authors>
