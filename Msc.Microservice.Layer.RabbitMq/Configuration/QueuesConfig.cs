@@ -122,5 +122,10 @@ namespace Msc.Microservice.Layer.RabbitMq.Configuration
         /// Виртуальный сегмент
         /// </summary>
         public string VirtualHost { get; set; } = "/";
+
+        /// <summary>
+        /// Использовать SSL.
+        /// </summary>
+        public bool SslEnabled { get; set; } = false;
     }
 }

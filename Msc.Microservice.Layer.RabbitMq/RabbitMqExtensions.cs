@@ -32,6 +32,8 @@ namespace Msc.Microservice.Layer.RabbitMq
             connectionFactory.Port = config.Port;
             connectionFactory.RequestedHeartbeat = TimeSpan.FromSeconds(30);
             connectionFactory.AutomaticRecoveryEnabled = true;
+            connectionFactory.Ssl.Enabled = config.SslEnabled;
+            connectionFactory.Ssl.ServerName = config.HostName;
         }
 
         /// <summary>
